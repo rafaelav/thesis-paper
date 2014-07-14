@@ -1,30 +1,72 @@
-\chapter{Locations}
-% 20 pages
+\chapter{Data analysis and clean up}
+% 3 pages TODO - keep writing
+The present project uses data that has been selected from the database of the
+SensibleDTU experiment. The data is fully anonymized and the users that have
+been a part of the study have been chosen randomly from the database.
+
+\section{Data statistics}
+% TODO(update the number of users if needed)
+We use the data collected from $131$ users from the SensibleDTU database. The
+students that have been selected for the present study had data collected for a
+period of almost a year.~\footnote{The starting time of collection for the 2012
+deployment of SernsibleDTU is October $1^{st}$ 2012 and the end is September
+$1^{st}$ 2013.}
+
+The application that is installed on the smartphones of the students who are
+part of the experiment is configured to scan periodically (around every $15$
+seconds) for Wifi networks, however, it is also set to record the scans which
+are triggered by any of the other applications that are present on the mobile
+phone.
+
+\section{Wifi and GPS data}
+For the present study we are not using all the fields that are accessible from
+the database of collected information. The study's aim is to analyze the
+predictability and patterns in the human mobility and as such we need
+information that can tell us the locations of the users that are part of the
+study. For this we are accessing information about the Wifi associations for the
+selected group of users. The results reagrding the users' locations over time
+are afterwards compared with recorded GPS locations and as such we are accessing
+this information from the database as well.
+
+% For the Wifi data, we are retriving from the database the fields in
+% Fig.~\figure{}.
+
+The user (first) field gives us information about what user we are currently
+observing. The real identities of the users are concealed and replaced by an ID
+which is unique for each of them.
+
+The timestamp (second) field gives us information about the moment of time at
+which the scan occured and for which the information is gathered. The time
+format is Unix timestamp.~\footnote{The Unix time stamp represents a way in
+which time can be tracked as the total number of seconds starting from January
+$1^{st}$, 1970 at UTC and a particular date and time.} This timestamp can be
+easily manipulated and converted to any other timestamp format in Python by
+using the datetime module that can be found in the Python Standard Library
+\cite{PSL}.
+
+The ssid (third) field stands for Service Set Identifier and it represents the
+unique ID that can be used in order to identify the wireless networks. This
+identifier is responsible for the correct sending of data when multiple wireless
+networks overlap.
+
+The bssid (forth) field stands for Basic Service Set identifier and it
+represents the MAC address of a wireless access point.
+
+The rssi (fifth) field stands for Received Signal Strength Indication and it
+represents the strength for a signal picked up by the mobile phone from an
+access point. The rssi values in our case are registered as the real signal
+strength recorded in dBm and are therefore negative values. As such, the signal
+is stronger when the value recorded for it is closer to $0$.
+
+The context (sixth) field is based in the ssid and it translates to the
+possibilities presented in %Fig.~\figure{}
+
+% TODO - add data stuff and description for GPS filds
+\section{Noise elimination}
+
 \begin{enumerate}
-  \item previous studies on what does a location is considering wifi
-  fingerprints
-  \item analazying what can determine a location fingerprint
-	\begin{itemize}
-		\item Plot access points’ presence over time considering their signal strength
-		\item Plot number of samples of each access point over time
-		\item Plot the average signal strength for various time windows for each
-		access point identified for a user
-		\item Plot the running average signal strength for 2,5 and 10 min time windows
-		for each access point identified for a user
-		\item Plot of access point presence in time bin (5 mins used for time bin)
-		without considering its signal strength
-	\end{itemize}
-  \item identifying locations
-	\begin{itemize}
-		\item Networks 
-		\item Hidden Markov Models 
-		\item Further improvements
-	\end{itemize}
-  \item matching locations locations
-	\begin{itemize}
-		\item Percentage similarity 
-		\item Keeping track of previous locations 
-		\item Creating fingerprints
-	\end{itemize}
-  \item  
+\item why working with wifi data;
+\item data structure and fields;
+\item how much data was analized
+\item how was the data prepared (noise elimination)
 \end{enumerate}
