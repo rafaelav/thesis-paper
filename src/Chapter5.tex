@@ -101,6 +101,106 @@ can tell us, what can we use, what would we need and what can we discard when
 moving further to defining what makes a location.
 
 \subsection{Signal strength over time}
+
+The first thing that we have tried to visualize was the access points (APs) that
+were scanned by users' mobile phones throughout different periods of time. We
+have plotted the APs and their registered signal strength for varied users in
+order to see if we notice any patterns in their movements.
+
+In Fig.~\ref{user_6_1d_lines} we can see how a day from the life of a random
+user (referred to as userX) looks like. The day for which we have plotted the
+data started on a Tuesday at $12:15$ pm and ends the next day right before the
+same hour. The hourly intervals can be seen on the x axis, while the signal
+strength values can be seen on the y axis. The legend contains the top $10$ most
+popular~\footnote{An AP is more popular than another in case it appears more
+times during the period of time for which the Wifi scans are analyzed}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[height =
+0.45\textwidth]{figures/user_6_sorted_1days_plot.png}
+\caption{Example of the APs registered for an user throughout one day (using
+connecting lines markers)}
+\label{user_6_1d_lines}
+\end{figure}
+
+The steps for creating this type of visualization are as follows:
+\begin{itemize}
+  \item Retrieve data for the time duration for which the visualization is made
+  \item Keep track of all the timestamps at which each AP has been seen and the
+  AP's signal strength at that moment
+  \item In case an AP is scanned no more than $2$ minutes after a it was
+  previously scanned, then a line can unite the two moments in order to mark
+  their proximity. If the apparitions are more than $2$ minutes apart there is
+  a high possibility that there has been a location change or that the AP is
+  experiencing technical problems and as such has stopped being active.
+\end{itemize}
+
+Although we have tried to visualize this type of information in various ways
+(using different types of markers), we found that this way is the easiest to
+interpret by people. If we leave out the lines, for example, as it can be seen
+in Fig.~\ref{user_6_1d_point}, it is quite hard to interpret where location
+might start or stop.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[height =
+0.45\textwidth]{figures/point_user_6_sorted_1days_plot.png}
+\caption{Example of the APs registered for an user throughout one day (using
+point markers)}
+\label{user_6_1d_point}
+\end{figure}
+
+Other ways in which we have been experimenting with visualization for this can
+be found in the Appendix % TODO - add stuff to appendix
+
+By looking at Fig.~\ref{user_6_1d_lines} we are at some level able to
+distinguish moments of time at which the user seems to be arriving at a
+location~\footnote{For example, we can say that what we notice from Wednesday
+at 10:15 until the same day at 12:15 is different than anything we can see
+before that time so we can assume that it is a new location.}, however is is
+hard to nice any patterns because we are only observing a single day in the life
+of userX. 
+
+Let us look at the data gathered through $7$ days from another user's (referred
+to as userY) life. The visualization for this data can be seen in
+Fig.~\ref{user_3_7d}. The image gives out some very interesting information. We
+can, for example, notice the repeating patterns which are dominated by the
+orange, light green and blue colors. These patterns appear during the evening
+and the night and we can assume that the user is spending this time at the
+location which we can label ``home''.
+
+We can notice some periods of time that are free. These free gaps like, for
+example, from Monday morning until Monday evening are gaps in which no signal
+was scanned and can mean that either the mobile phone was closed or that the
+user decided to switch off the Wifi.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[height =
+0.45\textwidth]{figures/user_3_sorted_7days_plot.png}
+\caption{Example of the APs registered for an user throughout 7 days}
+\label{user_3_7d}
+\end{figure}
+
+We can also notice fragments in which the density of signals is quite high, for
+example on Wednesday morning. This means that the user was located in a place
+which has a large number of APs near and since we can notice a regularity in
+this pattern we can assume that this place can be the University. This might
+seem unlikely based on the fact that the patterns sometimes is identified during
+the night, however this particular week is set in October when there are
+deadlines for school projects that need to be handed in.
+
+As we can see, these visualization can offer us a good first glance at what the
+locations might be like, however, they also raise some interesting questions.
+For example:
+\begin{itemize}
+  \item Can the spikes in the signals cause any problems in determining
+  locations?
+  \item Does the sample density give us additional useful information for
+  extracting the locations?
+\end{itemize}
+
 \subsection{Sample density}
 \subsection{Average signal strength}
 \subsection{Running average signal strength}
