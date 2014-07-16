@@ -19,6 +19,7 @@ are triggered by any of the other applications that are present on the mobile
 phone.
 
 \section{Wifi and GPS data}
+\label{data_structures}
 For the present study we are not using all the fields that are accessible from
 the database of collected information. The study's aim is to analyze the
 predictability and patterns in the human mobility and as such we need
@@ -58,15 +59,15 @@ $1^{st}$, 1970 at UTC and a particular date and time.} This timestamp can be
 easily manipulated and converted to any other timestamp format in Python by
 using the datetime module that can be found in the Python Standard Library
 \cite{PSL}.
-\item The ssid (third) field stands for Service Set Identifier and it represents
+\item The SSID (third) field stands for Service Set Identifier and it represents
 the unique ID that can be used in order to identify the wireless networks. This
 identifier is responsible for the correct sending of data when multiple wireless
 networks overlap.
-\item The bssid (forth) field stands for Basic Service Set identifier and it
+\item The BSSID (forth) field stands for Basic Service Set identifier and it
 represents the MAC address of a wireless access point.
-\item The rssi (fifth) field stands for Received Signal Strength Indication and
+\item The RSSI (fifth) field stands for Received Signal Strength Indication and
 it represents the strength for a signal picked up by the mobile phone from an
-access point. The rssi values in our case are registered as the real signal
+access point. The RSSI values in our case are registered as the real signal
 strength recorded in dBm and are therefore negative values. As such, the signal
 is stronger when the value recorded for it is closer to $0$.
 \item The context (sixth) field is based in the ssid and it translates to the

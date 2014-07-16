@@ -21,12 +21,95 @@ elements that have been taken into consideration for trying to understand and
 predict the way in which we are conducting our daily travels is far from being
 short. 
 
-\section{Location identification based on Wifi data}
- 
+\section{Wifi based positioning}
+
+Even from the beginning of the 21st century, research has been actively
+conducted for trying to use the Wifi system in order to determine real
+positioning and different databases for positioning systems have been created.
+These databases usually included the positions of the Wifi access points or RF
+(radio-frequency) identified fingerprints \cite{Chen:2006:PMP:2166283.2166297}
+\cite{Cheng:2005:ACM:1067170.1067195} \cite{Youssef:2005:HWL:1067170.1067193}
+\cite{bahl2000radar}. Modern databases for Wifi positioning are created with
+information about the signal strength for the Wifi access points and can
+even have information about where they were discovered.
+
+Koo et. al. \cite{koo2011autonomous} have explored an algorithm that can help
+estimate the relative positions of access points corresponding to the real
+geographic configuration with the help of multidimensional scaling techniques.
+Considering the fact that access points are not able to tell real distances
+between themselves and other access points, the study aims to estimate the
+dissimilarities between different access points using scans. They have also
+conducted an experiment in an office building in order to test the proposed
+algorithm and the results showed an estimation error of approximately $7$ m.
+
+Another study conducted in this similar direction is the one by Mok et. al.
+\cite{mok2007location}. The authors explore the possibility of determining the
+location of a device which can scan Wifi access points based on the signal
+strength that the access points are displaying at the moment of the scan. They
+estimate the positioning by performing a trilateration based on the information
+the device gets from multiple access points. The accuracy for their algorithm
+for the conditions that were present in their experiment was of about $1-3$ m.
+
+Athanasiou et. al. \cite{athanasiou2009utilizing} give a very clear and
+concrete description for two classes of wireless positioning systems. Their work
+focuses on experimenting with parameters for these algorithms in order to find
+the optimal solution in terms of accuracy under realistic settings. They also
+adapt a global map matching algorithm in order to extract travel time maps from
+wireless data and they propose a demonstration for showing that for high
+sampling frequencies, the locations identified are comparable to the ones
+derived from GPS data.
+
+The two classes of algorithms that are explored by the authors are: centroid and
+fingerprinting. \textit{Centroid} is presented as the fastest method for
+positioning, however it depends on having the real location of the access
+points. This information is in general unavailable and as such a proposed
+solution is to estimate the locations of the access points by calculating an
+arithmetic mean of all the coordinates at which it was visible. The
+\textit{fingerprinting} method is based on the assumption that the access points
+are stable over time (they do not change positions). This leads to the fact that
+at any time, a measurement at a particular location will return the same list of
+access points with the same signal strengths. As such, this list can be
+considered as the unique fingerprint of the location.
+
+% TODO add 2 figures for centroid and fingerprinting
+Zhang et.al. \cite{zhang2012polaris} propose an algorithm based on
+fingerprinting for estimating locations that takes into consideration the fact
+that the signal strength from various access points does not necessarily stay
+constant throught the time. They propose a way in which a similarity between
+fingerprints can be calculated in order to determine if two fingerprints are in
+fact representing the same location.
+
+These are just a selection of works that have been conducted on finding a
+solution for Wifi based positioning systems. With the growth and improvement of
+Wifi systems, in time all barriers can be overcome and we could have a
+positioning system that is as accurate yet considerably cheaper than GPS
+positioning systems.
+
+\section{Determining the fingerprint of a location}
+In order to have a better understanding about the way in which the mobile phone
+users have been moving throughout the experiment, we needed to have an image of
+the way a given period of time would look based on their Wifi records from
+SensibleDTU. As it has been presented in Section~\ref{data_structures}, the Wifi
+data we are using for the present project consists in the following fields:
+user id, timestamp, SSID, BSSID, RSSI and the context. However, considering the
+amount of data involved, just by looking through the log files it is almost
+impossible for us to understand at what moment the user might have reached a
+location and when did they leave from it. In order to be able to do this, we
+have created various visualizations considering different options, different
+time frames and for multiple users in order to begin to understand what the data
+can tell us, what can we use, what would we need and what can we discard when
+moving further to defining what makes a location.
+
+\subsection{Signal strength over time}
+\subsection{Sample density}
+\subsection{Average signal strength}
+\subsection{Running average signal strength}
+\subsection{Signal presence}
+
+\section{Extracting locations}
+\section{Location matching}
+
 \begin{enumerate}
-  \item Intro - done
-  \item previous studies on what does a location is considering wifi
-  fingerprints
   \item analazying what can determine a location fingerprint
 	\begin{itemize}
 		\item Plot access points’ presence over time considering their signal strength
