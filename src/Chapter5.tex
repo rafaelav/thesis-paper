@@ -192,16 +192,47 @@ the night, however this particular week is set in October when there are
 deadlines for school projects that need to be handed in.
 
 As we can see, these visualization can offer us a good first glance at what the
-locations might be like, however, they also raise some interesting questions.
-For example:
+locations might be like, yet they also make us consider other things that we can
+learn about the data. For example:
 \begin{itemize}
-  \item Can the spikes in the signals cause any problems in determining
-  locations?
-  \item Does the sample density give us additional useful information for
-  extracting the locations?
+  \item How many samples from each access point are received during a given time
+  frame
+  \item What is the average signal for various time frames for a given access
+  point
+  \item What are the running averages for signals from various access point
 \end{itemize}
+%As we can see, these visualization can offer us a good first glance at what the
+%locations might be like, however, they also raise some interesting questions.
+%For example:
+%\begin{itemize}
+%  \item Can the spikes in the signals cause any problems in determining
+%  locations?
+%  \item Does the sample density give us additional useful information for
+%  extracting the locations?
+%\end{itemize}
 
 \subsection{Sample density}
+
+When trying to identify locations based on the Wifi data, it is important to
+only take into consideration the access points that actively contribute to the
+fingerprint of the mentioned location. Before cleaning our data (as it has been
+described in Section~\ref{data_cleaning}), isolated observable access points can
+appear and unnecessarily burden the algorithm used for extracting the locations.
+The best way to identify such access points is by analyzing the sample density
+of the samples that are identified during scanning.
+
+In Fig X a) we can see all activiti and in b) one of the predominant Aps. We can
+see that the samples count is.. and that it appears for a long period of time.
+In fig Xb we have an example of an isoletaed obs ap. This ap is sampled only 5
+time in 5 mins and appears only once - might be passing by it.
+
+An example of a complete presence diagram throught 3 days and the 10 predominant
+aps during this time (based on number of apparitions) can be find the the
+appendix % TODO - add
+% TODO - modify and add fig with only one apparitions with 5 samples in 5
+% minutes -> to modify and say we take into consideration only those with more
+% than 5 samples in 5 minutes
+
 \subsection{Average signal strength}
 \subsection{Running average signal strength}
 \subsection{Signal presence}
