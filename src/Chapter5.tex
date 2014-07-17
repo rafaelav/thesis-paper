@@ -115,7 +115,7 @@ strength values can be seen on the y axis. The legend contains the top $10$ most
 popular~\footnote{An AP is more popular than another in case it appears more
 times during the period of time for which the Wifi scans are analyzed}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[height =
 0.45\textwidth]{figures/user_6_sorted_1days_plot.png}
@@ -142,7 +142,7 @@ interpret by people. If we leave out the lines, for example, as it can be seen
 in Fig.~\ref{user_6_1d_point}, it is quite hard to interpret where location
 might start or stop.
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[height =
 0.45\textwidth]{figures/point_user_6_sorted_1days_plot.png}
@@ -152,7 +152,7 @@ point markers)}
 \end{figure}
 
 Other ways in which we have been experimenting with visualization for this can
-be found in the Appendix % TODO - add stuff to appendix
+be found in the Appendix~\ref{appendix_signal_strength}.
 
 By looking at Fig.~\ref{user_6_1d_lines} we are at some level able to
 distinguish moments of time at which the user seems to be arriving at a
@@ -175,7 +175,7 @@ example, from Monday morning until Monday evening are gaps in which no signal
 was scanned and can mean that either the mobile phone was closed or that the
 user decided to switch off the Wifi.
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[height =
 0.45\textwidth]{figures/user_3_sorted_7days_plot.png}
@@ -225,6 +225,19 @@ In Fig X a) we can see all activiti and in b) one of the predominant Aps. We can
 see that the samples count is.. and that it appears for a long period of time.
 In fig Xb we have an example of an isoletaed obs ap. This ap is sampled only 5
 time in 5 mins and appears only once - might be passing by it.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=12cm,height=6cm,keepaspectratio]{figures/complete_on_bssid15181_for_1.split/complete_on_bssid15181_for_1_1.pdf}
+	\caption{Signal strength visualization}
+	\label{fig:rssi_6_2nd_day}
+\end{figure}
+\begin{figure}[h]
+	%\centering
+	\includegraphics[width=12cm,height=6cm,keepaspectratio]{figures/complete_on_bssid15181_for_1.split/complete_on_bssid15181_for_1_2.pdf}
+	\caption{Sample density for AP identified with 15181}
+	\label{samples_6_2nd_day}
+\end{figure}
 
 An example of a complete presence diagram throught 3 days and the 10 predominant
 aps during this time (based on number of apparitions) can be find the the
