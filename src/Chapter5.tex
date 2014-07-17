@@ -107,6 +107,7 @@ were scanned by users' mobile phones throughout different periods of time. We
 have plotted the APs and their registered signal strength for varied users in
 order to see if we notice any patterns in their movements.
 
+%userX == user 6
 In Fig.~\ref{user_6_1d_lines} we can see how a day from the life of a random
 user (referred to as userX) looks like. The day for which we have plotted the
 data started on a Tuesday at $12:15$ pm and ends the next day right before the
@@ -146,13 +147,13 @@ might start or stop.
 \centering
 \includegraphics[height =
 0.45\textwidth]{figures/point_user_6_sorted_1days_plot.png}
-\caption{Example of the APs registered for an user throughout one day (using
+\caption{Example of the APs registered for userX throughout one day (using
 point markers)}
 \label{user_6_1d_point}
 \end{figure}
 
 Other ways in which we have been experimenting with visualization for this can
-be found in the Appendix~\ref{appendix_signal_strength}.
+be found in Appendix~\ref{appendix_signal_strength}.
 
 By looking at Fig.~\ref{user_6_1d_lines} we are at some level able to
 distinguish moments of time at which the user seems to be arriving at a
@@ -162,6 +163,7 @@ before that time so we can assume that it is a new location.}, however is is
 hard to nice any patterns because we are only observing a single day in the life
 of userX. 
 
+% user Y = user 3
 Let us look at the data gathered through $7$ days from another user's (referred
 to as userY) life. The visualization for this data can be seen in
 Fig.~\ref{user_3_7d}. The image gives out some very interesting information. We
@@ -179,7 +181,7 @@ user decided to switch off the Wifi.
 \centering
 \includegraphics[height =
 0.45\textwidth]{figures/user_3_sorted_7days_plot.png}
-\caption{Example of the APs registered for an user throughout 7 days}
+\caption{Example of the APs registered for userY throughout 7 days}
 \label{user_3_7d}
 \end{figure}
 
@@ -218,35 +220,122 @@ only take into consideration the access points that actively contribute to the
 fingerprint of the mentioned location. Before cleaning our data (as it has been
 described in Section~\ref{data_cleaning}), isolated observable access points can
 appear and unnecessarily burden the algorithm used for extracting the locations.
-The best way to identify such access points is by analyzing the sample density
-of the samples that are identified during scanning.
+The best way to identify such access points is by analyzing the sample
+density~\footnote{We define the sample density for an access point as the number
+of times it appears in scans over a predefined time bin.} of the samples that
+are identified during scanning.
 
-In Fig X a) we can see all activiti and in b) one of the predominant Aps. We can
-see that the samples count is.. and that it appears for a long period of time.
-In fig Xb we have an example of an isoletaed obs ap. This ap is sampled only 5
-time in 5 mins and appears only once - might be passing by it.
+In order to determine the sample density for each AP, we need to define a time
+bin over which the sample density needs to be calculated. We have calculated the
+density considering a time bin of $5$ minutes as we can assume that this amount
+of time can be considered the minimum duration for which a user needs to be
+situated in approximately the same place in order for us to not consider that
+the location is a transition instead of a stop location.% TODO verify
+% supposition
+
+%TODO - userZ is 6 - 1 day , day 1
+In Fig.~\ref{rssi_6_2nd_day} we have the different APs and their RSSI values at
+the different moments when the mobile phone has identified them in the scans for
+an user referred to as userZ. In Fig.~\ref{samples_6_2nd_day} we can observe the
+sample density for one of the APs that are predominant during the visualized
+time frame. As we can see, the number of times the AP is present in the scans
+throughout the day is quite high and it is registered during numerous different
+periods during the day. We can easily assume that this AP is one of the key APs
+that define one of the locations the user has been associated with.
 
 \begin{figure}[h]
-	\centering
-	\includegraphics[width=12cm,height=6cm,keepaspectratio]{figures/complete_on_bssid15181_for_1.split/complete_on_bssid15181_for_1_1.pdf}
-	\caption{Signal strength visualization}
-	\label{fig:rssi_6_2nd_day}
-\end{figure}
-\begin{figure}[h]
-	%\centering
-	\includegraphics[width=12cm,height=6cm,keepaspectratio]{figures/complete_on_bssid15181_for_1.split/complete_on_bssid15181_for_1_2.pdf}
-	\caption{Sample density for AP identified with 15181}
-	\label{samples_6_2nd_day}
+\centering
+\includegraphics[width =\textwidth]{figures/combinations/user_6_sorted_1days_plot_croped.png}
+\caption{Example of the APs registered for userZ throughout 1 day}
+\label{rssi_6_2nd_day}
 \end{figure}
 
-An example of a complete presence diagram throught 3 days and the 10 predominant
-aps during this time (based on number of apparitions) can be find the the
-appendix % TODO - add stuff to appendix
+\begin{figure}[h]
+\centering
+\includegraphics[width =\textwidth]{figures/combinations/user_6_sorted_1days_plot_14280_histo.png}
+\caption{Example of an AP which appears often}
+\label{samples_6_2nd_day}
+\end{figure}
+
+On the opposite end as number of times it has appeared during the scans, we have
+the AP in Fig.~\ref{few_samples_6_2nd_day}. As it can be seen, this AP only
+appears $5$ times over a one single $5$ minute time bin. We can easily presume
+that the presence or absence of this particular AP will not offer us relevant
+information over the location at which the user was situated when it appeared in
+the scans. This statement is also sustained by the fact that the user location
+seems to be consisted from Wednesday $12:16$ up until around $13:16$ according
+to what we can observe in Fig.~\ref{rssi_6_2nd_day}, even though the AP does not appear
+throughout most of this time.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width =\textwidth]{figures/combinations/1553_modif.png}
+\caption{Example of an AP that appears just a few times}
+\label{few_samples_6_2nd_day}
+\end{figure}
+
+Other examples of visualizations for APs based on their sample density can be
+found in Appendix~\ref{appendix_sample_density}% TODO - add stuff to appendix
 % TODO - modify and add fig with only one apparitions with 5 samples in 5
 % minutes -> to modify and say we take into consideration only those with more
 % than 5 samples in 5 minutes
 
+\subsection{Exploring the implications of the signal strength}
+Something that is often taken into consideration during studies regarding the
+determination of locations based on Wifi data is the value which indicates
+the signal strength received from the various APs. The level of the signal
+strength indicator can, in general, give us a good approximation of how close we
+are to a particular AP. However, Wifi networks are susceptible to interferences
+\cite{MahantiCWA10}, meaning that there numerous factors which can cause signals
+to spike even in case the device which scans the region for AP signals does not
+move. This can represent a factor of risk when including the signal strength
+value in the location extraction from Wifi data as the same location could be,
+at different times, be associated to an AP which has a signal strength that
+oscillates based on other external factors.
+
+In order to see if we can smooth down possible fluctuations we have employed two
+mathematical tools. We have calculated the average signal strength, as well as
+the running average, considering different length time bins.
+
 \subsection{Average signal strength}
+
+In order to calculate the average signal strength of a given AP for a given time
+bin, we needed to identify all the moments of time inside the given time bin in which
+the AP has been spotted during the scans. The average signal of the AP is
+calculated as the sum of all the strength values that have been recorded for the
+AP inside the time bin and the sum is then divided to the number of recorded
+apparitions of the AP. For example, if we were to have an AP which appears 6
+times inside a $5$ minutes time bin with the following RSSI values [-60, -70,
+-60, -80, -90, -60], then the average signal strength for this particular time
+bin for our AP would be $avg = [(-60) + (-70) + (-60) + (-80) + (-90) +
+(-60)] / 6= -70$ dBm.
+
+We have calculated the average signal for various users and various days. We
+have also calculated it for different time bin length. For example, for the same
+data that we can see in Fig.~\ref{rssi_6_2nd_day} and for the same AP that has
+the sample density represented in Fig.~\ref{samples_6_2nd_day}, if we visualize
+the non-null averages calculated for time bins of $5$ minutes, we would have the
+representation in Fig.~\ref{user_6_avg_1d_5m}. The X axis records the time
+while on the Y axis records the values of the averages
+
+% TODO plot only with this AP in normal mode and maybe make some observations.
+%TODO add more to appendix.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width =\textwidth]{figures/combinations/user_6_sorted_1days_plot_14280_avg_sig.png}
+\caption{Example of average signal strength visualization for userZ}
+\label{user_6_avg_1d_5m}
+\end{figure}
+
+The averages are represented by big dots symbols which appear at the beninning
+of the time bin for which the average is calculated. For example, if we have
+calculated an average for the interval $12:05 - 12:10$, the average is plotted
+on the visualization at $12:05$. 
+
+Additional examples of averages for different APs scanned during the same day by
+userZ's mobile phone can be found in Appendix~\ref{appendix_signal_strength}.
+
 \subsection{Running average signal strength}
 \subsection{Signal presence}
 
@@ -256,10 +345,6 @@ appendix % TODO - add stuff to appendix
 \begin{enumerate}
   \item analazying what can determine a location fingerprint
 	\begin{itemize}
-		\item Plot access points’ presence over time considering their signal strength
-		\item Plot number of samples of each access point over time
-		\item Plot the average signal strength for various time windows for each
-		access point identified for a user
 		\item Plot the running average signal strength for 2,5 and 10 min time windows
 		for each access point identified for a user
 		\item Plot of access point presence in time bin (5 mins used for time bin)
