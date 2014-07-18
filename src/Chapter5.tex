@@ -473,30 +473,58 @@ minute time bin if it appeared in the scans at any point inside this time
 interval.
 
 We can use visualization in order to see how this transforms the way in which we
-can understand the data.
+can understand the data. In Fig.~\ref{} we have the different APs that have been
+scanned throughout the duration of $2$ days for userX. In Fig.~\ref{} we can see
+the top $50$ predominant APs and their presence over $5$ minutes time bin during
+the same $2$ days~\footnote{We restrict our visualization to $50$ APs as it
+would be hard to understand an image in which we would be displaying all the
+hundreds of APs which were encountered throughout the $2$ days.}. The X axis
+keeps track of the time bins throughout the $2$ days, while the Y axis
+represents the annonymized identifiers for the APs.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width
+=\textwidth]{figures/presence/user_6_sorted_2days_plot.png}
+\caption{Scanned APs for userX throughout a duration of 2 days}
+\label{user_6_APs_2d}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\textwidth]{figures/presence/user_6_sorted_2days_no_rssi_plot_crop.png}
+\caption{The most common 50 APs for userX during the given 2 days (presence
+visualization calculated for 5 minutes time bins)}
+\label{user_6_pres_2d}
+\end{figure}
+
+By closely observing the two visualization, it is quite easy to see that indeed
+they are representations of the same period of time. Even if not all APs are
+displayed in the visualization for the presence of the APs over time, we can
+notice that, for example, the user has spent the time from Wednesday $21:15$
+until almost Thursday $6:15$ in one location. This also coincides with what we
+can observe in the visualization for all the APs (with signal strength) scanned
+throughout this time.
+
+In Appendix~\ref{appendix_pres} can be found a visualization for the presence
+of APs for a period of $2$ days for another user. The presence for APs is determined for $5$
+minutes time bins over the $2$ days.
 
 \section{Extracting locations}
 \section{Location matching}
 
 \begin{enumerate}
-  \item analazying what can determine a location fingerprint
-	\begin{itemize}
-		\item Plot the running average signal strength for 2,5 and 10 min time windows
-		for each access point identified for a user
-		\item Plot of access point presence in time bin (5 mins used for time bin)
-		without considering its signal strength
-	\end{itemize}
   \item identifying locations
 	\begin{itemize}
-		\item Networks 
-		\item Hidden Markov Models 
+		\item Networks (3)
+		\item Hidden Markov Models (5) 
 		\item Further improvements (data cleaning)
 	\end{itemize}
-  \item matching locations locations
+  \item matching locations locations (0.5)
 	\begin{itemize}
-		\item Percentage similarity 
-		\item Keeping track of previous locations 
-		\item Creating fingerprints
+		\item Percentage similarity (0.5)
+		\item Keeping track of previous locations (0.5)
+		\item Creating fingerprints (1.5)
 	\end{itemize}
   \item  
 \end{enumerate}
