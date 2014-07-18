@@ -298,6 +298,7 @@ mathematical tools. We have calculated the average signal strength, as well as
 the running average, considering different length time bins.
 
 \subsection{Average signal strength}
+\label{average_sig}
 
 In order to calculate the average signal strength of a given AP for a given time
 bin, we needed to identify all the moments of time inside the given time bin in which
@@ -337,7 +338,142 @@ Additional examples of averages for different APs scanned during the same day by
 userZ's mobile phone can be found in Appendix~\ref{appendix_signal_strength}.
 
 \subsection{Running average signal strength}
+The average signal brings a small improvement as far as eliminating the signal
+spikes go, however, an even better way in order to smooth out any signal
+fluctuations is to calculate the running average\footnote{Also referred to as
+the moving average} \cite{Hyndman09movingaverages}.
+
+We have calculated the running average for different users and time frames, and
+we have taken into consideration different time bins when calculating it.
+The algorithm for calculating it is as follows:
+\begin{itemize}
+  \item For the selected user and the selected time frame, we have extracted for
+  each AP the time stamps at which it has been identified by the user's phone
+  \item We have divided for each AP the previously mentioned time stamps into
+  bins of $2$, $5$ or $10$ minutes recording also the signal
+  strength identified at each time stamp\footnote{By doing this we have the
+  signal strength for the given AP at any moments it has appeared inside the time bin}
+  \item The above identified time bins are overlapping. For example, if a
+  sequence of signals $[-60, -80, -70, -70]$ that have each been identified at $1$ minute
+  apart is to be divided into bins of $2$ minutes, the resulting $2$
+  minute bins would be: $[-60, -80]$, $[-80, -70]$, $[-70, -70]$
+  \item The running average is calculated as the sum of the values present in a
+  time bin which is then divided to the number of values. For example, for the
+  above time bins, the running averages would be $-70$, $-75$ and $-70$
+\end{itemize}
+
+In Fig.~\ref{user_1_APs_1d} we can see the APs associated with another user
+(referred to as userT) and their signal strengths over a day.
+Fig.~\ref{user_1_AP85_1d} shows the signal strength for just one of the
+identified APs. The average signal as is presented in Section~\ref{average_sig}
+for the same AP can be seen in Fig.~\ref{user_1_AP85_avg_1d}.
+Fig.~\ref{user_1_AP85_rn2avg_1d}, Fig.~\ref{user_1_AP85_rn5avg_1d} and
+Fig.~\ref{user_1_AP85_rn10avg_1d} present the running averages calculated for
+the same AP for time bins of $2$, $5$ and $10$ minutes~\footnote{In this
+representation, only the non-null values for running averages are displayed}.
+The X axis of these figures track the succession of time moments while the Y
+axis keeps track of the value of the running average calculated over this time.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width
+=\textwidth]{figures/rn_avg/user_1_sorted_1days_plot.png}
+\caption{Example of APs presence over time for userT}
+\label{user_1_APs_1d}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width
+=\textwidth]{figures/rn_avg/user_1_sorted_85_plot.png}
+\caption{AP 85 for userT during 1 day}
+\label{user_1_AP85_1d}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width
+=\textwidth]{figures/rn_avg/user_1_sorted_1days_plot_85_avg_sig.png}
+\caption{Average strength for AP 85 for userT during 1 day}
+\label{user_1_AP85_avg_1d}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width
+=\textwidth]{figures/rn_avg/user_1_sorted_1days_plot_85_rn_avg_sig_2.png}
+\caption{Running average for AP 85 for userT during 1 day (2 minute time bins)}
+\label{user_1_AP85_rn2avg_1d}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width
+=\textwidth]{figures/rn_avg/user_1_sorted_1days_plot_85_rn_avg_sig_5.png}
+\caption{Running average for AP 85 for userT during 1 day (5 minute time bins)}
+\label{user_1_AP85_rn5avg_1d}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width
+=\textwidth]{figures/rn_avg/user_1_sorted_1days_plot_85_rn_avg_sig_10.png}
+\caption{Running average for AP 85 for userT during 1 day (10 minute time bins)}
+\label{user_1_AP85_rn10avg_1d}
+\end{figure}
+
+The way in which the fluctuations are smoothed down can be easily seen in the
+figures that present the running averages calculated for various time bins. The
+fluctuations are smoother as the time bin is increased.
+
+Visualizations for running averages calculated for other APs identified during
+the same day for userT can be found in Appendix~\ref{appendix_rn_avg}.
+
 \subsection{Signal presence}
+
+Even though averaging the signal strength through time improves at a certain
+level the fluctuations in the signal strength, in a real environment spikes will
+always be present and this will bring extra difficulties in estimating locations
+based on fingerprints that contain the value of the signal strength for the
+involved APs.
+
+Another way of looking at locations is by calculating their fingerprint based
+only on the identity of the APs that have been identified while the user was
+found at that particular location. Basically, instead of defining a location
+based on both the identity of the APs present and their signal strength, we
+would only associate locations to visible APs.
+
+The idea is simple and elegant and has been used in previous studies with
+success \cite{Larsen:2009:MCT:1813042.1813063}. The concept behind is that, in
+general\footnote{New APs can be set up or old ones can be changed with new ones
+in time, which would mean a change in how the scans would look for the same
+location. However, this is an issue that is outside the scope of the present
+paper and work.}, at a given location the scans will always show the presence of
+the same APs. If, after a time, the scans change and other APs appear, it is
+reasonable to assume that the user has changed locations.
+
+Since the information offered by the signal strength does not seem to be of the
+ultimate importance, we can, in this case, try to identify the locations only
+based on the presence of the APs. We consider that an AP is present at a
+specific moment of time if the Wifi scans at that moment register a signal
+strength from that AP. However, as it has been mentioned previously, due to
+interferences, the signal from the AP might be lost for short periods of time
+even when the user does not change their location.Considering this and the
+assumption that, in general, people tend to spend at least a few minutes in a
+stop location (otherwise meaning that they might be just transiting it), we have
+made the decision to adapt for our case the definition for the presence of an
+AP.
+
+We divide our data into time bins of $5$ minutes~\footnote{We consider 5 minutes
+as the minimum amount of time that needs to be spent in a location for it be
+considered a stop location. This number can be easily adjusted in case further
+research shows that it is not the optimal assumption.}. We redefine the presence
+of an AP as follows: an AP is considered to be present for the duration of a $5$
+minute time bin if it appeared in the scans at any point inside this time
+interval.
+
+We can use visualization in order to see how this transforms the way in which we
+can understand the data.
 
 \section{Extracting locations}
 \section{Location matching}
