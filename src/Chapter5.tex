@@ -596,7 +596,7 @@ user has been in $2$ main locations during this day.
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=1\textwidth]{figures/networks/user_6_sorted_1days_no_rssi_plot.png}
+\includegraphics[width=\textwidth]{figures/networks/user_6_sorted_1days_no_rssi_plot.png}
 \caption{The most common 50 APs for userX during one day scan records}
 \label{user_6_pres_1d}
 \end{figure}
@@ -608,7 +608,7 @@ Fig.~\ref{user_6_networks_1d}
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=1\textwidth]{figures/networks/user_6_day0_networks.png}
+\includegraphics[width=0.7\textwidth]{figures/networks/user_6_day0_networks.png}
 \caption{Locations identified with networks for userX during one day}
 \label{user_6_networks_1d}
 \end{figure}
@@ -636,12 +636,26 @@ them }
 \label{user_6_size_distribution_1d}
 \end{figure}
 
+%TODO cum ar arata efectiv locatiile fata de cum sunt
 For generating the networks and the size distributions, we have been using
 Gephi~\cite{Gephi}. For visualizing the visualization in
 Fig.~\ref{user_6_networks_1d} we have used the Force Atlas $2$ layer which has
 been configured in order to avoid overlapping of components.
 
-\subsection{K-means algorithm}
+\subsection{K-means clustering}
+Original \cite{Macqueen67somemethods} implementation \cite{linde1980algorithm}
+%The algorithm, described by wikipedia, is known as the Lloyd-algorithm. It is described in "An Algorithm for Vector Quantizer Design" by Linde and Buzo and Gray, 1980.
+
+%The original k-means algorithm was described by MacQueen ("Some Methods for
+% classification and Analysis of Multivariate Observations", 1967) as follows
+
+%Stated informally, the k-means procedure consitsts of simply starting with k
+% groups each of which consists of a single random point, and thereafter adding each new point to the group whose mean the new point is nearest. After a point is added to a group, the mean of that group is adjusted in order to take account of the new point. Thus at each stage the k-means are, in fact, the means of the groups they represent (hence the term k-means).
+
+%Every data point is processed only once and only one cluster mean is recomputed
+% everytime a new data point is added. This is hardly the same algorithm as the one described by wikipedia.
+
+This is exactly what the Lloyd clustering does, except that we need to switch to Euclidean space (the algorithm famously works for nutrient grouping etc, but it is difficult to visualize): Centroid = mean; k = number of clusters; cluster = group; k-means is for k groups. The informal procedure you quoted is a different interpretation, although it does the exact same thing: In the mentioned method, you already have the points given. You don't have to add them one by one; instead you add the group centers one by one. This is exactly the same. You still associate each point with the nearest site (or the center to distinguish it from a point). Take k sites. Given n points, these k random sites are placed near the k of the n possible points (usually you select k points and make them the sites). For every point, figure out which of the k sites is the nearest; that point goes to that group. You will have at most k groups now (some groups may be left unassigned if no point lies near to the site). Now recalculate the mean, reposition the k sites; repeat lather rinse. I don't understand how the quoted verbatim differs from this; it describes this exactly. Please clarify. Also provide a link to the PDF or article where this MacQueen paper is, I couldn't find it using Scholar. User_talk:gfxguy
 \subsection{Hidden Markov Models}
 \section{Location matching}
 
