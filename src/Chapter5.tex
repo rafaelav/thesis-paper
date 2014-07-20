@@ -430,6 +430,7 @@ Visualizations for running averages calculated for other APs identified during
 the same day for userT can be found in Appendix~\ref{appendix_rn_avg}.
 
 \subsection{Signal presence}
+\label{sig_pres}
 
 Even though averaging the signal strength through time improves at a certain
 level the fluctuations in the signal strength, in a real environment spikes will
@@ -511,14 +512,144 @@ of APs for a period of $2$ days for another user. The presence for APs is determ
 minutes time bins over the $2$ days.
 
 \section{Extracting locations}
+
+By visualizing the Wifi data in the way presented in Section \ref{sig_pres}, we
+can begin to see how locations seem to succeed each other throughout the days of
+a particular user. However, it is important to be able to implement a solution
+that will extract these locations from a large amount of data so that we would
+not be needed to examine the data manually. We have used different methods in
+order to get the best possible approximation for identifying the locations. The
+methods we have tried are: using \textit{networks}, using \textit{k-means
+clustering} and using \textit{Hidden Markov Models}.
+
+\subsection{Network theory}
+
+Networks have a high degree of importance when trying to understand human or
+animal behaviour. They have been used in combination with social platforms in
+order to extract a new definition of friendship \cite{cho2011friendship}, they
+have been used for monitoring animal behaviour \cite{4116628}, or to understand
+the economical situations cause by the way in which people interact
+\cite{Copic05identifyingcommunity}, or just to understand underlying communities
+of people. During our research, we have considered the use of network theory in
+order to extract locations from Wifi data.
+
+In theory, we can expect that the APs that are identified at a particular
+location will not appear in the scans the user's phone will have from another
+location. This assumption is sound as the APs will rarely be moved and as such
+they should always be associated to the same place. In this case, we should
+expect that the succession of locations can be similar to what we can see in
+Fig.~\ref{user_6_tn}., where AP1-AP6 are associated to location number 1, while
+the remaining APs are associated with location 2 and the APs never overlap.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\textwidth]{figures/networks/theoretical_network.png}
+\caption{Example of how, in theory, locations should be displayed through the
+presence of APs}
+\label{user_6_tn}
+\end{figure}
+
+The idea behind constructing the network  that can be used to extract the
+locations is simple. A graph can be created for each user from their data and
+the locations can be identified as follows:
+\begin{itemize}
+  \item We consider each found AP from the user data as a node in the created
+  graph
+  \item We construct a presence matrix for the identified APs. Each line in the
+  presence matrix is associated to an AP and contains the signal presence
+  (Section \ref{sig_pres}) calculated for the AP considering $5$ minute time bins
+  throughout the time we are evaluating
+  \item For each time bin, we identify the APs that are present trough it and
+  we connect each two of them with an undirected edge (in case they have not
+  been connected at a previous time)
+  \item Since signal from various APs can be lost due to interferences, for each
+  two APs for which we have created a connecting edge, we keep and update a
+  variable which represents the number of times the APs have been identified in
+  the same time bin
+  \item After the network is completely created, we normalize the counts of how
+  many times each two APs have been seen in the same time bin by dividing the
+  counted value to the maximum number of apparitions of either of the two access points
+  \item After the normalization we remove the weak links~\footnote{In this
+  case, a link is considered weak if after normalization its associated value is
+  below a given threshold}
+  \item We consider the resulting connected components to be the extracted
+  locations
+\end{itemize}
+
+An example on how to construct such a graph if given four APs and their
+presence matrix can be seen in Fig.~\ref{network_calc_example}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\textwidth]{figures/networks/net_constr_ex.png}
+\caption{Example of constructing a network}
+\label{network_calc_example}
+\end{figure}
+
+We have applied the previously described algorithm for a selection of users, but
+the results have not been satisfactory.
+
+For example, we can take data for one day for userX. The visualization for the
+identified APs and their presence throughout this time can be observed in
+Fig.~\ref{user_6_pres_1d}. By looking at this image, we can observe that the
+user has been in $2$ main locations during this day.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\textwidth]{figures/networks/user_6_sorted_1days_no_rssi_plot.png}
+\caption{The most common 50 APs for userX during one day scan records}
+\label{user_6_pres_1d}
+\end{figure}
+
+When running the algorithm that extract the locations based on the constructed
+network, we obtain $21$ connected components which have the potential of being
+locations. The image for the connected components can be seen in
+Fig.~\ref{user_6_networks_1d} 
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\textwidth]{figures/networks/user_6_day0_networks.png}
+\caption{Locations identified with networks for userX during one day}
+\label{user_6_networks_1d}
+\end{figure}
+
+We have tried to adjust the threshold for eliminating weak links yet the results
+are in most cases unsatisfactory. Upon closer analysis we have observed that
+this can be cause by the fact that, sometimes, there are a high number of APs
+that even though they are in reality tied to a given location, their signal
+fluctuates often and as such, the algorithm identifies them as part of a
+different location and as such we have locations consisting in only a very small
+number of APs that in reality could have been integrated in other locations.
+This observation is sustained by the size distribution of the generated networks
+(example for such a size distribution determined for the network in
+Fig.~\ref{user_6_networks_1d} can be seen in
+Fig.~\ref{user_6_size_distribution_1d}). Another thing we have observed is that
+there are adjacent locations which can have interfering APs signals. This means
+that our original supposition that, at all times, the APs that are visible from
+a location will stop being visible in any other location does not always hold.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/networks/communities-size-distribution.png}
+\caption{Size distribution of locations based on the number of APs associated to
+them }
+\label{user_6_size_distribution_1d}
+\end{figure}
+
+For generating the networks and the size distributions, we have been using
+Gephi~\cite{Gephi}. For visualizing the visualization in
+Fig.~\ref{user_6_networks_1d} we have used the Force Atlas $2$ layer which has
+been configured in order to avoid overlapping of components.
+
+\subsection{K-means algorithm}
+\subsection{Hidden Markov Models}
 \section{Location matching}
 
 \begin{enumerate}
   \item identifying locations
 	\begin{itemize}
-		\item Networks (3)
 		\item Hidden Markov Models (5) 
-		\item Further improvements (data cleaning)
+		\item K-means(2)
 	\end{itemize}
   \item matching locations locations (0.5)
 	\begin{itemize}
