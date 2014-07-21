@@ -753,9 +753,59 @@ for that time frame. Our goals was to use the k-means algorithm to cluster the
 fingerprints that are similar enough as to be associated to the same location.
 However, since we cannot know for sure the number of locations (clusters) we are
 to expect for a given time frame, we are running the k-means algorithm with
-different values for k and we perform cross validation in order to see what
-value has generate the most likely estimation.
+different values for k and we perform 10-fold cross validation in order to see
+what value has generate the most likely estimation.
 
+The steps in extracting the locations with k-means and 10-fold cross validation
+are as follow:
+\begin{itemize}
+  \item We select the time frame (number of days) for which we want to extract
+  the locations
+  \item We retrieve the data and extract the fingerprints
+  \item Since previous research shows that in general people spend most of their
+  time in a small amount of locations ($5$ to $50$) \cite{Barabasi08}, we choose
+  the maximum number of locations we are expecting to find as the minimum value
+  between $50$ and the rezult for the number of days multiplied by
+  $10$\footnote{By observing the visualization for the presence of APs during
+  different days in different users' life, we have observed that in general
+  they seem to spend their time during a day in a most 10 locations}
+  \item For each possible number for locations from between $2$ and our
+  previously selected maximum we run the k-means clustering algorithm on the
+  identified fingerprints
+  \item The estimations are cross validated in order to see which number of
+  locations has generated the optimal approximation for the given fingerprints
+  \item In case more locations have generated equally good results we selected
+  as number of expected locations the highest of them
+  \item This algorithm is ran $10$ times leading to $10$ estimations for the
+  number of locations. Out of these estimations the one which appears the most times
+  out of the $10$ results is considered correct.
+\end{itemize}
+
+We ran the algorithm for $10$ times in order to ensure that we the final result
+is as less influenced by the random fact involved in the determination of the
+subsamples for the cross validation as possible. At the end of the algorith we
+have the estimation for the locations throughout the selected time frame. An
+example for such an estimation can be seen in Fig.~\ref{user_3_days1_2_kmeans},
+while in Fig.~\ref{user_3_days1_2_APs_presence} we have the presence of the APs
+which have been scanned throughout the same amount of time for the same user.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{figures/kmeans/user_3_sorted_2days_no_rssi_plot.png}
+\caption{The most common 50 APs for userY during the given 2 days (presence
+visualization calculated for 5 minutes time bins)}
+\label{user_3_days1_2_APs_presence}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/kmeans/kmeans_locations_(6)_2days_plot.png}
+\caption{Locations estimated with k-means for userY for 2 days}
+\label{user_3_days1_2_kmeans}
+\end{figure}
+
+An additional example of locations estimated using k-means can be seen in
+Appendix~\ref{appendix_kmeans}.
 
 \subsection{Hidden Markov Models}
 \section{Location matching}
