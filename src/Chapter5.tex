@@ -111,15 +111,16 @@ order to see if we notice any patterns in their movements.
 In Fig.~\ref{user_6_1d_lines} we can see how a day from the life of a random
 user (referred to as userX) looks like. The day for which we have plotted the
 data started on a Tuesday at $12:15$ pm and ends the next day right before the
-same hour. The hourly intervals can be seen on the x axis, while the signal
-strength values can be seen on the y axis. The legend contains the top $10$ most
+same hour. The hourly intervals can be seen on the X axis, while the signal
+strength values can be seen on the Y axis. The legend contains the top $10$ most
 popular~\footnote{An AP is more popular than another in case it appears more
 times during the period of time for which the Wifi scans are analyzed}
 
 \begin{figure}[h]
 \centering
-\includegraphics[height =
-0.45\textwidth]{figures/user_6_sorted_1days_plot.png}
+\includegraphics[width
+=\textwidth, height =
+0.4\textwidth]{figures/user_6_sorted_1days_plot.png}
 \caption{Example of the APs registered for an user throughout one day (using
 connecting lines markers)}
 \label{user_6_1d_lines}
@@ -145,8 +146,9 @@ might start or stop.
 
 \begin{figure}[h]
 \centering
-\includegraphics[height =
-0.45\textwidth]{figures/point_user_6_sorted_1days_plot.png}
+\includegraphics[width
+=\textwidth, height =
+0.4\textwidth]{figures/point_user_6_sorted_1days_plot.png}
 \caption{Example of the APs registered for userX throughout one day (using
 point markers)}
 \label{user_6_1d_point}
@@ -159,9 +161,9 @@ By looking at Fig.~\ref{user_6_1d_lines} we are at some level able to
 distinguish moments of time at which the user seems to be arriving at a
 location~\footnote{For example, we can say that what we notice from Wednesday
 at 10:15 until the same day at 12:15 is different than anything we can see
-before that time so we can assume that it is a new location.}, however is is
-hard to nice any patterns because we are only observing a single day in the life
-of userX. 
+before that time so we can assume that it is a new location.}, however it is
+hard to notice any patterns because we are only observing a single day in the
+life of userX. 
 
 % user Y = user 3
 Let us look at the data gathered through $7$ days from another user's (referred
@@ -179,8 +181,9 @@ user decided to switch off the Wifi.
 
 \begin{figure}[h]
 \centering
-\includegraphics[height =
-0.45\textwidth]{figures/user_3_sorted_7days_plot.png}
+\includegraphics[width
+=\textwidth, height =
+0.4\textwidth]{figures/user_3_sorted_7days_plot.png}
 \caption{Example of the APs registered for userY throughout 7 days}
 \label{user_3_7d}
 \end{figure}
@@ -236,8 +239,8 @@ the location is a transition instead of a stop location.% TODO verify
 %TODO - userZ is 6 - 1 day , day 1
 In Fig.~\ref{rssi_6_2nd_day} we have the different APs and their RSSI values at
 the different moments when the mobile phone has identified them in the scans for
-an user referred to as userZ. In Fig.~\ref{samples_6_2nd_day} we can observe the
-sample density for one of the APs that are predominant during the visualized
+userX during the second day of observations. In Fig.~\ref{samples_6_2nd_day} we
+can observe the sample density for one of the APs that are predominant during the visualized
 time frame. As we can see, the number of times the AP is present in the scans
 throughout the day is quite high and it is registered during numerous different
 periods during the day. We can easily assume that this AP is one of the key APs
@@ -245,14 +248,18 @@ that define one of the locations the user has been associated with.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width =\textwidth]{figures/combinations/user_6_sorted_1days_plot_croped.png}
-\caption{Example of the APs registered for userZ throughout 1 day}
+\includegraphics[width
+=\textwidth, height =
+0.4\textwidth]{figures/combinations/user_6_sorted_1days_plot_croped.png}
+\caption{Example of the APs registered for userX throughout day 2}
 \label{rssi_6_2nd_day}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width =\textwidth]{figures/combinations/user_6_sorted_1days_plot_14280_histo.png}
+\includegraphics[width
+=\textwidth, height =
+0.4\textwidth]{figures/combinations/user_6_sorted_1days_plot_14280_histo.png}
 \caption{Example of an AP which appears often}
 \label{samples_6_2nd_day}
 \end{figure}
@@ -269,7 +276,9 @@ throughout most of this time.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width =\textwidth]{figures/combinations/1553_modif.png}
+\includegraphics[width
+=\textwidth, height =
+0.4\textwidth]{figures/combinations/1553_modif.png}
 \caption{Example of an AP that appears just a few times}
 \label{few_samples_6_2nd_day}
 \end{figure}
@@ -325,11 +334,11 @@ while on the Y axis records the values of the averages
 \begin{figure}[h]
 \centering
 \includegraphics[width =\textwidth]{figures/combinations/user_6_sorted_1days_plot_14280_avg_sig.png}
-\caption{Example of average signal strength visualization for userZ}
+\caption{Example of average signal strength visualization for userX}
 \label{user_6_avg_1d_5m}
 \end{figure}
 
-The averages are represented by big dots symbols which appear at the beninning
+The averages are represented by big dots symbols which appear at the beginning
 of the time bin for which the average is calculated. For example, if we have
 calculated an average for the interval $12:05 - 12:10$, the average is plotted
 on the visualization at $12:05$. 
@@ -377,7 +386,8 @@ axis keeps track of the value of the running average calculated over this time.
 \begin{figure}[!h]
 \centering
 \includegraphics[width
-=\textwidth]{figures/rn_avg/user_1_sorted_1days_plot.png}
+=\textwidth, height =
+0.4\textwidth]{figures/rn_avg/user_1_sorted_1days_plot.png}
 \caption{Example of APs presence over time for userT}
 \label{user_1_APs_1d}
 \end{figure}
@@ -385,7 +395,8 @@ axis keeps track of the value of the running average calculated over this time.
 \begin{figure}[!h]
 \centering
 \includegraphics[width
-=\textwidth]{figures/rn_avg/user_1_sorted_85_plot.png}
+=\textwidth, height =
+0.4\textwidth]{figures/rn_avg/user_1_sorted_85_plot.png}
 \caption{AP 85 for userT during 1 day}
 \label{user_1_AP85_1d}
 \end{figure}
@@ -393,7 +404,8 @@ axis keeps track of the value of the running average calculated over this time.
 \begin{figure}[!h]
 \centering
 \includegraphics[width
-=\textwidth]{figures/rn_avg/user_1_sorted_1days_plot_85_avg_sig.png}
+=\textwidth, height =
+0.4\textwidth]{figures/rn_avg/user_1_sorted_1days_plot_85_avg_sig.png}
 \caption{Average strength for AP 85 for userT during 1 day}
 \label{user_1_AP85_avg_1d}
 \end{figure}
@@ -401,7 +413,8 @@ axis keeps track of the value of the running average calculated over this time.
 \begin{figure}[!h]
 \centering
 \includegraphics[width
-=\textwidth]{figures/rn_avg/user_1_sorted_1days_plot_85_rn_avg_sig_2.png}
+=\textwidth, height =
+0.4\textwidth]{figures/rn_avg/user_1_sorted_1days_plot_85_rn_avg_sig_2.png}
 \caption{Running average for AP 85 for userT during 1 day (2 minute time bins)}
 \label{user_1_AP85_rn2avg_1d}
 \end{figure}
@@ -409,7 +422,8 @@ axis keeps track of the value of the running average calculated over this time.
 \begin{figure}[!h]
 \centering
 \includegraphics[width
-=\textwidth]{figures/rn_avg/user_1_sorted_1days_plot_85_rn_avg_sig_5.png}
+=\textwidth, height =
+0.4\textwidth]{figures/rn_avg/user_1_sorted_1days_plot_85_rn_avg_sig_5.png}
 \caption{Running average for AP 85 for userT during 1 day (5 minute time bins)}
 \label{user_1_AP85_rn5avg_1d}
 \end{figure}
@@ -417,7 +431,8 @@ axis keeps track of the value of the running average calculated over this time.
 \begin{figure}[!h]
 \centering
 \includegraphics[width
-=\textwidth]{figures/rn_avg/user_1_sorted_1days_plot_85_rn_avg_sig_10.png}
+=\textwidth, height =
+0.4\textwidth]{figures/rn_avg/user_1_sorted_1days_plot_85_rn_avg_sig_10.png}
 \caption{Running average for AP 85 for userT during 1 day (10 minute time bins)}
 \label{user_1_AP85_rn10avg_1d}
 \end{figure}
@@ -474,14 +489,15 @@ minute time bin if it appeared in the scans at any point inside this time
 interval.
 
 We can use visualization in order to see how this transforms the way in which we
-can understand the data. In Fig.~\ref{} we have the different APs that have been
-scanned throughout the duration of $2$ days for userX. In Fig.~\ref{} we can see
-the top $50$ predominant APs and their presence over $5$ minutes time bin during
-the same $2$ days~\footnote{We restrict our visualization to $50$ APs as it
-would be hard to understand an image in which we would be displaying all the
-hundreds of APs which were encountered throughout the $2$ days.}. The X axis
-keeps track of the time bins throughout the $2$ days, while the Y axis
-represents the annonymized identifiers for the APs.
+can understand the data. In Fig.~\ref{user_6_APs_2d} we have the different APs
+that have been scanned throughout the duration of $2$ days for userX. In
+Fig.~\ref{user_6_pres_2d} we can see the top $50$ predominant APs and their
+presence over $5$ minutes time bin during the same $2$ days~\footnote{We
+restrict our visualization to $50$ APs as it would be hard to understand an
+image in which we would be displaying all the hundreds of APs which were
+encountered throughout the $2$ days.}. The X axis keeps track of the time bins
+throughout the $2$ days, while the Y axis represents the annonymized identifiers
+for the APs.
 
 \begin{figure}[!h]
 \centering
@@ -493,7 +509,7 @@ represents the annonymized identifiers for the APs.
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=1\textwidth]{figures/presence/user_6_sorted_2days_no_rssi_plot_crop.png}
+\includegraphics[width=1\textwidth]{figures/presence/user_6_sorted_2days_no_rssi_plot.png}
 \caption{The most common 50 APs for userX during the given 2 days (presence
 visualization calculated for 5 minutes time bins)}
 \label{user_6_pres_2d}
@@ -655,21 +671,22 @@ Original \cite{Macqueen67somemethods} implementation \cite{linde1980algorithm}
 %Every data point is processed only once and only one cluster mean is recomputed
 % everytime a new data point is added. This is hardly the same algorithm as the one described by wikipedia.
 
-This is exactly what the Lloyd clustering does, except that we need to switch to Euclidean space (the algorithm famously works for nutrient grouping etc, but it is difficult to visualize): Centroid = mean; k = number of clusters; cluster = group; k-means is for k groups. The informal procedure you quoted is a different interpretation, although it does the exact same thing: In the mentioned method, you already have the points given. You don't have to add them one by one; instead you add the group centers one by one. This is exactly the same. You still associate each point with the nearest site (or the center to distinguish it from a point). Take k sites. Given n points, these k random sites are placed near the k of the n possible points (usually you select k points and make them the sites). For every point, figure out which of the k sites is the nearest; that point goes to that group. You will have at most k groups now (some groups may be left unassigned if no point lies near to the site). Now recalculate the mean, reposition the k sites; repeat lather rinse. I don't understand how the quoted verbatim differs from this; it describes this exactly. Please clarify. Also provide a link to the PDF or article where this MacQueen paper is, I couldn't find it using Scholar. User_talk:gfxguy
+%This is exactly what the Lloyd clustering does, except that we need to switch
+% to Euclidean space (the algorithm famously works for nutrient grouping etc, but it is difficult to visualize): Centroid = mean; k = number of clusters; cluster = group; k-means is for k groups. The informal procedure you quoted is a different interpretation, although it does the exact same thing: In the mentioned method, you already have the points given. You don't have to add them one by one; instead you add the group centers one by one. This is exactly the same. You still associate each point with the nearest site (or the center to distinguish it from a point). Take k sites. Given n points, these k random sites are placed near the k of the n possible points (usually you select k points and make them the sites). For every point, figure out which of the k sites is the nearest; that point goes to that group. You will have at most k groups now (some groups may be left unassigned if no point lies near to the site). Now recalculate the mean, reposition the k sites; repeat lather rinse. I don't understand how the quoted verbatim differs from this; it describes this exactly. Please clarify. Also provide a link to the PDF or article where this MacQueen paper is, I couldn't find it using Scholar. User_talk:gfxguy
 \subsection{Hidden Markov Models}
 \section{Location matching}
 
-\begin{enumerate}
-  \item identifying locations
-	\begin{itemize}
-		\item Hidden Markov Models (5) 
-		\item K-means(2)
-	\end{itemize}
-  \item matching locations locations (0.5)
-	\begin{itemize}
-		\item Percentage similarity (0.5)
-		\item Keeping track of previous locations (0.5)
-		\item Creating fingerprints (1.5)
-	\end{itemize}
-  \item  
-\end{enumerate}
+%\begin{enumerate}
+%  \item identifying locations
+%	\begin{itemize}
+%		\item Hidden Markov Models (5) 
+%		\item K-means(2)
+%	\end{itemize}
+%  \item matching locations locations (0.5)
+%	\begin{itemize}
+%		\item Percentage similarity (0.5)
+%		\item Keeping track of previous locations (0.5)
+%		\item Creating fingerprints (1.5)
+%	\end{itemize}
+%  \item  
+%\end{enumerate}
