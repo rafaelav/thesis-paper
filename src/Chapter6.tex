@@ -1,9 +1,85 @@
-\chapter{Entropy and predictability}
-\section{Entropy of SensibleDTU users}
-\section{Predictability of SensibleDTU users}
-% 6 pages
-%\begin{enumerate}
-%  \item Calculating entropy for users
-%  \item Calculating predictability for users
-%  \item Observations 
-%end{enumerate}
+\chapter{Location matching through long periods of time}
+
+The HMM method as well as the k-means methods offer us with the possibility of
+extracting locations over a given number of days. However, both the algorithms
+perform better when the given time frame is shorter. This observation has come
+up while carefully observing the results for different number of days for which
+the algorithms have been executed. 
+
+The reason behind this behaviour seems to be the limitations of the 10-fold
+cross validation which has been used in order to evaluate the fitness of the
+results. The method implies that the data from the time frame taken into
+consideration is divided into 10 equal subsequences which are afterwards used in
+turns as training data and as testing data. However, when the data size grows,
+the randomly divided subsequences also grow. When we are dealing with
+subsequences which have a considerable size, it can happen that some of the
+subsequences can contain all of the fingerprints which can be attributed to a
+certain location and as such, that location cannot be estimated based on the
+other subsequences which have no knowledge of it. This leads to a decay in the
+efficiency of estimating the number of locations which we can expect the user
+has been at throughout the evaluated time.
+
+A solution for this can be to scale the k factor of the k-fold validation in
+order to use a factor larger than 10 when dealing with bigger amount of data,
+however this leads to a very long processing time which can be avoided by using
+the second possible solution. The second solution is to extract locations for
+each day and concatenate the results for all the days afterwards. This however
+leads to a new situation. We need to find a way in which to identify that a
+location $L_{x}$ from day X might be the same as a location $L_{y}$ from day Y.
+This problem is referred to in the present paper as the ``matching of
+locations'' problem.
+
+We take into consideration three possible ways in which we can solve this new
+problem.
+
+\section{Methods for solving the ``matching of locations'' problem}
+
+We have taken into consideration three possible ways in which we can solve the
+problem of matching Wifi identified locations which seem to be indicating the
+same geographical location.
+
+5.1. Identifying location fingerprint
+Ways to do this:
+a) Percentage similarity
+- for each location register all APs that ever are associated to it
+- keeping a dictionary with location name (e.g. 1) associated to the list of APs 
+- before adding a new entry for a new location look at the previous ones and see how much they resembled it
+Problem: the APs of a location can be completely found in the fingerprint of another location and they don’t need to be the same (e .g user 6 for the second day)
+
+b) Keeping all ever registered fingerprints that were associated to a location
+and see if any of them can be found in another location as well (case in which
+we can say they are the same). In this case a fingerprint is a 1 and 0 list
+saying which APs are present which are not Problem : 2 locations can be the same
+even if there is no fingerprint that completely matches.
+
+c) Create a overall fingerprint for a location with 1 and 0. An AP has a 1 of
+overall in the sub-fingerprints it was mostly present and 0 otherwise. The
+overall location can be compared with different thresholds for similarity. If
+similarity is above a threshold with another overall fingerprint for another
+location, than it can be assumed it is the same.
+* also, if a location is completely contained in another yet not above that
+threshold it is still the same (case in which 60% of the APs are the same, but
+the rest are missing in a location because they might have been switched off -
+in general locations do not share APs so much as for them to actually be kept in
+the overall location)
+
+\section{Location matching based on fingerprint similarity}
+After having the fingerprint for each location identified over a day, we needed to look at more time (e.g. 30 days) and try to match the locations up so that if the same location would appear throughout the days we would be able to pin point it and say it is the same one.
+
+* Identifying locations with HMM over 30 days is very difficult because of the total number of APs considered (for user 6 over 2500 for example), and because the 10-fold validation over so much time means that a location has high chances of being randomly selected in the same fold and thus not being identified.
+Consider we have the fingerprints as dictionaries with {AP1:0 or 1, AP2:0 or 1…} and that we need to combine location A and B.
+Ways to calculate similarity between fingerprints:
+a) There's a A-B similarity calculated that means the number of APs in A that exist in B and have the same presence value attributed divided to the number of common APs between A and B. There is a similar B-A similarity. The overall similarity is calculated as the sum of the two previously mentioned values divided to 2.
+
+Problem: ignores the number of APs that havn’t the same value for A and B. They are not considered at all and this influences the result.
+
+
+b) A reunion for bssids from both A and B is calculated. In case a bssid is not in A or B but it is in the reunion, than the presence value attributed for it is 0. In case a bssid is in A or B and the value for it in the original dictionary was 1, then it stays 1. The similarity is calculated as the number of bssids that have the same value for both the new dictionaries for A and B, divided to the number of bssids in either of these dictionaries (it's the same number since it's the reunion)
+
+Problem: a lot of APs that are not originally in one of the locations are uselessly added to the location with a 0 value (even the ones that are 0 in the other location are added, even though they will not define any of the locations). This creates fake similarities (A, B might get extra similar locations based on an AP that wasn’t even identified in B).
+
+c) A reunion of only the bssids that are 1 in either a or b and the bssids that exist in both a and b (can also be 0) is calculated. The similarity is calculated as the number of bssids in this reunion that have the same presence associated for both a and b divided to the total number of these bssids (same in a and b).
+
+Thresholds
+Ran for values between 0.98 and 0.65. In general around (80-75\%) it stays to a
+constant estimation of locations, otherwise the jumps are quite big.
