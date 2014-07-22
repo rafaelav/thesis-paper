@@ -680,6 +680,8 @@ Fig.~\ref{user_6_networks_1d} we have used the Force Atlas $2$ layer which has
 been configured in order to avoid overlapping of components.
 
 \subsection{Cross validation}
+\label{cross_valid}
+
 For both the k-means and the Hidden Markove Models approaches on extracting
 locations out of the user data we have been faced with a problem. The problem we
 have been faced with is that both these algorithm need to know how many
@@ -734,6 +736,7 @@ matches the original estimation made by our selected algorithm, which means that
 the algorithm we have used has worked fine.
 
 \subsection{K-means clustering}
+\label{k-means}
 
 The k-means algorithm is a popular method for analyzing clusters in data mining.
 The first time the ``k-means'' term was used was by MacQueen
@@ -822,8 +825,8 @@ MMs the states are visible to possible observers, the difference for the HMMs is
 that the states are not visible, yet the results which can be observed do depend
 on the hidden states \cite{18626}.
 
-There area few elements that characterize the HMMs \cite{18626}. They are as
-follows:
+There area few elements that characterize the HMMs according to \cite{18626}.
+They are as follows:
 \begin{itemize}
   \item N which represents the number of hidden states in the model. In general,
   these states can be interconnected in a way so that from some states others
@@ -841,8 +844,8 @@ follows:
   N
 \end{itemize}
 
-The three problems \cite{18626} that the HMMs can be used for to solve are as
-follows:
+The three problems also mentioned in \cite{18626} that the HMMs can be used for
+to solve are as follows:
 \begin{itemize}
   \item Given an observation sequence, how can the probability of the
   observation sequence be computed efficiently considering the given model
@@ -856,7 +859,80 @@ The second of the three problems above addresses the uncovering of the hidden
 states of a given model. Which is exactly what we are trying to identify when
 attempting to extract what are the locations an user has been at based on
 observing the APs that have been scanned throughout a given time frame for the
-given user.
+given user. In our case, N represents the number of unknown locations a user has
+been at, M is the set of observable fingerprints which we can calculate based
+on the presence of various APs in $5$ minutes time bins, and A, B and $\pi$ are
+the various probability distributions that can be associated with the way in
+which the user travels from location to location.
+
+The idea of using HMMs in order to track localization is not new. It has been
+explored in papers like \cite{el2013indoor}, \cite{inatomi2013hidden} or
+\cite{morelli2007hidden} which sustain the potential of using an algorithm based
+on this method of studying the travel behaviour of people.
+
+Scikit-learn \cite{SL} offers an implementation for HMMs that ensures the
+training for the models and the inferring of the hidden states and we have been
+using the tools they provide for working with our data.
+
+As with the k-means method (Section~\ref{k-means}), the problem we have been
+facing was that we could not approximate from the beginning the number of hidden
+states (which stand for locations in our case) that we are expecting the model
+to find based on the input observations. However, by using the k-fold cross
+validation (Section~\ref{cross_valid}) we can, once again (similar to the way in
+which we have solved the problem for k-means), test the estimation being
+computed based on different numbers of possible locations.
+
+The steps in extracting the locations with the help of the HMM based algorithm
+that has been combined with a 10-fold cross validation are as follow:
+\begin{itemize}
+  \item We select the time frame (number of days) for which we want to extract
+  the locations
+  \item We retrieve the data and extract the fingerprints
+  \item We choose the maximum number of locations we are expecting to find in a
+  similar manner we have done for the k-means algorithm, meaning as the minimum
+  value between $50$ and the result for the number of days multiplied by $10$
+  \item For each possible number of locations in the range of $2$ and our
+  previously selected maximum we run the HMM algorithm on the existing
+  fingerprints
+  \item The estimations are cross validated in order to see which number of
+  locations has generated the optimal approximation for the given fingerprints
+  \item In case more locations have generated equally good results we select
+  as number of expected locations the highest of them
+  \item This algorithm is also ran $10$ times leading to $10$ estimations out of
+  which the one which appears the most times out of the $10$ results is
+  considered the correct one
+\end{itemize}
+
+The reason behind running the algorithm $10$ times is the same as the one
+present for k-means algorithm. We want to ensure that the random factor which is
+involved in the cross validation process has a very little effect on the
+correctness of the estimation. At the end of the algorithm we have the hidden
+states (in our case, locations) that can be extracted based on the observations
+we have based on the presence of the various APs the user is associated to
+throughout the given time frame. An example of locations that have been found
+for userX throughout $3$ days can be seen in Fig.~\ref{user_6_days1_2_3_hmm}.
+They can be easily mapped to the locations we can observe by looking at
+Fig.~\ref{user_6_days1_2_3_APs_presence} where we have the presence of the
+APs which have been scanned throughout the same amount of time for the same user.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{figures/hmm/user_6_sorted_3days_no_rssi_plot.png}
+\caption{The most common 50 APs for userX during the given 3 days (presence
+visualization calculated for 5 minutes time bins)}
+\label{user_6_days1_2_3_APs_presence}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/hmm/hmm_locations_(5)_3days_plot.png}
+\caption{Locations estimated with HMM for userX for 3 days}
+\label{user_3_days1_2_3_hmm}
+\end{figure}
+
+An additional example of locations estimated using the HMM based algorithm can
+be seen in Appendix~\ref{appendix_hmm}.
+
 \section{Location matching}
 
 %\begin{enumerate}
