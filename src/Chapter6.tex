@@ -38,22 +38,224 @@ We have taken into consideration three possible ways in which we can solve the
 problem of matching Wifi identified locations which seem to be indicating the
 same geographical location.
 
-5.1. Identifying location fingerprint
-Ways to do this:
-a) Percentage similarity
-- for each location register all APs that ever are associated to it
-- keeping a dictionary with location name (e.g. 1) associated to the list of APs 
-- before adding a new entry for a new location look at the previous ones and see how much they resembled it
-Problem: the APs of a location can be completely found in the fingerprint of another location and they don’t need to be the same (e .g user 6 for the second day)
+\subsection{Dictionary of locations based on APs}
+\label{dictionary_aps}
+The algorithm which can be used for matching up locations over time based on a
+\textit{dictionary based on APs} is as follows:
+\begin{itemize}
+  \item For each location identified with our location extraction algorithm and
+  for each time bin in which the location appears we can identify the APs that
+  are present in during those time bins and keep them as APs which are
+  associated with the given location
+  \item Before adding a new entry in the dictionary~\footnote{Adding an entry
+  in such a dictionary is equivalent with defining a new location based on the
+  APs of which presence the new location is characterized by.}, we can first
+  check the dictionary for previously defined locations that seem to resemble
+  the new one we want to add
+  \item If we do not find a similar location we can just add a new entry for the
+  new location in the dictionary
+  \item If we find locations which resemble the new one in a proportion bigger
+  than a given threshold, we can chose the one which resembles the most and
+  consider that the new location and this specific location are the same
+  \item In the above case, the entry for the location in the dictionary is
+  updated to contain the reunion of the APs which define the previous definition
+  of the location and the newly found location that matches it
+\end{itemize}
 
-b) Keeping all ever registered fingerprints that were associated to a location
-and see if any of them can be found in another location as well (case in which
-we can say they are the same). In this case a fingerprint is a 1 and 0 list
-saying which APs are present which are not Problem : 2 locations can be the same
-even if there is no fingerprint that completely matches.
+This method seems to be a simple solution, however, at a close exploration of
+possible situations which can appear within our data we identified a case in
+which this solution fails. Let use explore the situation in
+Fig.~\ref{overlap_of_aps}. 
 
-c) Create a overall fingerprint for a location with 1 and 0. An AP has a 1 of
-overall in the sub-fingerprints it was mostly present and 0 otherwise. The
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/matching/overlap_of_aps.png}
+\caption{Example of APs overlapping}
+\label{overlap_of_aps}
+\end{figure}
+
+In this case the user would spend most of his or her time for the exemplified
+duration at location L1 or at location L2. However, these locations can be, for
+example, two rooms which are close enough so as to have a signal overlap between
+them (e.g. between t1 and t2). If the user is to stop for enough time, but not
+very long (e.g. 5 minutes which is the duration of exactly one time bin) in an
+intermediate location where the signals from the APs in the two rooms overlap,
+then the extraction algorithm would identify the location as one of either L1 or
+L2. When using the matching algorithm, the dictionary will contain an entry for
+L1 which has all the APs from 1 to 10 as all of them have been identified
+throughout the time in which the user seems to be located at location L1.
+Because of this, when the algorithm tries to see if location L2 can be matched
+with another previous location, since the APs attributed to L2 are AP7-10, then
+all of them can also be found in the entry existing for location L1 and as such
+the algorithm considers that locations L1 and L2 are the same.
+
+Situations like this one make the use of this particular algorithm to be
+inefficient.
+
+\subsection{Dictionary of locations based on fingerprints}
+\label{dictionary_fingerprints}
+The algorithm which can be used for matching up locations over time based on a
+\textit{dictionary based on fingerprints}
+is as follows:
+\begin{itemize}
+  \item For each location identified with our location extraction algorithm and
+  for each time bin in which the location appears we can see which is the
+  fingerprint~\footnote{A fingerprint is calculated for each time bin. It is a
+  list with N elements, where N is the number of APs which are associated with
+  the given user. Element at position i in the list is attributed to $AP_{i}$.
+  Each element can be either 0 or 1 marking the absence or presence in the given time bin of
+  the AP which corresponds to the element.} for the given time bin 
+  \item An entry in the dictionary can contain the fingerprints which are
+  extracted from the time bins which are associated to the location for which
+  the entry is created
+  \item Before adding a new entry in the dictionary, we can first
+  check the dictionary to see if previously defined locations might fit the
+  characteristics of the current location we are trying to add
+  \item If a similar location is not found, we can proceed with adding a new
+  entry in the dictionary for the new location
+  \item If we find locations which resemble the new one in a proportion bigger
+  than a given threshold~\footnote{Meaning that a high number of fingerprints
+  are common to both locations}, we can chose the one which resembles the most
+  and consider that they are the same
+  \item In the above case, the entry for the location in the dictionary
+  is updated to contain the reunion of the fingerprints which are attributed
+  to the previously defined locations which are now matched into one
+\end{itemize}
+
+This solution eliminates the problem that was found in
+Section~\ref{dictionary_aps} since, in this case the entries for location L1 and
+L2 would be different as it can be seen in
+Tab.~\ref{tab:table_fingerprints}~\footnote{We make the assumption that the
+algorithm for extracting locations associates the period between t1 and t0 to
+location L1.}.
+
+\begin{table}[h]
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{1}{|l|}{}       & \multicolumn{2}{c|}{\textbf{Location 1 (L1)}}   & \textbf{Location 2 (L2)} \\ \hline
+\textbf{Access points (APs)} & \textbf{Fingerprint 1} & \textbf{Fingerprint 2} & \textbf{Fingerprint 1}   \\ \hline
+AP1                          & 1                      & 1                      & 0                        \\
+AP2                          & 1                      & 1                      & 0                        \\
+AP3                          & 1                      & 1                      & 0                        \\
+AP4                          & 1                      & 1                      & 0                        \\
+AP5                          & 1                      & 1                      & 0                        \\
+AP6                          & 1                      & 1                      & 0                        \\
+AP7                          & 0                      & 1                      & 1                        \\
+AP8                          & 0                      & 1                      & 1                        \\
+AP9                          & 0                      & 1                      & 1                        \\
+AP10                         & 0                      & 1                      & 1                        \\ \hline
+\end{tabular}
+\caption{This table shows the fingerprints for locations L1 and L2 in
+Fig.~\ref{overlap_of_aps}}
+\label{tab:table_fingerprints}
+\end{table}
+
+There is, however, another situation which we were able to identify and which
+creates difficulties for the good functionality of the present algorithm. The
+mentioned case can be seen in Fig.~\ref{diff_fp_same_loc}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/matching/different_fp_same_loc.png}
+\caption{Example of locations which can be matched yet do not have any identical
+fingerprints overlapping}
+\label{diff_fp_same_loc}
+\end{figure}
+
+The fingerprints of locations L1 and L2 in this new case can be seen in
+Tab.~\ref{tab:table_fingerprints_same_loc}. As we can see there are no common
+fingerprints identified for the two locations because in the case of location L2
+the signal from the APs that identify with it is not constant because of
+possible interferences. In this case the algorithm will fail to identify the two
+location as being the same one and, as such, the present algorithm is not the
+best option to use in order to solve the matching problem.
+
+\begin{table}[h]
+\begin{tabularx}{0.75\textwidth}{|c|c|c|c|c|c|c|c|}
+\hline
+                             & \textbf{Location 1 (L1)} & \multicolumn{6}{c|}{\textbf{Location 2 (L2)}}                                                                                                       \\ \hline
+\textbf{Access points (APs)} & \textbf{Fingerprint 1}   & \textbf{Fingerprint 1} & \textbf{Fingerprint 2} & \textbf{Fingerprint 3} & \textbf{Fingerprint 4} & \textbf{Fingerprint 5} & \textbf{Fingerprint 6} \\ \hline
+AP1                          & 1                        & 1                      & 0                      & 0                      & 1                      & 1                      & 1                      \\
+AP2                          & 1                        & 0                      & 1                      & 1                      & 1                      & 1                      & 1                      \\
+AP3                          & 1                        & 1                      & 1                      & 0                      & 1                      & 1                      & 0                      \\
+AP4                          & 1                        & 1                      & 1                      & 1                      & 1                      & 0                      & 1                      \\
+AP5                          & 1                        & 1                      & 1                      & 1                      & 1                      & 1                      & 1                      \\
+AP6                          & 1                        & 1                      & 0                      & 0                      & 0                      & 1                      & 0                      \\ \hline
+\end{tabularx}
+\caption{This table shows the fingerprints for locations L1 and L2 in
+Fig.~\ref{diff_fp_same_loc}}
+\label{tab:table_fingerprints_same_loc}
+\end{table}
+
+\subsection{Dictionary of location signatures}
+\label{dictionary_signatures}
+We define the signature of a location as follows:
+\begin{itemize}
+  \item It is an entity which is calculated for a location taking into
+  consideration a given period of time (e.g. $1$ day) for which we have used an
+  algorithm for extracting the locations
+  \item It is an entity which identifies a location independently of the moment
+  of time inside the time frame for which it is calculated (as opposed to the
+  fingerprints that have been mentioned in 
+  Section~\ref{dictionary_fingerprints} and which are extracted for each time
+  bin)
+  \item It is a list of N elements (where N is the number of APs which the user
+  is associated with)
+  \item Each element has the value 1 or 0
+  \item If the element at position i in the list (where $i \in \{1..N\}$) is 1
+  it means that the associated AP ($AP_{i}$) has been found mostly with the
+  value $1$ in the fingerprints associated to the existing time bins (as
+  presented in Section~\ref{dictionary_fingerprints}) and if it is 0
+  it means the opposite~\footnote{This means that if the signature of the
+  location we are interested in has the element attributed to a given AP set to
+  1 then the AP has appeared in more time bins than the ones it was missing
+  from during the given time frame. If it is 0, than the AP has been missing
+  from more time bins than the ones that it was present in and that are
+  associated to the give location.}
+\end{itemize}
+
+The way in which these signatures are create eliminates the problems that can
+appear in case interferences appear and disturb the presence of the signal from
+various APs for a limited amount of time. The location matching algorithm, in
+this case, can be as follows:
+
+\begin{itemize}
+  \item For each location identified with our location extraction throughout the
+  days we calculate the location signature
+  \item An entry in the dictionary contains the location signature
+  \item Before adding a new entry in the dictionary, we can first
+  check the dictionary to see if any of the previous locations have a signature
+  that is similar above a selected threshold to the one of the new location we
+  are trying to add
+  \item If a similar location is not found, we can proceed with adding a new
+  entry in the dictionary for the new location
+  \item If we find a location which resembles the new one in a proportion bigger
+  than a given threshold then we can consider that the two are the same
+  location
+\end{itemize}
+
+%TODO mention how similarity is calculated
+%TODO - mention how threshold was selected
+
+By analysing data for different users we found a case in which this method did
+not identify correctly (with the present version of the algorithm) that two
+locations where in fact the same one. The situation can be seen in Fig.~\ref{}.
+
+As we can see, location L1 has $10$ APs while location L2 has only $5$. Since
+the APs in location L2 are also present in location L1 it is safe to assume that
+the remaining APs are not present in L2 due to technical problems or
+interferences. However, when calculating the signatures of the two locations and
+comparing them, by using a threshold value of 80\% for considering them the
+same, we would only obtain that they are similar in a 50\% proportion. In order
+to avoid this kind of situations, we have added to our algorithm another
+condition which goes as follows: if all the APs which have the value $1$ in the
+signature of a location appear in the signature of an already found previous
+location, than the two can be considered the same location even if the
+similarity value is not above the given threshold.
+
+
+c) Create a overall fingerprint for a location with 1 and 0.
+An AP has a 1 of overall in the sub-fingerprints it was mostly present and 0 otherwise. The
 overall location can be compared with different thresholds for similarity. If
 similarity is above a threshold with another overall fingerprint for another
 location, than it can be assumed it is the same.
