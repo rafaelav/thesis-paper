@@ -171,17 +171,17 @@ location as being the same one and, as such, the present algorithm is not the
 best option to use in order to solve the matching problem.
 
 \begin{table}[h]
-\begin{tabularx}{0.75\textwidth}{|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
-                             & \textbf{Location 1 (L1)} & \multicolumn{6}{c|}{\textbf{Location 2 (L2)}}                                                                                                       \\ \hline
-\textbf{Access points (APs)} & \textbf{Fingerprint 1}   & \textbf{Fingerprint 1} & \textbf{Fingerprint 2} & \textbf{Fingerprint 3} & \textbf{Fingerprint 4} & \textbf{Fingerprint 5} & \textbf{Fingerprint 6} \\ \hline
-AP1                          & 1                        & 1                      & 0                      & 0                      & 1                      & 1                      & 1                      \\
-AP2                          & 1                        & 0                      & 1                      & 1                      & 1                      & 1                      & 1                      \\
-AP3                          & 1                        & 1                      & 1                      & 0                      & 1                      & 1                      & 0                      \\
-AP4                          & 1                        & 1                      & 1                      & 1                      & 1                      & 0                      & 1                      \\
-AP5                          & 1                        & 1                      & 1                      & 1                      & 1                      & 1                      & 1                      \\
-AP6                          & 1                        & 1                      & 0                      & 0                      & 0                      & 1                      & 0                      \\ \hline
-\end{tabularx}
+             & \textbf{Location 1 (L1)}     & \multicolumn{6}{c|}{\textbf{Location 2 (L2)}}                                           \\ \hline
+\textbf{APs} & \textbf{Fingerprint 1 (FP1)} & \textbf{FP1} & \textbf{FP2} & \textbf{FP3} & \textbf{FP4} & \textbf{FP5} & \textbf{FP6} \\ \hline
+AP1          & 1                            & 1            & 0            & 0            & 1            & 1            & 1            \\
+AP2          & 1                            & 0            & 1            & 1            & 1            & 1            & 1            \\
+AP3          & 1                            & 1            & 1            & 0            & 1            & 1            & 0            \\
+AP4          & 1                            & 1            & 1            & 1            & 1            & 0            & 1            \\
+AP5          & 1                            & 1            & 1            & 1            & 1            & 1            & 1            \\
+AP6          & 1                            & 1            & 0            & 0            & 0            & 1            & 0            \\ \hline
+\end{tabular}
 \caption{This table shows the fingerprints for locations L1 and L2 in
 Fig.~\ref{diff_fp_same_loc}}
 \label{tab:table_fingerprints_same_loc}
@@ -234,12 +234,35 @@ this case, can be as follows:
   location
 \end{itemize}
 
-%TODO mention how similarity is calculated
-%TODO - mention how threshold was selected
+The similarity between two signatures is calculated by taking into consideration
+the APs that are set to $1$ in either of the two signatures and the APs which
+are set to $0$ but that are present in both signatures~\footnote{The difference
+in APs in signatures is given by the fact that, when looking at date from
+different days, the APs which are scanned during these days might not always be
+the same. We are not keeping all the APs associated at any moment with a user
+because this leads to an unnecessary increase in the execution time.}. The
+similarity value si calculated as the number of APs that have the same value
+associated to them in both the signatures (either $0$ or $1$) and this number is
+then divided to the number of APs in the reunion.
+
+The similarity result obtained for two signatures is compared to a given
+threshold in order to determine if the two signatures can be referring to the
+same geographical location. We have experimented with threshold values between
+$65\%$ - $98\%$ and the results show that for threshold values inside the
+interval $75\%$ - $80\%$ return the most accurate results for matching
+locations.
 
 By analysing data for different users we found a case in which this method did
-not identify correctly (with the present version of the algorithm) that two
-locations where in fact the same one. The situation can be seen in Fig.~\ref{}.
+not identify correctly that two locations where in fact the same one. The
+situation can be seen in Fig.~\ref{same_location_less_than_threshold}.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/matching/different_fp_same_loc.png}
+\caption{Example of locations which need to be matched despite their similarity
+being below the threshold}
+\label{same_location_less_than_threshold}
+\end{figure}
 
 As we can see, location L1 has $10$ APs while location L2 has only $5$. Since
 the APs in location L2 are also present in location L1 it is safe to assume that
@@ -251,37 +274,9 @@ to avoid this kind of situations, we have added to our algorithm another
 condition which goes as follows: if all the APs which have the value $1$ in the
 signature of a location appear in the signature of an already found previous
 location, than the two can be considered the same location even if the
-similarity value is not above the given threshold.
+similarity value is not above the given threshold. Small improvement ensures
+that the algorithm performs very well even despite cases as this one.
 
-
-c) Create a overall fingerprint for a location with 1 and 0.
-An AP has a 1 of overall in the sub-fingerprints it was mostly present and 0 otherwise. The
-overall location can be compared with different thresholds for similarity. If
-similarity is above a threshold with another overall fingerprint for another
-location, than it can be assumed it is the same.
-* also, if a location is completely contained in another yet not above that
-threshold it is still the same (case in which 60% of the APs are the same, but
-the rest are missing in a location because they might have been switched off -
-in general locations do not share APs so much as for them to actually be kept in
-the overall location)
-
-\section{Location matching based on fingerprint similarity}
-After having the fingerprint for each location identified over a day, we needed to look at more time (e.g. 30 days) and try to match the locations up so that if the same location would appear throughout the days we would be able to pin point it and say it is the same one.
-
-* Identifying locations with HMM over 30 days is very difficult because of the total number of APs considered (for user 6 over 2500 for example), and because the 10-fold validation over so much time means that a location has high chances of being randomly selected in the same fold and thus not being identified.
-Consider we have the fingerprints as dictionaries with {AP1:0 or 1, AP2:0 or 1…} and that we need to combine location A and B.
-Ways to calculate similarity between fingerprints:
-a) There's a A-B similarity calculated that means the number of APs in A that exist in B and have the same presence value attributed divided to the number of common APs between A and B. There is a similar B-A similarity. The overall similarity is calculated as the sum of the two previously mentioned values divided to 2.
-
-Problem: ignores the number of APs that havn’t the same value for A and B. They are not considered at all and this influences the result.
-
-
-b) A reunion for bssids from both A and B is calculated. In case a bssid is not in A or B but it is in the reunion, than the presence value attributed for it is 0. In case a bssid is in A or B and the value for it in the original dictionary was 1, then it stays 1. The similarity is calculated as the number of bssids that have the same value for both the new dictionaries for A and B, divided to the number of bssids in either of these dictionaries (it's the same number since it's the reunion)
-
-Problem: a lot of APs that are not originally in one of the locations are uselessly added to the location with a 0 value (even the ones that are 0 in the other location are added, even though they will not define any of the locations). This creates fake similarities (A, B might get extra similar locations based on an AP that wasn’t even identified in B).
-
-c) A reunion of only the bssids that are 1 in either a or b and the bssids that exist in both a and b (can also be 0) is calculated. The similarity is calculated as the number of bssids in this reunion that have the same presence associated for both a and b divided to the total number of these bssids (same in a and b).
-
-Thresholds
-Ran for values between 0.98 and 0.65. In general around (80-75\%) it stays to a
-constant estimation of locations, otherwise the jumps are quite big.
+This third possible solution performs very well for the test we have conducted
+over or data and as such it has been chosen for solving the matching problem for
+locations over different days.
