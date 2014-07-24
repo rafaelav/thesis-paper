@@ -1,6 +1,72 @@
 \chapter{Entropy and predictability}
-\section{Entropy of SensibleDTU users}
-\section{Predictability of SensibleDTU users}
+
+The potential using a real scientific approach in order to be able to predict
+where people will travel in the near or less near future can have an outstanding
+impact on the way in which the engineers design and construct infrastructures
+for cities, it can also impact the way in which we understand the transportation
+system and, not to mention, it could give us a new insight into how we can
+approach the solving of epidemics spreading \cite{Lu13} \cite{Brockmann08}.
+
+Data from SensibleDTU \cite{Stopczynski14m} allows us to explore for research
+purpose exactly how and why people move from a certain location to another. It
+gives us the opportunity to look more careful into our mobility patterns in
+order to try to understand how we can make use of these patterns to improve our
+world.
+
+%TODO -add no of users
+In order to explore the entropy and predictability of human mobility, we have
+conducted tests based on the data retrieved from a selection of users from the
+SensibleDTU database. We have selected $X$ users from our original pool of $131$
+users in order to observe their movements throughout a period of $30$ days. The
+reason behind discarding the remaining users was that some of them did not have
+enough data collected through the explored period of time, their data has been
+found to be missing relevant fields or they did not have a complete data
+collection throughout the month that we targeted for the present study.
+
+\section{Entropy}
+
+``Entropy is probably the most fundamental quantity capturing the degree of
+predictability characterizing a time series'' \cite{Barabasi10}. Multiple
+studies (\cite{Sinatra14},\cite{Lu13}, \cite{marin2012exploring},
+\cite{Barabasi10}) that aim at understanding the predictability of the human
+travel trajectory take into consideration different entropy measures which have
+different meaning and different levels of importance in correctly estimating the
+probability of choosing a location or another. The measures that are mentioned
+are the random entropy, the temporal uncorrelated entropy, the conditional
+entropy and the real entropy.
+
+\subsection{The random entropy}
+
+The formula for the random entropy of a random user i is given by $S_{i}^{rand}
+= log_{2}N_{i}$, where $N_{i}$ represents the number of unique locations that
+have been associated to the given user throughout the time frame that we are
+taking into consideration. This measurement can be used to reflect the
+predictability of the travel patterns of the given user in case we consider that
+each of the locations can be visited with the exact same probability.
+
+\subsection{The temporal uncorrelated entropy}
+
+The formula for the temporal uncorrelated entropy of a random user i is given by
+$S_{i}^{unc} = -\Sigma_{j=1}^{N_{i}}p_{i}(j)log_{2}p_{i}(j)$, where $N_{i}$
+represents the number of unique locations that have been associated to the given
+user throughout the time frame that we are taking into consideration and
+$p_{i}(j)$ represents the historical probability of the given user to visit
+location j. The present measurement incorporates the knowledge about what
+locations occur more often in the user's traveling patterns.
+
+\subsection{The conditional entropy}
+%TODO change
+The formula for the random entropy of a random user i is given by $S_{i}^{rand}
+= log_{2}N_{i}$, where $N_{i}$ represents the number of unique locations that
+have been associated to the given user throughout the time frame that we are
+taking into consideration. This measurement can be used to reflect the
+predictability of the travel patterns of the given user in case we consider that
+each of the locations can be visited with the exact same probability.
+
+\subsection{The real entropy}
+% TODO - add formulas from additional paper of barabasi
+
+\section{Predictability}
 % 6 pages
 %\begin{enumerate}
 %  \item Calculating entropy for users
