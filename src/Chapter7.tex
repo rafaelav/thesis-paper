@@ -161,19 +161,100 @@ be written as
 S_{i} = - \sum\limits_{T'_{i}\subset T_{i}}P(T'_{i})log_{2}[P(T'_{i})]
 \end{equation}
 
-We have calculated the entropy for our selected users and the distribution for
-the results which have been rounded after the second decimal can be seen in
-Fig.~\ref{}. The fact that the average value of the real entropy for the
-selected user is around $ $ means that, in reality we the uncertainty about
-where a user will be traveling to next is $2^{} = $ locations. These findings
-show that, the users we have been observing do not randomly choose their future
-locations, but in fact, their locations are well established by restrictions
-such as hours or days at which they need to be at work, or school as well as
-other patterns that govern most of the times our decisions.
+We have calculated a measurement of the entropy for our selected users and the
+distribution for the results which have been rounded after the second decimal
+can be seen in Fig.~\ref{}. The fact that the average value of the real entropy
+for the selected user is around $ $ means that, in reality we the uncertainty
+about where a user will be traveling to next is $2^{} = $ locations. These
+findings show that, the users we have been observing do not randomly choose
+their future locations, but in fact, their locations are well established by
+restrictions such as hours or days at which they need to be at work, or school
+as well as other patterns that govern most of the times our decisions.
 
 
 In Fig.~\ref we have an overlay of the distribution for the random, temporal
 uncorrelated and real entropies.
+
 \section{Predictability}
+
+A measure that needs to be taken into consideration when discussing
+predictability is the probability ($\Pi$) of a predictive algorithm to correctly
+estimate the future locations a user will visit. According to the inequality of
+Fano \cite{brabazon2008natural} \cite{1057678}, a user for which the entropy is
+S and it has been calculated taking into consideration the fact that the user
+spends his or her time in either of N given locations, then his or her
+predictability (as it is presented in \cite{Barabasi10} and in \cite{Sinatra14}
+as well) is given by
+
+\begin{equation}
+\label{ineq_pred}
+\Pi \leq \Pi^{max}(S,N)
+\end{equation}
+
+The value for $\Pi^{max}$ can be determined from
+
+\begin{equation}
+\label{pred}
+S = H(\Pi^{max}) + (1 - \Pi^{max})log_{2}(N-1)  
+\end{equation}
+
+by knowing that
+
+\begin{equation}
+\label{h_func}
+H(\Pi^{max}) = - \Pi^{max}log_{2}(\Pi^{max}) - (1-\Pi^{max})log_{2}(1-\Pi^{max})   
+\end{equation}  
+
+By combining the two previous formula we obtain the equation
+
+\begin{equation}
+\label{equation}
+S + \Pi^{max}log_{2}(\Pi^{max}) + (1-\Pi^{max})log_{2}(1-\Pi^{max}) - (1 -
+\Pi^{max})log_{2}(N-1) = 0
+\end{equation}
+
+One of the aims of our study is to estimate the predictability when it comes to
+the trajectory patterns of the selected users from the SensibleDTU database.
+After we have calculated their entropy and after knowing the number of locations
+each of them has been traveling in between for the duration of $30$ days that we
+considered for our experiment, we only needed to calculate the entropy based on
+the mathematical formulae at \ref{pred} and \ref{h_func}. However, the equation
+at \ref{equation}, which would allow us to calculate the predictability for each
+user is a transcendent equation. This means that the equation can be solved
+either numerically or graphically.
+
+In order to solve the equation we use a numerical method that helped us
+approximate the result. The method we use is the bisection method \cite{faires}.
+This method is applicable for solving an equation $f(x) = 0$ over a given
+interval $[a,b]$ for which the values $f(a)$ and $f(b)$ have opposing sings. In
+our case the f function is represented by the left side in the equation
+\ref{equation}. Since the solution of our equation $f(x) = 0$ needs to be a
+number between 0 and 1 (the maximum predictability can only have a value in this
+interval), than we start the algorithm by verifying if by replacing the maximum
+predictability with 0 or 1 we have a solution or if the two values obtained this
+way have opposing signs. If they have opposing signs, we consider that $a = 0$
+and $b = 1$. In case the function does not have opposing signs, we adjust the
+interval until we find either a solution or values for which the signs are
+opposing. The algorithm continues as following:
+\begin{itemize}
+  \item As long as we do not exceed a previously set number of iterations we
+  look for the middle of the interval given by the selected a and b numbers
+  (let the middle be m)
+  \item In case $f(m)$ is 0 or sufficiently close to 0 (we accept an error of
+  order $10^{-3}$), than we have found our solution, otherwise if the value of
+  $f(m)$ has the same sign as $f(a)$ we move forward considering the interval
+  $[m,b]$, if it has the same sign as $f(b)$ we continue by using the interval
+  $[a,m]$
+  \item We increment the number of iterations we have computed
+\end{itemize}
+
+Fig.~\ref{} shows the distribution of the predictability values which have been
+computed for our selected users. As we can see, the average predictability value
+for the selected users and through the given $30$ days of observations is of $ $
+which supports the observations made in previous works (a considerable number of
+which have already been mentioned in the present paper - e.g.
+\cite{song2010limits}, \cite{Barabasi08} etc) regarding the fact that we seem to
+have a highly well established pattern of traveling that rises from our daily
+habits.
 % 6 pages \begin{enumerate} \item Calculating entropy for users \item
 % Calculating predictability for users \item Observations end{enumerate}
