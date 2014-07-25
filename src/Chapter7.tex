@@ -36,40 +36,144 @@ are the random entropy, the temporal uncorrelated entropy, the conditional
 entropy and the real entropy.
 
 \subsection{The random entropy}
+\label{r_e}
 
-The formula for the random entropy of a random user i is given by $S_{i}^{rand}
-= log_{2}N_{i}$, where $N_{i}$ represents the number of unique locations that
+The formula for the random entropy of a random user i is given by
+
+\begin{equation}
+S_{i}^{rand} = log_{2}N_{i}
+\end{equation}
+
+Where $N_{i}$ represents the number of unique locations that
 have been associated to the given user throughout the time frame that we are
 taking into consideration. This measurement can be used to reflect the
 predictability of the travel patterns of the given user in case we consider that
 each of the locations can be visited with the exact same probability.
+
+We have calculated the random entropy by taking into consideration the locations
+visited by our selected users throughout a period of $30$ days. Fig.~\ref{}
+shows the density distribution of the results which have been rounded after the
+second decimal. As we can see, most of the users have a random entropy of $ $
+and the average random entropy is $ $. This means that, in average, is a user
+would choose randomly his or her next location, than they can be found in any of
+$2^{S^rand} = 2^{}$ locations (which is approximately $ $).
+
 
 \subsection{The temporal uncorrelated entropy}
+\label{tu_e}
 
 The formula for the temporal uncorrelated entropy of a random user i is given by
-$S_{i}^{unc} = -\Sigma_{j=1}^{N_{i}}p_{i}(j)log_{2}p_{i}(j)$, where $N_{i}$
-represents the number of unique locations that have been associated to the given
-user throughout the time frame that we are taking into consideration and
-$p_{i}(j)$ represents the historical probability of the given user to visit
-location j. The present measurement incorporates the knowledge about what
-locations occur more often in the user's traveling patterns.
+
+\begin{equation}
+S_{i}^{unc} = -\sum\limits_{j=1}^{N_{i}}p_{i}(j)log_{2}p_{i}(j)
+\end{equation}
+
+Where $N_{i}$ represents the number of unique locations that have been
+associated to the given user throughout the time frame that we are taking into
+consideration and $p_{i}(j)$ represents the historical probability of the given
+user to visit location j. The present measurement incorporates the knowledge
+about what locations occur more often in the user's traveling patterns.
+
+We have calculated the temporal uncorrelated entropy by taking into
+consideration the locations visited by our selected users throughout a period of
+$30$ days. Fig.~\ref{} shows the density distribution of the results which have
+been rounded after the second decimal. As we can see, most of the users have a
+temporal uncorrelated entropy of $ $ and the average temporal uncorrelated
+entropy is $ $. This means that, in average, if we are to base our supposition
+on the number of times each location has been visited in the past by a given
+user, then the user's next location can be found in any of $2^{S^rand} = 2^{}$
+locations (which is approximately $ $).
 
 \subsection{The conditional entropy}
-%TODO change
-The formula for the random entropy of a random user i is given by $S_{i}^{rand}
-= log_{2}N_{i}$, where $N_{i}$ represents the number of unique locations that
-have been associated to the given user throughout the time frame that we are
-taking into consideration. This measurement can be used to reflect the
-predictability of the travel patterns of the given user in case we consider that
-each of the locations can be visited with the exact same probability.
+\label{con_e}
+The conditional entropy $S_{i}^{cond}$ for a given user $i$ is calculated based
+on the formula given in the paper \cite{Sinatra14}
+
+\begin{equation}
+S_{i}^{cond} = - \sum\limits_{x_{t}\in X_{i}} \sum\limits_{x_{t-1}\in X_{i}}
+p_{i}(x_{t-1},x_{t})log_{2}p_{i}(x_{t}|x_{t-1})
+\end{equation}
+
+In this formula, $x_{t}$ and $x_{t-1}$ are possible locations,
+$p_{i}(x_{t-1},x_{t})$ is the probability of apparition of the subsequent
+locations $x_{t-1}$ and $x_{t}$ and $p_{i}(x_{t}|x_{t-1}) = p_{i}(x_{t-1},x_{t})
+/ p(x_{t-1})$ represent the probability of the user being at location $x_{t}$ at
+time $t$, considering that the previous location was $x_{t-1}$. The conditional
+entropy is equal to the temporal uncorrelated entropy in case we do not make any
+time correlations. Also it can be proved that $S^{cond} \leq S^{unc} \leq
+S^{rand}$ \cite{Cover:2006:EIT:1146355}.
+
+In \cite{Sinatra14} the authors introduce an extension for the conditional
+entropy in order to explore how the amount of previous knowledge affects the
+value of the conditional entropy. The new formula is 
+
+\begin{equation}
+S_{i}^{cond,k} = - \sum\limits_{x_{t}\in X_{i}} .. \sum\limits_{x_{t-k}\in
+X_{i}} p_{i}(x_{t-k},..,x_{t})log_{2}p_{i}(x_{t}|x_{t-k},..,x_{t-1})
+\end{equation}
+
+In this case, k represents the number of previous steps we know. With the
+present formula it can be observed that $S_{i}^{cond,0}$ is the same with
+$S_{i}^{unc}$ and that $S_{i}^{cond,1}$ is the same as $S_{i}^{cond}$.
+
+In Fig.~\ref{} we have the representation for the conditional entropy calculated
+considering that we have knowledge of a previous time window of $1 - 10$ time
+bins. It can be seen that the more information we have from the past, the
+value of the conditional entropy decreases.
 
 \subsection{The real entropy}
-% TODO - add formulas from additional paper of barabasi
+The real entropy of a user needs to be calculated by taking into consideration
+the different locations that the user has been to, the frequency with which he
+or she visits these locations, the time spent at the locations and the order in
+which the locations seem to follow through time. The relation between the actual
+entropy and the random and time uncorrelated entropies is $S \leq S^{unc}
+\leq S^{rand}$. 
 
+If we consider that $X_{i}$ represents the locations of a user at time i,
+and $h_{n}$ represents a sequence of n locations, then for a process X =
+\{$X_{i}$\} the entropy can be written as
+\begin{equation}
+\label{eq_7_5}
+S \equiv \lim_{n\to\infty} {1 \over n}S(X_{1},X_{2},..,X_{n})
+\end{equation} 
+\begin{equation}
+\label{eq_7_6}
+= \lim_{n\to\infty} \sum\limits_{i=1}^{n} S(X_{i}|h_{i-1})
+\end{equation}
+\begin{equation}
+\label{eq_7_7}
+= \lim_{n\to\infty} \sum\limits_{i=1}^{n} S(i)
+\end{equation}
+
+Equation \ref{eq_7_5} is the definition given to entropy in
+\cite{Cover:2006:EIT:1146355}, equation \ref{eq_7_6} reflects the application of
+the chain rule in the previous equation and $S(X_{i}|h_{i-1})$ represents the
+conditional entropy at step n in equation \ref{eq_7_7} \cite{song2010limits}.
+
+The paper \cite{Barabasi10} present another way in which the entropy for a user
+i can be written. If we consider that $T_{i} = {X_{1}, X_{2},\ldots, X_{n}}$
+represents the sequence of locations which have been visited by user i and if we
+consider that $P(T'_{i})$ represents the probability of finding time ordered
+subsequence $T'_{i}$ in the trajectory $T_{i}$, then the entropy of user i can
+be written as
+
+\begin{equation}
+S_{i} = - \sum\limits_{T'_{i}\subset T_{i}}P(T'_{i})log_{2}[P(T'_{i})]
+\end{equation}
+
+We have calculated the entropy for our selected users and the distribution for
+the results which have been rounded after the second decimal can be seen in
+Fig.~\ref{}. The fact that the average value of the real entropy for the
+selected user is around $ $ means that, in reality we the uncertainty about
+where a user will be traveling to next is $2^{} = $ locations. These findings
+show that, the users we have been observing do not randomly choose their future
+locations, but in fact, their locations are well established by restrictions
+such as hours or days at which they need to be at work, or school as well as
+other patterns that govern most of the times our decisions.
+
+
+In Fig.~\ref we have an overlay of the distribution for the random, temporal
+uncorrelated and real entropies.
 \section{Predictability}
-% 6 pages
-%\begin{enumerate}
-%  \item Calculating entropy for users
-%  \item Calculating predictability for users
-%  \item Observations 
-%end{enumerate}
+% 6 pages \begin{enumerate} \item Calculating entropy for users \item
+% Calculating predictability for users \item Observations end{enumerate}
