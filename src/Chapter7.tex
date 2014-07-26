@@ -51,13 +51,20 @@ predictability of the travel patterns of the given user in case we consider that
 each of the locations can be visited with the exact same probability.
 
 We have calculated the random entropy by taking into consideration the locations
-visited by our selected users throughout a period of $30$ days. Fig.~\ref{}
-shows the density distribution of the results which have been rounded after the
-second decimal. As we can see, most of the users have a random entropy of $ $
-and the average random entropy is $ $. This means that, in average, is a user
-would choose randomly his or her next location, than they can be found in any of
-$2^{S^rand} = 2^{}$ locations (which is approximately $ $).
+visited by our selected users throughout a period of $30$ days.
+Fig.~\ref{dis_r_e} shows the density distribution of the results which have been
+rounded after the second decimal. As we can see, most of the users have a random
+entropy of around $3.7$ and the average random entropy is $3.88$. This means
+that, in average, is a user would choose randomly his or her next location, than
+they can be found in any of $2^{S^{rand}} = 2^{3.88}$ locations (which is
+approximately $14.72$).
 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{figures/entro_pred/rand_entro_distrib.png}
+\caption{Density distribution for $S^{rand}$}
+\label{dis_r_e}
+\end{figure}
 
 \subsection{The temporal uncorrelated entropy}
 \label{tu_e}
@@ -76,13 +83,19 @@ about what locations occur more often in the user's traveling patterns.
 
 We have calculated the temporal uncorrelated entropy by taking into
 consideration the locations visited by our selected users throughout a period of
-$30$ days. Fig.~\ref{} shows the density distribution of the results which have
-been rounded after the second decimal. As we can see, most of the users have a
-temporal uncorrelated entropy of $ $ and the average temporal uncorrelated
-entropy is $ $. This means that, in average, if we are to base our supposition
-on the number of times each location has been visited in the past by a given
-user, then the user's next location can be found in any of $2^{S^rand} = 2^{}$
-locations (which is approximately $ $).
+$30$ days. Fig.~\ref{dis_tu_e} shows the density distribution of the results
+which have been rounded after the second decimal. The average temporal
+uncorrelated entropy is $1.2$. This means that, in average, if we are to base
+our supposition on the number of times each location has been visited in the
+past by a given user, then the user's next location can be found in any of
+$2^{S^{unc}} = 2^{1.2}$ locations (which is approximately $2.29$).
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{figures/entro_pred/tu_entro_distrib.png}
+\caption{Density distribution for $S^{unc}$}
+\label{dis_tu_e}
+\end{figure}
 
 \subsection{The conditional entropy}
 \label{con_e}
@@ -116,10 +129,17 @@ In this case, k represents the number of previous steps we know. With the
 present formula it can be observed that $S_{i}^{cond,0}$ is the same with
 $S_{i}^{unc}$ and that $S_{i}^{cond,1}$ is the same as $S_{i}^{cond}$.
 
-In Fig.~\ref{} we have the representation for the conditional entropy calculated
-considering that we have knowledge of a previous time window of $1 - 10$ time
-bins. It can be seen that the more information we have from the past, the
-value of the conditional entropy decreases.
+In Fig.~\ref{conditional_e} we have the representation for the conditional
+entropy calculated considering that we have knowledge of a previous time window
+of $1 - 30$ time bins. It can be seen that the more information we have from the
+past, the value of the conditional entropy decreases.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{figures/entro_pred/constr.png}
+\caption{$S^{cond,k}$ for a given user, where $ k \in \{1,..30\}$}
+\label{conditional_e}
+\end{figure}
 
 \subsection{The real entropy}
 The real entropy of a user needs to be calculated by taking into consideration
@@ -163,17 +183,31 @@ S_{i} = - \sum\limits_{T'_{i}\subset T_{i}}P(T'_{i})log_{2}[P(T'_{i})]
 
 We have calculated a measurement of the entropy for our selected users and the
 distribution for the results which have been rounded after the second decimal
-can be seen in Fig.~\ref{}. The fact that the average value of the real entropy
-for the selected user is around $ $ means that, in reality we the uncertainty
-about where a user will be traveling to next is $2^{} = $ locations. These
-findings show that, the users we have been observing do not randomly choose
-their future locations, but in fact, their locations are well established by
-restrictions such as hours or days at which they need to be at work, or school
-as well as other patterns that govern most of the times our decisions.
+can be seen in Fig.~\ref{dis_full_e}. The fact that the average value of the
+real entropy for the selected user is around $0.16$ means that, in reality we
+the uncertainty about where a user will be traveling to next is $2^{0.16} =
+1.12$ locations. These findings show that, the users we have been observing do
+not randomly choose their future locations, but in fact, their locations are
+well established by restrictions such as hours or days at which they need to be
+at work, or school as well as other patterns that govern most of the times our
+decisions.
 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{figures/entro_pred/full_entro_distrib.png}
+\caption{Density distribution for $S$}
+\label{dis_full_e}
+\end{figure}
 
-In Fig.~\ref we have an overlay of the distribution for the random, temporal
-uncorrelated and real entropies.
+In Fig.~\ref{dis_overlay} we have an overlay of the distribution for the random,
+temporal uncorrelated and real entropies.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{figures/entro_pred/overlay.png}
+\caption{Density distributions for $S$, $S^{rand}$ and $S^{unc}$}
+\label{dis_overlay}
+\end{figure}
 
 \section{Predictability}
 
@@ -248,13 +282,12 @@ opposing. The algorithm continues as following:
   \item We increment the number of iterations we have computed
 \end{itemize}
 
-Fig.~\ref{} shows the distribution of the predictability values which have been
-computed for our selected users. As we can see, the average predictability value
-for the selected users and through the given $30$ days of observations is of $ $
-which supports the observations made in previous works (a considerable number of
-which have already been mentioned in the present paper - e.g.
-\cite{song2010limits}, \cite{Barabasi08} etc) regarding the fact that we seem to
-have a highly well established pattern of traveling that rises from our daily
-habits.
+The average predictability value for the selected users and through the given
+$30$ days of observations is of approximately $98\%$ which supports the
+observations made in previous studies (a considerable number of which have
+already been mentioned in the present paper - e.g. \cite{song2010limits},
+\cite{Barabasi08} etc) regarding the fact that we seem to have a highly well
+established pattern of traveling that rises from our daily habits.
+
 % 6 pages \begin{enumerate} \item Calculating entropy for users \item
 % Calculating predictability for users \item Observations end{enumerate}
