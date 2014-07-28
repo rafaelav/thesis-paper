@@ -36,5 +36,124 @@ from their Wifi data with possible stop locations provided from their GPS data.
 
 \section{Extracting stop locations from GPS data}
 
-\section{Comparing results}
-% 5 pags
+There are different algorithm that can be used for extracting stop locations
+from GPS data. We present the three solutions that have been
+explored in \cite{cuttone2014inferring} and which we have taken into
+considerations as possibilities for extracting the stop locations.
+
+\subsection{Speed thresholding}
+
+This method relays on the calculation of speed in order to estimate if the data
+represents a stop location or a movement. The approximation of the speed between
+two given positions is calculated in this case as
+
+\begin{equation}
+Speed_{i} = \frac{Distance(pos_{i-1},pos_{i})}{timestamp_{pos_{i}}-timestamp_{pos_{i-1}}}
+\end{equation}
+
+Based on the given dataset and the frequency of sampling, the calculated speeds
+can oscillate a lot. In \cite{cuttone2014inferring} the proposed solution for
+this problem is to have the data grouped into time bins of a given size and to
+consider that the position which corresponds to each time bin is given by the
+median of the samples in the bin, thus allowing the calculation of the speed
+between the bins instead of the samples. 
+
+After the speeds are calculated, the samples for which a high speed~\footnote{A
+speed is considered to be high if it is above a defined $Speed_{max}$ value} is
+identified can be discarded as they can represent movement. The remaining
+samples can be, therefor, associated to stop locations and can be grouped into
+different stop locations. 
+
+\subsection{Gaussian Mixtures Model}
+
+A different approach presented in \cite{cuttone2014inferring} for grouping
+samples into stop locations is to observe the overall distribution of the
+existing samples without taking into consideration the timestamps. The idea is
+to observe the clusters that form and to consider as stop locations the clusters
+of samples which have a higher density.
+
+The clusters are created by using a Gaussian Mixtures Model that attributes
+samples to different clusters which are modeled as Gaussian distributions which
+have unknown parameters. After a sample is allocated to a cluster, then
+consecutive samples that have been assigned to the same cluster can be grouped
+and consider to form stop locations. The size of the clusters are determined by
+a given parameter.
+ 
+\subsection{Distance grouping}
+
+The main idea behind the distance grouping algorithm, as it has been presented
+in \cite{cuttone2014inferring} is that a sequence of location samples which seem
+to be geographically close to each other~\footnote{The location samples have
+been identified within a given maximum distance $D_{max}$ of each other} can be
+grouped into a stop location.
+
+The stop locations are created as follows:
+\begin{itemize}
+  \item The samples are taken into consideration in the ascending order of their
+  timestamps
+  \item A stop location has initially only one location sample $L_{i}$
+  attributed to it
+  \item All the following $k$ samples as long as all samples $j \in \{i+1, k\}$
+  respect the condition $Distance(L_{j}, L_{i}) < D_{max}$
+  \item The process of constructing the next stop location is started again from
+  location $L_{i+k+1}$
+\end{itemize}
+
+\section{Comparing results obtained with distance grouping algorithm}
+
+For the purpose of analysing the locations we have obtained from the Wifi data
+we have implemented the distance grouping algorithm. Our implementation
+considers that the maximum distance $D_{max}$ that determines the way in which
+GPS samples are grouped is of $60$ m. The way in which this value is selected
+affects the results as a too large value for $D_{max}$ leads to the merging of
+different stop locations awhile a too small value leads to stop locations being
+unnecessarily divided into more smaller stop locations. The $60$ m value has
+proved to be a good approximation for the data we have been working with.
+
+We also try to be consistent with the fact that for the Wifi data we consider
+that a user needs to be close to a given geographical location for at least $5$
+minutes in order for it to be considered a stop location and not a transition
+location. In order to keep this assumption for the locations extracted from the
+GPS data, we discard the stop locations for which the user does not seem to be
+spending at least $5$ minutes within their limits. To calculate the time the
+user spends in a GPS identified stop location we calculate the difference
+between the timestamps of the first sample that is associated with the position
+and the last sample that is still considered part of the stop location. If the
+difference is above $5$ minutes, the stop location is kept.
+
+In Fig.~\ref{user6_aps_2days} we can see the predominant APs that have been
+scanned during a $2$ days time frame for an user (userT).
+Fig.~\ref{user6_hmm_2days} displays the locations identified considering the
+Wifi data (first line of colors) and the locations extracted from
+the GPS data (second line of colors).
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{figures/gps/user_6_sorted_3days_no_rssi_plot.png}
+\caption{The most common 50 APs for userX during 3 days scan records}
+\label{user6_aps_2days}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{figures/gps/user_6_hmm_and_gps.png}
+\caption{Wifi and GPS locations identified for userX throughout 3 days}
+\label{user6_hmm_2days}
+\end{figure}
+
+From these images we can observe that the GPS data has, indeed, a better
+accuracy when dealing with locations. For example, from the GPS data we can
+identify that from Thursday morning and up to Thursday at noon, the user is
+recorder to have changed location three times. In the Wifi data, only two
+locations are identified withing the same time frame. A reason why this can be
+possible is that the stop locations identified from GPS data are grouped
+together if they are less than $60$ meters apart, while the Wifi stop locations
+are calculated based on the visibility of the Wifi APs. In this case, if some
+APs have a range of visibility which extends $60$ m, stop locations which can be
+identified as being different based on GPS can be considered the same based on
+Wifi data.
+
+Despite some differences, the two figures do present similarities and are
+clearly associated to the same time frame and the same user. For example, the
+time between Thursday at around $12.15$ until Friday at around $4.00$ is
+identified in both data as one stop location.

@@ -910,23 +910,23 @@ correctness of the estimation. At the end of the algorithm we have the hidden
 states (in our case, locations) that can be extracted based on the observations
 we have based on the presence of the various APs the user is associated to
 throughout the given time frame. An example of locations that have been found
-for userX throughout $3$ days can be seen in Fig.~\ref{user_6_days1_2_3_hmm}.
+for userT throughout $1$ day can be seen in Fig.~\ref{user_6_days1_2_3_hmm}.
 They can be easily mapped to the locations we can observe by looking at
 Fig.~\ref{user_6_days1_2_3_APs_presence} where we have the presence of the
 APs which have been scanned throughout the same amount of time for the same user.
 %explain figures
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\textwidth]{figures/hmm/user_6_sorted_3days_no_rssi_plot.png}
-\caption{The most common 50 APs for userX during the given 3 days (presence
+\includegraphics[width=\textwidth]{figures/hmm/user_1_sorted_1days_no_rssi_plot.png}
+\caption{The most common 50 APs for userT during the given day (presence
 visualization calculated for 5 minutes time bins)}
 \label{user_6_days1_2_3_APs_presence}
 \end{figure}
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.95\textwidth]{figures/hmm/hmm_locations_(5)_3days_plot.png}
-\caption{Locations estimated with HMM for userX for 3 days}
+\includegraphics[width=0.95\textwidth]{figures/hmm/user_1_hmm_locations_(5)_1days_plot.png}
+\caption{Locations estimated with HMM for userT for 1 day}
 \label{user_6_days1_2_3_hmm}
 \end{figure}
 
