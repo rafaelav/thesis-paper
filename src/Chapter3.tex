@@ -82,34 +82,33 @@ The main aim of the present project is to explore the human mobility and the
 predictability of our traveling destinations based on the Wifi data gathered for
 a selection of participants from the SensibleDTU study.  
 
- 
-``Wireless Positioning Systems (WPS)
-provide a position estimate based on the radio signals received at a given location (measurement), and a known radio map of the
-environment.''\cite{athanasiou2009utilizing} In the case for 802.11 (WiFi) wireless networks, the
-measurement con- sists of a set of the visible access point ids (BSSID), and their corresponding received
-signal strength (RSS 1 ). The measurement is then compared to the radio map through a
-distance metric, and a position estimate is calculated.
-Different wireless positioning algorithms exist, which imply different forms and
-means to create the radio maps, as well as distance metrics to provide an estimate. In all
-cases, the radio maps for a given region are produced by training data, typically col-
-lected through wardriving. Wardriving is the process of massively collecting geocoded
-RSS measurements when driving through a certain geographic area. For a given meas-
-urement period (e.g., 5sec), we perform a scan of the available WiFi networks in the
-environment (BSSID, RSS) and obtain the position of this scan through GPS.
+The market of smart hand held devices is constantly and rapidly growing. This
+has opened a new market for applications which take the location of the user
+into consideration for offering him or her personalized services \cite{alsehly2010improving}.
+In order for information about locations to be offered to such applications, the need for
+a system that can identify these locations at a low cost and in a sufficiently
+accurate matter has developed. 
 
+``Wireless Positioning Systems (WPS) provide a position estimate based on the
+radio signals received at a given location (measurement), and a known radio map
+of the environment.''\cite{athanasiou2009utilizing} The possibility of
+determining locations based on Wifi data is based on the fact that each access
+point that can be found inside a network has an unique id attributed to it
+(BSSID) and that each location receives a different signal strength from an
+access point given the distance in between them. Thus, the received signal
+strength (RSS) can also prove to be an important factor in the definition of a
+location based on Wifi data and various algorithm for determining position based
+on Wifi have already been designed and used \cite{athanasiou2009utilizing}.
 
-This second type of Location is based on the connected Wi-Fi network. This method relies on the fact
-that every Wi-Fi Access Point has a unique or semi-unique identification number, called Basic Service
-Set Identifier (BSSID).
-The BSSID is a 48-bit number which has the same format as an IEEE 802 MAC address. This field
-uniquely identifies each Basic Server Set (BSS). The value of this field in an Independent BSS (IBSS) is a
-locally administered IEEE MAC address formed from a 46-bit random number. More details can be
-found in the IEEE 802.11 Specifications [15] and in [16].E FFICIENT LOCALIZATION METHODS FOR MOBILE DEVICES
-7
-When a user wants to define a Location using the connected Wi-Fi network, the BSSID of this
-network is stored. When the alarm is checked if it should be triggered, the BSSID of the currently
-connected network is compared with the stored BSSID. Thus, the key element for this Location type
-is this unique identification number for a Wireless network, which accurately identifies a place.
+Studies show that Wifi positioning can be acceptably good, as it can have an
+accuracy of 1-4 m in an indoor environment and between 10-40 m for an outdoor
+environment, depending on the number of access points which define the area as
+well as the presence of interferences that can affect the accuracy for the
+positioning \cite{Cheng:2005:ACM:1067170.1067195} \cite{mok2007location}.
+Considering these numbers, the increase in the usage of smartphones and
+the cost wise advantages presented by Wifi positioning systems, ensure that the
+studies on human mobility include and should keep on including the data that can
+be acquired from Wifi networks.
 
 \section{Implementation tools}
 Before starting the work on the present research, we have carefully taken into
@@ -126,12 +125,25 @@ used with it and that allow the visualization or handling of big
 data.~\footnote{Examples of libraries and packages used: numpy, pickle,
 datetime, sympy etc.}
 
-Matplotlib 
+The matplotlib library \cite{Mplib} is a very useful tool when dealing with
+visualizations which can be made directly from Python scripts that are used for
+data analysis. It can be used in order to generate plots, histograms,
+scatterplots, bar charts and many additional types of figures in an easy way.
 
 An additional tool that has been used for the present project is Gephi
 \cite{Gephi}. Gephi is a platform that allows the exploration and handling of
 various networks and graphs. Further information on how this tool has proved
 helpful can be found in Chapter \ref{locations}.
 
-Sklearn - HMM, Cross validation, kmeans.
-%TODO Add studd about scikit.
+Scikit-learn \cite{SL} provides ready, simple to use and effective tools that
+can be used for data mining and analysis. The provided tools include regression
+algorithms, implementations for various models (e.g. Hidden Markov Models,
+further details in \ref{hmm_section}), pre-processing for various data,
+clustering algorithms (e.g. k-means, further details in \ref{k-means}) and many
+other equally useful mechanisms and implementations.
+
+Pandas \cite{Pandas} is a powerful and easy-to-use Python library that allows
+the work with data structures through offering various data analysis tools.
+Among the tools provided by this library we can find the intelligent data
+alignment, tools for reading and writing data of various formats, merging and
+joining of data sets, grouping and reshaping of data and many others.
