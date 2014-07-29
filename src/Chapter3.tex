@@ -11,46 +11,109 @@ such information.
 
 \section{SensibleDTU}
 \label{sensible_dtu}
+
 The data we are using is part of a large-scale study that aims to make
 observations based on the lives of volunteering students - the Copenhagen
-Network Study. The data is collected from a variety of sources. Some of them
-require the volunteers to interact with the system through questionnaires and
-others track them automatically through their smartphones. The aim of this
-project is to offer an extensible framework for different studies. The
-deployments from 2012 and 2013 are based at the Technical University of Denmark
-and are named SensibleDTU \cite{Stopczynski14m}.
+Network Study \cite{Stopczynski14m}. The main aim of this project is to offer an
+extensible framework for different studies that can help us have a better
+understanding of the human nature and how personal data can be used to analyse
+individual behaviour in order to promote self-awareness and positive behaviour
+changes. The deployments for this study from 2012 and 2013 are based at the
+Technical University of Denmark and are named SensibleDTU. 
 
-The students that consented to being volunteers for this ambitious project have
-received smartphones that are able to track different aspects of their lives and
-through which they can interact with the system. The big number of
-volunteers~\footnote{During the second iteration, there have been deployed
-approximately 1000 smartphones to students who wanted to take part in the study.}
-has allowed the gathering of a considerable amount of data regarding the mobile
-phone users' behaviour.
+A factor that represents a definite strength of this project is that it allows
+the collection of data phase to co-exist with various analysis phases. The
+platform allows the conducting of controlled studies which can be distributed to
+participants with the help of the smartphone software. Due to the way in which
+the platform is designed, the participants can be divided in different groups
+and these groups can be exposed to different stimuli in order to allow the
+analysis of results gathered for a multitude of possible experiments. Another
+benefit of being able to work with the provided data as soon as it is received
+is that data can be monitored without unnecessary delay. By doing this, the
+quality of the date can be evaluated for both the level of an individual user as
+well as for the whole dataset. The results of a qualitative evaluation allow the
+researches to understand if the collected data in its form is sufficient for
+answering the various research questions. The real time processing of the data
+has the benefit that it allows the researches to create applications and
+services designed for the participants. These services can be used for receiving
+feedback and thus improve the understanding of what can be improved in order to
+maximize the usefulness of how the data is used in the ongoing studies, but they
+can also be used for offering the participants the chance to access the results
+of their own data and thus helping them understand themselves better.
 
-The data gathered for the SensibleDTU experiment consists in data gathered
-through questionnaires~\footnote{A survey was presented to the participants in
-2012 consisting of over 90 questions. In 2013 an addition of over 300 questions
-were ask per participant. The questioned targeted different aspects from working
+The students that consented to being volunteers for SensibleDTU have received
+smartphones that are able to track different aspects of their lives and through
+which they can interact with the system. The big number of
+volunteers~\footnote{Up to the moment at which the present paper has been
+written, there have been deployed over 1000 smartphones to students who wanted
+to take part in the study.} has allowed the gathering of a considerable amount
+of data regarding the mobile phone users' behaviour. 
+
+The data is collected from a variety of sources. Participants in the various
+studies can receive questionnaires which can be focused on getting information
+about their socioeconomic background, habits or even psychological
+traces~\footnote{For example, a survey was presented to the participants in 2012
+consisting of over 90 questions. In 2013 an addition of over 300 questions were
+ask per participant. The questioned targeted different aspects from working
 habits and various socio-econimic factors to Big Five Inventory measuring
-personality traits \cite{John99} and self-esteem.}, Facebook
-data~\footnote{Participants have the option of allowing the gathering of
-Facebook data such as friendships and various interactions such as likes,
-statuses etc.}, sensor data, qualitative data and Wifi data.
+personality traits \cite{John99} and self-esteem.}. Sensor data is collected
+throughout the days at regular intervals as well as Wifi data. SensibleDTU
+offers the participants the option to authorize the collection of data from
+Facebook. This type of data can be used on order to create friendship graphs and
+to follow the interactions between various participants in the studies.
+Qualitative data is collected in order to gather feedback from the participants
+as well as understanding what can keep their interest in the project at a high
+level.
 
 Since the majority of the collected information about the students is sensitive
 \cite{Stopczynski14p}, keeping the data secure is and has been a top priority
 from the beginning of the experiment. The data is annonymzed and stored securely
 and the students that are part of the experiment have access to tools that allow
-them to see what data are they sharing, what it is done with this data and that
-allow them to control how much they want to share.
+them to see what data they are sharing, what it is done with this data and that
+allow them to control how much they want to share. The combination between the
+measurements which are taken in order to keep the data anonymized as well as the
+fact that the users have control and understanding of their own data ensures a
+good security level.
 
-\section{Using Wifi data}
-% TODO - from Cosmin 
+
+\section{Using Wifi data for defining locations}
+
+The main aim of the present project is to explore the human mobility and the
+predictability of our traveling destinations based on the Wifi data gathered for
+a selection of participants from the SensibleDTU study.  
+
+ 
+``Wireless Positioning Systems (WPS)
+provide a position estimate based on the radio signals received at a given location (measurement), and a known radio map of the
+environment.''\cite{athanasiou2009utilizing} In the case for 802.11 (WiFi) wireless networks, the
+measurement con- sists of a set of the visible access point ids (BSSID), and their corresponding received
+signal strength (RSS 1 ). The measurement is then compared to the radio map through a
+distance metric, and a position estimate is calculated.
+Different wireless positioning algorithms exist, which imply different forms and
+means to create the radio maps, as well as distance metrics to provide an estimate. In all
+cases, the radio maps for a given region are produced by training data, typically col-
+lected through wardriving. Wardriving is the process of massively collecting geocoded
+RSS measurements when driving through a certain geographic area. For a given meas-
+urement period (e.g., 5sec), we perform a scan of the available WiFi networks in the
+environment (BSSID, RSS) and obtain the position of this scan through GPS.
+
+
+This second type of Location is based on the connected Wi-Fi network. This method relies on the fact
+that every Wi-Fi Access Point has a unique or semi-unique identification number, called Basic Service
+Set Identifier (BSSID).
+The BSSID is a 48-bit number which has the same format as an IEEE 802 MAC address. This field
+uniquely identifies each Basic Server Set (BSS). The value of this field in an Independent BSS (IBSS) is a
+locally administered IEEE MAC address formed from a 46-bit random number. More details can be
+found in the IEEE 802.11 Specifications [15] and in [16].E FFICIENT LOCALIZATION METHODS FOR MOBILE DEVICES
+7
+When a user wants to define a Location using the connected Wi-Fi network, the BSSID of this
+network is stored. When the alarm is checked if it should be triggered, the BSSID of the currently
+connected network is compared with the stored BSSID. Thus, the key element for this Location type
+is this unique identification number for a Wireless network, which accurately identifies a place.
 
 \section{Implementation tools}
-Before starting the work on the present research, we have overviewed possible
-tools that can be useful in our work.
+Before starting the work on the present research, we have carefully taken into
+consideration possible tools that can be useful in our work.
 
 The scripts that are used for analyzing, transforming and working with the data
 are developed in Python. The reasons behind using Python instead of any other
@@ -60,12 +123,15 @@ its high scalability, it is the perfect choice for both large and small
 projects, being easily extensible at the same time. Another very important
 reason for using Python is that there is a large number of libraries that can be
 used with it and that allow the visualization or handling of big
-data.~\footnote{Examples of libraries and packages used: numpy, matplotlib,
-pickle, datetime, sympy etc.}
+data.~\footnote{Examples of libraries and packages used: numpy, pickle,
+datetime, sympy etc.}
+
+Matplotlib 
 
 An additional tool that has been used for the present project is Gephi
 \cite{Gephi}. Gephi is a platform that allows the exploration and handling of
-various networks and graphs. Further information on how this tool has proven
+various networks and graphs. Further information on how this tool has proved
 helpful can be found in Chapter \ref{locations}.
 
+Sklearn - HMM, Cross validation, kmeans.
 %TODO Add studd about scikit.

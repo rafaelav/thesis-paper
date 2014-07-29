@@ -16,12 +16,12 @@ world.
 %TODO -add no of users
 In order to explore the entropy and predictability of human mobility, we have
 conducted tests based on the data retrieved from a selection of users from the
-SensibleDTU database. We have selected $X$ users from our original pool of $131$
-users in order to observe their movements throughout a period of $30$ days. The
-reason behind discarding the remaining users was that some of them did not have
-enough data collected through the explored period of time, their data has been
-found to be missing relevant fields or they did not have a complete data
-collection throughout the month that we targeted for the present study.
+SensibleDTU database. We have selected $65$ users from our original pool of
+$131$ users in order to observe their movements throughout a period of $30$ days. The
+reason behind discarding the remaining users was that their data was found to be
+missing important fields or they did not keep their mobile phones charged and
+open for the most part of the $30$ days and thus their result could have
+jeopardize the study results.
 
 \section{Entropy}
 
@@ -54,10 +54,10 @@ We have calculated the random entropy by taking into consideration the locations
 visited by our selected users throughout a period of $30$ days.
 Fig.~\ref{dis_r_e} shows the density distribution of the results which have been
 rounded after the second decimal. As we can see, most of the users have a random
-entropy of around $3.7$ and the average random entropy is $3.88$. This means
+entropy of around $3.65$ and the average random entropy is $3.87$. This means
 that, in average, is a user would choose randomly his or her next location, than
-they can be found in any of $2^{S^{rand}} = 2^{3.88}$ locations (which is
-approximately $14.72$).
+they can be found in any of $2^{S^{rand}} = 2^{3.87}$ locations (which is
+approximately $14.62$).
 
 \begin{figure}[!h]
 \centering
@@ -85,10 +85,10 @@ We have calculated the temporal uncorrelated entropy by taking into
 consideration the locations visited by our selected users throughout a period of
 $30$ days. Fig.~\ref{dis_tu_e} shows the density distribution of the results
 which have been rounded after the second decimal. The average temporal
-uncorrelated entropy is $1.2$. This means that, in average, if we are to base
+uncorrelated entropy is $1.3$. This means that, in average, if we are to base
 our supposition on the number of times each location has been visited in the
 past by a given user, then the user's next location can be found in any of
-$2^{S^{unc}} = 2^{1.2}$ locations (which is approximately $2.29$).
+$2^{S^{unc}} = 2^{1.3}$ locations (which is approximately $2.46$).
 
 \begin{figure}[!h]
 \centering
@@ -184,8 +184,8 @@ S_{i} = - \sum\limits_{T'_{i}\subset T_{i}}P(T'_{i})log_{2}[P(T'_{i})]
 We have calculated a measurement of the entropy for our selected users and the
 distribution for the results which have been rounded after the second decimal
 can be seen in Fig.~\ref{dis_full_e}. The fact that the average value of the
-real entropy for the selected user is around $0.16$ means that, in reality we
-the uncertainty about where a user will be traveling to next is $2^{0.16} =
+real entropy for the selected user is around $0.17$ means that, in reality we
+the uncertainty about where a user will be traveling to next is $2^{0.17} =
 1.12$ locations. These findings show that, the users we have been observing do
 not randomly choose their future locations, but in fact, their locations are
 well established by restrictions such as hours or days at which they need to be
