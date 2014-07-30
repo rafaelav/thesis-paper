@@ -1,2 +1,78 @@
-\chapter{Results and observations}
-% 2 pags
+\chapter{Discussion}
+
+During the work conducted for our study we have come across a number of
+interesting findings and observations. This chapter contains a summation of
+these surfacing results.
+
+In order to capture results that can reflect general facts about the way human
+mobility patterns emerge, it is important for the conducted studies to
+incorporate the usage of a high amount of data. Despite the quantity of data
+being relevant for the results, the importance of the quality of the data can
+exceed it. Considering this, a through cleaning of the Wifi data proved to be of
+a high importance for our present research. By eliminating the noise and the
+excessive signals from various sources that were not of interest for the
+present work, we have obtained data that allowed us to make interesting
+observations on human mobility.
+
+Despite the data clean up, it has been easy to notice from the very beginning
+that the signal strength received from the high number of access points does not
+tend to stay constant even if the location seems to be maintained by the user.
+Interferences influence the signal strength \cite{MahantiCWA10} and can
+complicate the algorithm used for identifying locations based both on access
+points BSSIDs and RSS values. We have analyzed the possibility of using
+different average signal calculations (Sections \ref{average_sig} and
+\ref{running_avg}) in order to smooth out the spikes caused by interferences.
+The averaging, especially the running average, did improve the data by removing
+a part of the spikes, however this proved to be not sufficient for the present
+case. Previous research projects show that an approach that does not necessarily
+require the use of signal strength for the visible access points, but just the
+knowledge of the signals being present or not in a given point can be a good
+starting point for determining a location
+\cite{Larsen:2009:MCT:1813042.1813063}. We have, therefor, determined the
+presence of the various access points across different time frames and we have
+used the results in order to explore the possibility of determining locations
+based on this information.
+
+We have worked with three different algorithms in order to extract locations
+from Wifi data: based on networks, k-means clustering and based on the use of
+Hidden Markov Models. The algorithm that uses the construction of a network
+based on the presence of the access points at given times did not lead to
+acceptable results for the duration of our study. However, the k-means
+clustering and the algorithm based on Hidden Markov Models combined with a
+k-fold cross validation algorithm in order to estimate the correct number of
+locations that were to be expected for a user lead to good approximations for
+stop locations. For the data we have used, the algorithm based on Hidden Markov
+Models, has statistically given better approximations, however further research
+is needed in order to determine if either of the two methods is better than the
+other or they just behave better in various circumstances.
+
+Due to the need of using cross validation in order to determine the approximate
+number of locations we are to expect for each user during a given time frame, as
+well as the complexity of the location determination algorithms, the execution
+time rises exponentially if the amount of input data is high. In order to avoid
+this problem we have determined locations over short one day intervals. The
+locations estimated for different days needed to be compared and analyzed in
+order to determine when they coincided. This offered us the opportunity to
+explore different methods in order to determine the location matching (Chapter
+\ref{ch_matching}). We have also compared our extracted locations with locations
+extracted from GPS data and the results support that, even though the GPS data
+offers better location estimations, the Wifi data can provide acceptable
+results as well.
+
+The locations extracted from a selection of $65$ of user from our original pool
+of $131$ users has allowed us to explore the predictability of human travel
+trajectories. The results we have reached support previous studies
+(\cite{Barabasi10}, \cite{Barabasi08}, \cite{Sinatra14}, \cite{Brockmann06}
+etc.) which indicate that the mobility patterns we display seem to have a high
+degree of predictability. This can prove that, in fact, we could be less
+spontaneous than we believe we are and that our behaviour is deeply based on
+habits.
+
+The present work proves that the exploration of human mobility is currently just
+at the beginning. Despite the numerous previous projects that have approached
+the subject, there are still an enormous number of questions that need answers
+and further work is needed in order to be able to fully understand what
+determines our trajectories and how can we use the knowledge in order to
+increase our quality of life either by using it to prevent the spreading of
+diseases, to design better urban and transportation or any other way that can
+prove to help us.
