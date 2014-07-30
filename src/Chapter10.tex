@@ -1,2 +1,62 @@
 \chapter{Conclusions}
-% 2 pags
+
+This paper discusses the steps which have been taken in order to study the
+inferring of human mobility patterns from Wifi data. The focus of the study has
+been divided in between different areas of this subject. We have firstly
+analyzed what defines a Wifi determined location. 
+
+We have taken into consideration different approaches that can be used in order
+to extract locations. We considered determining locations based on access
+points' BSSIDs and RSS. This option has lead to us trying to find a solution for
+a better noise elimination. We have experienced with different averages that
+aimed to smooth the spikes in the signal strength, however we have come to the
+conclusion that for the used data a better approach is to only take into
+consideration the BSSIDs of the access point and the knowledge if an access
+point is present of not in a given time bin. The information extracted by
+analyzing when the access point are visible is named access point presence and
+has been used in order to determine stop locations.
+
+The extraction of the locations based on the identity and presence of various
+access points throughout different time framse has proved to be a challenging
+and complex task. We have tested three different methods: an algorithm based on
+the usage of networks, an algorithm based on k-means clustering and an algorithm
+based on Hidden Markov Models. The first algorithm did not lead to satisfactory
+results in the present study. Between the second two approaches, the algorithm
+based on Hidden Markov Models has statistically had better results through our
+used data, however further research is needed in order to make a defined
+assumption on which of the two algorithms can prove to be better to use in
+different circumstances. Also, in order to use either of k-means or Hidden
+Markov Models based algorithms we needed to first determine the number of
+locations we were expecting the algorithms to identify. This has been achieved
+by the use cross validation.
+
+In order to conduct the study over a large amount of data we needed to run the
+location identification algorithm on data collected during smaller time frames
+(e.g. one day). The resulting locations have been compared to each other. This
+was needed in order to determine if a location appeared in the results from a
+different iteration. We have also compared the resulting locations extracted
+from Wifi data to locations which have been extracted from analogue GPS data.
+The results have been satisfactory in the sense that, even though, as expected,
+GPS data can offer more detailed results about location changes, the accuracy
+of the Wifi results is not badly impaired.
+
+By knowing the different locations and the sequence in which they occurred
+throughout time we were able to calculate various entropy values for a selected
+pool of users. We have also been able to determine that the users which have
+been selected to be part of the present study present a high degree of
+predictability as far as human mobility is concerned. This observation supports
+previous results which have been made regarding this topic, yet further research
+on an even bigger data set and longer period of time might be needed in order to
+establish if this particular observation can be considered a fact.
+
+We have concluded the paper by making a summary of the most important
+observations that have emerged throughout our work as well as a series of
+suggestions about possible future areas of interest for the present topic.
+
+To conclude, we would like to state that the work in the present field is far
+from being complete. There are many questions that still require answers and
+many opportunities for improvement and we feel that the findings presented in
+the current paper, as well as previous works can constitute a solid ground for
+further research projects. The topic in itself is of a high interest for the
+future as any results can be used to drastically improve the quality of life for
+generations to come.
