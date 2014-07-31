@@ -10,7 +10,7 @@ ways to identify the travel behaviour of people. Some of them have focused on
 studying the information gathered from observing the way in which money is
 dispersed through time \cite{Brockmann06}, or they have been focusing in
 studying the behaviour of mobile phone users by analyzing the way they move
-based on the communication towers their phones are connecting to when they are
+based on the telephone towers their phones are connecting to when they are
 engaging in voice communication \cite{Barabasi08}. There are studies that try to
 understand human mobility through the glass of social networks
 \cite{yang2010using}, as it can be observed that individuals prefer to meet with
@@ -19,36 +19,43 @@ other people that are part of their community more often
 various studies \cite{cuttone2014inferring}, \cite{5657695}. The list of
 elements that have been taken into consideration for trying to understand and
 predict the way in which we are conducting our daily travels is far from being
-short. 
+short.
+
+The present chapter focuses on the steps of our work that have been taken in
+order to identify and extract locations from Wifi data. We have analyzed the
+data in order to explore ways in which locations can be determined based on
+characteristics that can individualize them. We have also experimented with
+various algorithms that can be used in order to extract locations. All these
+steps are presented in the sections of the current chapter.
 
 \section{Wifi based positioning}
 
-Even from the beginning of the 21st century, research has been actively
+Even from the beginning of the $21$st century, research has been actively
 conducted for trying to use the Wifi system in order to determine real
 positioning and different databases for positioning systems have been created.
-These databases usually included the positions of the Wifi access points or RF
-(radio-frequency) identified fingerprints \cite{Chen:2006:PMP:2166283.2166297}
-\cite{Cheng:2005:ACM:1067170.1067195} \cite{Youssef:2005:HWL:1067170.1067193}
-\cite{bahl2000radar}. Modern databases for Wifi positioning are created with
-information about the signal strength for the Wifi access points and can
-even have information about where they were discovered.
+These databases usually included the positions of the Wifi access points (APs)
+or RF (radio-frequency) identified fingerprints
+\cite{Chen:2006:PMP:2166283.2166297} \cite{Cheng:2005:ACM:1067170.1067195}
+\cite{Youssef:2005:HWL:1067170.1067193} \cite{bahl2000radar}. Modern databases
+for Wifi positioning are created with information about the signal strength for
+the Wifi APs and can even have information about where they were discovered.
 
 Koo et. al. \cite{koo2011autonomous} have explored an algorithm that can help
-estimate the relative positions of access points corresponding to the real
-geographic configuration with the help of multidimensional scaling techniques.
-Considering the fact that access points are not able to tell real distances
-between themselves and other access points, the study aims to estimate the
-dissimilarities between different access points using scans. They have also
-conducted an experiment in an office building in order to test the proposed
-algorithm and the results showed an estimation error of approximately $7$ m.
+estimate the relative positions of APs corresponding to the real geographic
+configuration with the help of multidimensional scaling techniques. Considering
+the fact that APs are not able to tell real distances between themselves and
+other APs, the study aims to estimate the dissimilarities between different APs
+using scans. They have also conducted an experiment in an office building in
+order to test the proposed algorithm and the results showed an estimation error
+of approximately $7$ m.
 
 Another study conducted in this similar direction is the one by Mok et. al.
 \cite{mok2007location}. The authors explore the possibility of determining the
-location of a device which can scan Wifi access points based on the signal
-strength that the access points are displaying at the moment of the scan. They
-estimate the positioning by performing a trilateration based on the information
-the device gets from multiple access points. The accuracy for their algorithm
-for the conditions that were present in their experiment was of about $1-3$ m.
+location of a device which can scan Wifi APs based on the signal strength that
+the access points are displaying at the moment of the scan. They estimate the
+positioning by performing a trilateration based on the information the device
+gets from multiple access points. The accuracy for their algorithm for the
+conditions that were presented in their experiment was of about $1-3$ m.
 
 Athanasiou et. al. \cite{athanasiou2009utilizing} give a very clear and
 concrete description for two classes of wireless positioning systems. Their work
@@ -61,21 +68,20 @@ derived from GPS data.
 
 The two classes of algorithms that are explored by the authors are: centroid and
 fingerprinting. \textit{Centroid} is presented as the fastest method for
-positioning, however it depends on having the real location of the access
-points. This information is in general unavailable and as such a proposed
-solution is to estimate the locations of the access points by calculating an
-arithmetic mean of all the coordinates at which it was visible. The
-\textit{fingerprinting} method is based on the assumption that the access points
-are stable over time (they do not change positions). This leads to the fact that
-at any time, a measurement at a particular location will return the same list of
-access points with the same signal strengths. As such, this list can be
-considered as the unique fingerprint of the location.
+positioning, however it depends on having the real location of the APs. This
+information is in general unavailable and as such a proposed solution is to
+estimate the locations of the access points by calculating an arithmetic mean of
+all the coordinates at which it was visible. The \textit{fingerprinting} method
+is based on the assumption that the APs are stable over time (they do not change
+positions). This leads to the fact that at any time, a measurement at a
+particular location will return the same list of APs with the same signal
+strengths. As such, this list can be considered as the unique fingerprint or
+signature of the location.
 
-% TODO add 2 figures for centroid and fingerprinting
 Zhang et.al. \cite{zhang2012polaris} propose an algorithm based on
-fingerprinting for estimating locations that takes into consideration the fact
-that the signal strength from various access points does not necessarily stay
-constant throught the time. They propose a way in which a similarity between
+fingerprinting for estimating locations. The algorithm takes into consideration
+the fact that the signal strength from various APs does not necessarily stay
+constant throughout the time. They propose a way in which a similarity between
 fingerprints can be calculated in order to determine if two fingerprints are in
 fact representing the same location.
 
@@ -86,35 +92,35 @@ positioning system that is as accurate yet considerably cheaper than GPS
 positioning systems.
 
 \section{Determining the fingerprint of a location}
-In order to have a better understanding about the way in which the mobile phone
-users have been moving throughout the experiment, we needed to have an image of
+In order to have a better understanding of the way in which the mobile phone
+users have been moving throughout the experiment, we need to have an image of
 the way a given period of time would look based on their Wifi records from
 SensibleDTU. As it has been presented in Section~\ref{data_structures}, the Wifi
 data we are using for the present project consists in the following fields:
 user id, timestamp, SSID, BSSID, RSSI and the context. However, considering the
 amount of data involved, just by looking through the log files it is almost
 impossible for us to understand at what moment the user might have reached a
-location and when did they leave from it. In order to be able to do this, we
-have created various visualizations considering different options, different
-time frames and for multiple users in order to begin to understand what the data
-can tell us, what can we use, what would we need and what can we discard when
-moving further to defining what makes a location.
+location and when they left from it. In order to be able to do this, we have
+created various visualizations considering different options, different time
+frames and for multiple users in order to begin to understand what the data can
+tell us, what we can use, what would we need and what can we discard when moving
+further to defining what can help identify a location.
 
 \subsection{Signal strength over time}
 
-The first thing that we have tried to visualize was the access points (APs) that
-were scanned by users' mobile phones throughout different periods of time. We
-have plotted the APs and their registered signal strength for varied users in
-order to see if we notice any patterns in their movements.
+The first thing that we have tried to visualize was the APs that were scanned by
+users' mobile phones throughout different periods of time. We have plotted the
+APs and their registered signal strength for a variety of users in order to see
+if we notice any patterns in their movements.
 
-%userX == user 6
 In Fig.~\ref{user_6_1d_lines} we can see how a day from the life of a random
 user (referred to as userX) looks like. The day for which we have plotted the
 data started on a Tuesday at $12:15$ pm and ends the next day right before the
 same hour. The hourly intervals can be seen on the X axis, while the signal
 strength values can be seen on the Y axis. The legend contains the top $10$ most
 popular~\footnote{An AP is more popular than another in case it appears more
-times during the period of time for which the Wifi scans are analyzed}
+times during the period of time for which the Wifi scans are analyzed} APs that
+have been scanned throughout the given time.
 
 \begin{figure}[h]
 \centering
@@ -130,19 +136,21 @@ The steps for creating this type of visualization are as follows:
 \begin{itemize}
   \item Retrieve data for the time duration for which the visualization is made
   \item Keep track of all the timestamps at which each AP has been seen and the
-  AP's signal strength at that moment
-  \item In case an AP is scanned no more than $2$ minutes after a it was
+  AP's signal strength at those moments
+  \item In case an AP is scanned no more than $2$ minutes after it was
   previously scanned, then a line can unite the two moments in order to mark
-  their proximity. If the apparitions are more than $2$ minutes apart there is
-  a high possibility that there has been a location change or that the AP is
-  experiencing technical problems and as such has stopped being active.
+  their proximity. If the apparitions are more than $2$ minutes apart, then
+  there is a high possibility that there has been a location change or that the
+  AP is experiencing technical problems and as such has stopped being active.
 \end{itemize}
 
 Although we have tried to visualize this type of information in various ways
 (using different types of markers), we found that this way is the easiest to
-interpret by people. If we leave out the lines, for example, as it can be seen
-in Fig.~\ref{user_6_1d_point}, it is quite hard to interpret where location
-might start or stop.
+interpret by people~\footnote{We have required a group of 12 different people to
+rate different visualizations and one used in Fig.~\ref{user_6_1d_lines} has
+been preferred by a majority of 8}. If we leave out the lines, for example, as
+it can be seen in Fig.~\ref{user_6_1d_point}, it is quite hard to interpret
+where location might start or stop.
 
 \begin{figure}[h]
 \centering
@@ -804,7 +812,7 @@ visualization calculated for 5 minutes time bins)}
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=0.95\textwidth]{figures/kmeans/kmeans_locations_(6)_2days_plot.png}
+\includegraphics[width=0.935\textwidth]{figures/kmeans/kmeans_locations_(6)_2days_plot.png}
 \caption{Locations estimated with k-means for userY for 2 days}
 \label{user_3_days1_2_kmeans}
 \end{figure}
@@ -935,18 +943,3 @@ visualization calculated for 5 minutes time bins)}
 
 An additional example of locations estimated using the HMM based algorithm can
 be seen in Appendix~\ref{appendix_hmm}.
-
-%\begin{enumerate}
-%  \item identifying locations
-%	\begin{itemize}
-%		\item Hidden Markov Models (5) 
-%		\item K-means(2)
-%	\end{itemize}
-%  \item matching locations locations (0.5)
-%	\begin{itemize}
-%		\item Percentage similarity (0.5)
-%		\item Keeping track of previous locations (0.5)
-%		\item Creating fingerprints (1.5)
-%	\end{itemize}
-%  \item  
-%\end{enumerate}
