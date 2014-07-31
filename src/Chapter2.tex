@@ -1,28 +1,32 @@
 \chapter{Related work}
 \label{relatedwork}
-% 7 pages
 There is a high interest and a huge amount of work the scientific community
 dedicates to understanding the patterns of human mobility. The knowledge we can
 gain from the results of this work has the potential to benefit a wide variety
 of industries from the modeling and maintenance of the transportation
 infrastructure, to the medical industry where we can use this knowledge in
-trying to prevent the spreading of epidemics. \cite{Brockmann08} %TODO - add references
+trying to prevent the spreading of epidemics \cite{Brockmann08}.
 
-Various studies have been conducted in order to gain a better understanding of
-the human mobility patters. These studies give us results that seem to support
-each other in the idea that people are less spontaneous than they would like to
-think themselves and that, indeed, our behaviour shows that we are quite rooted
-into habits when it comes to the way we travel.
+Before starting the work on any subject we first need to understand what has
+been done previously, what were the results and what have been the suggestions
+for future research. The present chapter is dedicated to presenting previous
+studies and the findings they offer us. The studies have been divided into $6$
+sections. The first two sections focus on previous studies which provide
+knowledge about mobility patterns and behaviour that can be attributed mostly to
+communities and not individuals. The following three sections present studies
+that focus on individual mobility patterns. The last section presents the
+results of studies that have focused on analysing and calculating the
+predictability of human travel trajectories.
 
 \section{Mobility patters uncovered by the dissipation on bank notes}
-Brockmann, Hufnagel and Geisel\cite{Brockmann06} have analyzed the human movement
-based on the way bank notes were dispersed through the United States (excluding
-Alaska and Hawaii). Their study shows that a relatively small percentage of bank
-notes ($23.6\%$) traveled for more than $800$ km, while a fraction of $19.1\%$
-did not traveled for more than $50$ km even after a year of being observed. The
-possible explanation the authors have given for these findings are that, in
-general, people would be less inclined to leave the areas of the large cities or
-the places they usually conduct their lives.
+Brockmann et. al.\cite{Brockmann06} have analyzed the human movement based on
+the way bank notes were dispersed through the United States (excluding Alaska
+and Hawaii). Their study shows that a relatively small percentage of bank notes
+($23.6\%$) traveled for more than $800$ km, while a fraction of $19.1\%$ did not
+traveled for more than $50$ km even after a year of being observed. The possible
+explanations the authors have given for these findings are that, in general,
+people would be less inclined to leave the areas of the large cities or the
+places they usually conduct their lives.
 
 The problem identified with this approach for tracking individuals is that the
 bank notes exchange hands and the behaviour which is identified by the way they
@@ -31,44 +35,112 @@ ones that at any moment have had the bank note in their possession. Despite this
 the result have a high scientific value as they do identify patterns in human
 travel behaviours in general.
 
+\section{Eigenbehaviours}
+Eagle et. al. analyze data of individuals and communities with the
+purpose of trying to predict and cluster the daily habits and behaviour of
+people \cite{Eagle09}. They consider that the behaviour of one person throughout
+a day can be close to a sum of their primary eigenbahaviours throughout that day.
+The results of the study have shown that when having a weighted sum calculated
+for the first half of a day, the behaviour of the same person throughout the
+remaining of the day can actually be approximated with $79\%$ accuracy.
+
+The results have applicability in more fields, as they allow us to consider the
+possibility of clustering people into various communities based on the
+similarity of their behaviours. It goes even further, as the findings show that
+this enables the possibility of calculating similarity for groups as well and
+thus permitting a classification that, according to the experiment, can be
+$96\%$ accurate for determining affiliations in the social network of a
+particular population.
+
+As a last observation in the paper by Eagle et. al. it is stated that
+eigenbehaviours can be used in order to identify the possible friendship ties
+between people. The observations in this paper have been done based on the
+Reality Mining data set that tracked the behavior for 100 individuals at MIT for
+the duration of one year.
+
 \section{Mobility patterns of mobile phone users}
-A. L. Barabasi, M. C. Gonzalez and C. A. Hidalgo have conducted a study
-\cite{Barabasi08} that deals with studying the trajectories of over $100000$
-mobile phone users with anonymized identities. The study was conducted in order
-to see if there are any patterns in our mobility habits. Among the things that
-have been subjected to testing was the return probability of individuals in the
-same place as in the past. The study shows there is, in general, a peak in the
-return probability after $24$, $48$ or $72$ since they have left a particular
-location. This shows that we humans tend to visit locations periodically. This
-can be explaineQd by our going to places such as work, school, grocery shops
-near our home etc.
+Barabasi et. al. have conducted a study \cite{Barabasi08} that deals with
+observing the trajectories of over $100000$ mobile phone users with annonymized
+identities. The study was conducted in order to see if there are any patterns in
+our mobility habits. Among the things that have constituted subject for testing
+was the return probability of individuals in a previous place. The study shows
+there is, in general, a peak in the return probability after $24$, $48$ or $72$
+since people have left a particular location. This shows that we tend to visit
+locations periodically. This can be explained by our needs of going to places
+such as work, school, grocery shops near our home etc.
 
 The authors have also ranked the locations the mobile phone users frequented
 based on the number of times they have been spotted nearby. The results for this
-have shown that the probability of finding someone near a location that is
-ranked for them with a level $L$ can be estimated with $1/L$. Another
+experiment have shown that the probability of finding someone near a location
+that is ranked for them with a level $L$ can be estimated with $1/L$. Another
 interesting finding that is mentioned in the paper is that, in general, people
 seem to be spending the majority of their time in just a few locations, while
-diving the remaining time just between a limited number of locations that varies
-for the subjects from as low as $5$ to around $50$.
-
-There are some note worthy plots that the authors present in the paper. They can
-be seen in figure{} and they show that most people travel over short distances,
-yet there is a small number of people that regularly travel over big distances.
+dividing the remaining time just between a limited number of locations that
+varies for the subjects from as low as $5$ to around $50$.
 
 The results of this study are a major indicator that individuals display a high
 level of regularity and that we have a tendency to spend most of our times in
 places that are familiar to us, or that require us to visit them regularly (e.g.
 home, work).
 
+\section{Human movement recorded through real traces}
+Studies as the ones with the travel of bank notes or the recorded location of
+mobile users through telephone cannot be very exact and usually cannot reflect
+the real traces for the people taking part in them. They provide a very useful
+estimation, however with the technology that we have access to nowadays, we are
+able to record mobile phone users' real traces either through GPS or Wifi. The
+data that can be acquired through these means allows us to conduct studies that
+can take into consideration an even better approximation of the real location of
+individuals.
+
+In the paper by Kim et. al. \cite{Kim06}, the authors present us with a method
+in which the locations of users can be estimated based on the WiFi signals that
+their devices register. The experiment is conducted considering the data for a
+duration of $13$ months. The user traces that have been used consist of the
+trace data from Dartmouth College. The mobility traces are defined as the lists
+of access points that are associated to a user's devices at a given timestamp.
+
+The mobility traces allowed the authors to extract the tracks (locations) of the
+users. They have explored three methods in which the location can be extracted
+from the data. The first approach presumed the calculation of the center
+(intersection of medians) of the triangle defined by the past three access
+point associations of the mobile device of the user. This approach has a
+downside since the devices do not necessarily change the associations in a
+periodic manner. This lead to the second approach which consisted in considering
+a time window after which the associations needed to be updated in case new
+associations have appeared during that time. The third and last approach
+explored the use of Kalman filters \cite{KalmanFilter}.
+
+In order tp validate the path extractors the authors have compared the results
+with GPS data. This validation has proved that the type of device used for
+collecting the data can have a significant importance in how accurate the
+results are as it seems that some devices can be more aggressive in updating the
+associations with access points while others try to stay associated with the
+same access points as long as possible before switching to new ones. This leads
+to problems as different distances between users and access points considered by
+different devices and as such it affects the estimated paths. The best
+estimations have been given in this experiment by the approach that used the
+Kalman filters, however both the other two approaches have provided fairly good
+estimations as well.
+
+Another paper which explores the travel patterns from real data is the one
+written by Azevedo et. al. \cite{Azevedo09}. The authors propose another
+approach for analyzing the mobility of people. They take into consideration the
+following movement components: velocity, acceleration, direction angle change
+and the pause time and they are using the GPS data in order to estimate the
+locations of individuals. The experiment takes place in a park in Rio de Janeiro
+and is done based on the data received from approximately $120$ volunteers. The
+results have shown that people seem to have in general smooth trajectories without
+abrupt changes.
+
 \section{Mobility patterns in massive multiplayer online games}
-R. Sinatra and M. Szell have studied the way in which users of a massive
-multiplayer online game behave inside the virtual universe provided by the
-mentioned game \cite{Sinatra14}. It has been established that the massive
-multiplayer games provide people with a virtual reality where they can interact
-with others through their characters and can, in fact, form groups and, as such,
-display both individual as well as collective behaviour actions that can
-translate to the non-virtual world \cite{Ball03}.
+Sinatra et. al. have studied the way in which users of a massive multiplayer
+online game behave inside the virtual universe provided by the mentioned game
+\cite{Sinatra14}. It has been established that the massive multiplayer games
+provide people with a virtual reality where they can interact with others
+through their characters and can, in fact, form groups and, as such, display
+both individual as well as collective behaviour actions that can translate to
+the non-virtual world \cite{Ball03}.
 
 This study gives an interesting insight into the habits and actions of the
 characters which are controlled by the players. Among the things the authors
@@ -88,113 +160,29 @@ characters from one place to another.
 
 By analyzing the why in which characters have interacted through the years, the
 authors have observed that the mobility of the characters through the universe
-is highly predictable, as users in general will seem to be choosing a random
-location to visit next in just about $10\%$ of the cases.
+is highly predictable, as users in general will seem to be choosing a next
+location in a random manner in just about $10\%$ of the cases.
 
-\section{Eigenbehaviours}
-N. Eagle and A. S. Pentland analyze data of individuals and communities with the
-purpose of trying to predict and cluster the daily habits and behaviour of
-people \cite{Eagle09}. The consider that the behaviour of one person throughout a
-day can be close to a sum of their primary eigenbahaviours throughout that day.
-The results of the study have shown that when having a weighted sum calculated
-for the first half of a day, the behaviour of the same person throughout the
-remaining of the day can actually be approximated with $79\%$ accuracy.
-
-The results have applicability in more fields, as they allow us to consider the
-possibility of clustering people into various communities based on the
-similarity of their behaviours. It goes even further, as the findings show that
-this enables the possibility of calculating similarity for groups as well and
-thus permitting the a classification that, according to the experiment, can be
-$96\%$ accurate for determining affiliations in the social network of a
-particular population.
-
-As a last observation in the paper by N. Eagle and A. S. Pentland it is stated
-that eigenbehaviours can be used in order to identify the possible friendship
-ties between people. The observations in this paper have been done based on the
-Reality Mining data set that tracked the behavior for 100 individuals at MIT for
-the duration of one year.
-
-\section{Human movement recorded through real traces}
-Studies as the ones with the travel of bank notes or the recorded location of
-mobile users through telephone is not very exact and does not reflect the real
-traces for the people. They do provide a very useful estimation, however with
-the technology that we have access to nowadays, we are able to record mobile
-phone users' real traces either through GPS or Wifi. The data that can be
-acquired through these means allows us to conduct studies that can take into
-consideration a very good approximation of the real location of individuals.
-
-In the paper by M. Kim, D. Kotz and S. Kim \cite{Kim06}, the authors present us
-with a method in which the locations of users can be estimated based on the WiFi
-signals that their devices register. The experiment is conducted considering
-the data for a duration of $13$ months. The user traces that have been used consist
-of the trace data from the Darmouth College. The mobility traces are defined as
-the lists of access points that are associated to a user's devices at a given
-timestamp.
-
-The mobility traces allowed the authors to extract the tracks (locations) of the
-users. They have explored three methods in which the location can be extracted
-from the data. The first approach presumed the calculation of the center
-(intersection of medians) of the triangle defined by the past three access
-point associations of the mobile device of the user. This approach has a
-downside since the devices do not necessarily change the associations in a
-periodic manner. This lead to the second approach which consisted in considering
-a time window after which the associations needed to be updated in case new
-associations have appeared during that time. The third and last approach
-explored the use of Kalman filters \cite{KalmanFilter}.
-
-The validation the path extractors the authors have compared the results with
-GPS data. This validation has prove that the type of the used device has at
-the moment a significant importance in how accurate the results can be as it seems
-that some devices can be more aggressive in updating the associations with
-access points while others try to stay associated with the same access points as
-long as possible before switching to new ones. This leads to problems as
-different distances between users and access points considered by different
-devices and as such it affects the estimated paths. The best estimations have
-been given in this experiment by the approach that used the Kalman filters,
-however both the other two approaches have provided fairly good estimations as
-well.
-
-Another paper which explores the travel patterns from real data is the one
-written by T. S. Azevedo, R. L. Bezerra, C. A. V. Campos and L. F. M. de Moraes
-\cite{Azevedo09}. The authors propose another approach for analyzing the mobility
-of people. They take into consideration the following movement components:
-velocity, acceleration, direction angle change and the pause time and they are
-using the GPS data in order to estimate the locations of individuals. The
-experiment takes place in a park in Rio de Janeiro and is done based on the data
-received from around $120$ volunteers. The results have shown that people seem
-to have in general smooth trajectories without abrupt changes.
-% TODO - social network theory TODO - radio landscape obs - Perez Penichet paper
-% TODO - Levi flight and people vs animals
-
-% TODO - locations and identifying locations paragraph TODO - 2-3 papers on
-% identifying locations TODO - paragraph about predictability and entropies
-% (Lu13 - approaching the limits of predictability) TODO - 2 papers on this
 \section{Entropy and predictability}
 One step further from understanding the way we travel from place to place is to
-predict our future locations based on a previous knowledge our our past
-patterns. There has been an extensive study done in this area of the scientific
-playground as well and the results which have emerged up until now are
-remarkable.
+predict our future locations based on a previous knowledge of our past patterns.
+There has been an extensive study done in this area of the scientific playground
+as well and the results which have emerged up until now are remarkable.
 
-In the paper by C. Song, Z. Qu, N. Blumm and A. L. Barabasi \cite{Barabasi10},
-the authors take up the challenge of studying how predictable people can be.
-They analyze the mobility patterns of mobile phone users and calculate the
-entropy of these users. The locations are defined by the telephone towers the
-users are encountering at hourly intervals and the trajectory of the user is
-given by the ordered sequence of these towers. The real entropy of each user i
-is calculated as $\Sigma _{T'_{i}\subset T_{i}} P(T'_{i})log_{2}(P(T'_{i}))$,
-where $P(T'_{i})$ represents the probability of encountering a time-ordered
-subsequence $T'_{i}$ in the sequence of hourly encountered telephone towers
-$T_{i}$.
+In the paper by Song et. al. \cite{Barabasi10}, the authors take up the
+challenge of studying how predictable people can be. They analyze the mobility
+patterns of mobile phone users and calculate the entropy of these users. The
+locations are defined by the telephone towers the users are encountering at
+hourly intervals while the trajectory of the user is given by the ordered
+sequence of these towers. The real entropy of each user $i$ is calculated as
+$\Sigma _{T'_{i}\subset T_{i}} P(T'_{i})log_{2}(P(T'_{i}))$, where $P(T'_{i})$
+represents the probability of encountering a time-ordered subsequence $T'_{i}$
+in the sequence of hourly encountered telephone towers $T_{i}$.
 
 The results for this particular study show that, for the considered users, the
 uncertainty of where they could be at a certain moment, based on the real
 entropy calculated for them would be very low as they would most probably be in
 one of two locations.
-% The results show that, for most of the users that were part of this particular
-% study, the entropy S has been calculated to be around $0.8$. This means that %
-% the real uncertainty when it comes to estimating where a user can be at a
-% certain moment is $2^{0.8}$ which means $1.74$, so less than $2$ locations.
 
 The authors also take a look into the maximum predictability which can be
 expected for a user. Their results show that, with the right algorithm, a user's
@@ -215,5 +203,6 @@ Markov chain models \cite{Ross09} \cite{Liu96}, the neural networks
 \cite{Petzold04} or the study of human walks traces \cite{5061995}
 \cite{4509740}. Most of the studies support the idea that people's actions and
 travel behavior is indeed far from being random and thus the science world needs
-to dedicate further effort and time in order to use this knowledge in order to
-improve our quality of life and the world we live in.
+to dedicate further effort and time in order to continue the work done for
+understanding the way in which mobility patterns emerge so that we can use this
+knowledge to improve our quality of life and the world we live in.
