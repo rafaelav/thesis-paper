@@ -1,5 +1,10 @@
 \chapter{An evaluation of Wifi positioning accuracy} 
 
+Up to this point in our paper we have discussed the steps that have been
+taken in order to extract and analyze locations from Wifi data. The aim of the
+current chapter is to present the steps we have taken in order to evaluate the
+Wifi positioning in comparison to solutions that relay on GPS data.
+
 The evolution of technology during the present days allows us to make use of
 devices that register and process high amounts of contextual information about
 their owners. Among these devices we can find our smartphones. Smartphones have
@@ -16,7 +21,7 @@ by the Google Now \cite{GN} service. This service uses various contextual
 information that we make available through our Android phones in order to
 provide us with important information like traffic statistics for when we are
 expected to travel, weather information for the destination we should be
-arriving at, or news about our favorite television show, for example.
+arriving at, or news about our favorite television show.
 
 An example of contextual information that can be retrieved from our smartphones
 is our locations, or our traveling patterns. This is possible due to the GPS
@@ -74,16 +79,16 @@ of samples which have a higher density.
 
 The clusters are created by using a Gaussian Mixtures Model that attributes
 samples to different clusters which are modeled as Gaussian distributions which
-have unknown parameters. After a sample is allocated to a cluster, then
-consecutive samples that have been assigned to the same cluster can be grouped
-and consider to form stop locations. The size of the clusters are determined by
-a given parameter.
+have unknown parameters. After a sample is allocated to a cluster, consecutive
+samples that have been assigned to the same cluster can be grouped and consider
+to form stop locations. The size of the clusters are determined by a given
+parameter.
  
 \subsection{Distance grouping}
 
 The main idea behind the distance grouping algorithm, as it has been presented
-in \cite{cuttone2014inferring} is that a sequence of location samples which seem
-to be geographically close to each other~\footnote{The location samples have
+in \cite{cuttone2014inferring}, is that a sequence of location samples which
+seem to be geographically close to each other~\footnote{The location samples have
 been identified within a given maximum distance $D_{max}$ of each other} can be
 grouped into a stop location.
 
@@ -94,7 +99,8 @@ The stop locations are created as follows:
   \item A stop location has initially only one location sample $L_{i}$
   attributed to it
   \item All the following $k$ samples as long as all samples $j \in \{i+1, k\}$
-  respect the condition $Distance(L_{j}, L_{i}) < D_{max}$
+  respect the condition $Distance(L_{j}, L_{i}) < D_{max}$ are added to the
+  location
   \item The process of constructing the next stop location is started again from
   location $L_{i+k+1}$
 \end{itemize}
@@ -102,13 +108,14 @@ The stop locations are created as follows:
 \section{Comparing results obtained with distance grouping algorithm}
 
 For the purpose of analysing the locations we have obtained from the Wifi data
-we have implemented the distance grouping algorithm. Our implementation
+we have implemented the \textit{distance grouping algorithm}. Our implementation
 considers that the maximum distance $D_{max}$ that determines the way in which
 GPS samples are grouped is of $60$ m. The way in which this value is selected
-affects the results as a too large value for $D_{max}$ leads to the merging of
-different stop locations awhile a too small value leads to stop locations being
-unnecessarily divided into more smaller stop locations. The $60$ m value has
-proved to be a good approximation for the data we have been working with.
+affects the results as a very large large value for $D_{max}$ leads to the
+merging of different stop locations while a very small value leads to stop
+locations being unnecessarily divided into more smaller stop locations. The $60$
+m value has proved to be a good approximation as it has been determined
+empirically from the data that it provides acceptable results.
 
 We also try to be consistent with the fact that for the Wifi data we consider
 that a user needs to be close to a given geographical location for at least $5$
@@ -118,14 +125,13 @@ GPS data, we discard the stop locations for which the user does not seem to be
 spending at least $5$ minutes within their limits. To calculate the time the
 user spends in a GPS identified stop location we calculate the difference
 between the timestamps of the first sample that is associated with the position
-and the last sample that is still considered part of the stop location. If the
-difference is above $5$ minutes, the stop location is kept.
+and the last sample that is still considered a part of the stop location. If the
+difference is equal or above $5$ minutes, the stop location is kept.
 
 In Fig.~\ref{user6_aps_2days} we can see the predominant APs that have been
-scanned during a $2$ days time frame for an user (userT).
-Fig.~\ref{user6_hmm_2days} displays the locations identified considering the
-Wifi data (first line of colors) and the locations extracted from
-the GPS data (second line of colors).
+scanned during a $2$ days time frame for an user. Fig.~\ref{user6_hmm_2days}
+displays the locations identified considering the Wifi data (first line of
+colors) and the locations extracted from the GPS data (second line of colors).
 
 \begin{figure}[!h]
 \centering
