@@ -13,15 +13,15 @@ gives us the opportunity to look more careful into our mobility patterns in
 order to try to understand how we can make use of these patterns to improve our
 world.
 
-%TODO -add no of users
 In order to explore the entropy and predictability of human mobility, we have
 conducted tests based on the data retrieved from a selection of users from the
 SensibleDTU database. We have selected $65$ users from our original pool of
-$131$ users in order to observe their movements throughout a period of $30$ days. The
-reason behind discarding the remaining users was that their data was found to be
-missing important fields or they did not keep their mobile phones charged and
-open for the most part of the $30$ days and thus their result could have
-jeopardize the study results.
+$131$ users in order to observe their movements throughout a period of $30$
+days. The reason behind discarding the remaining users was that their data was
+found to be missing important fields or they did not keep their mobile phones
+charged and open for the most part of the $30$ days and thus their result could
+have jeopardize the study results. The current chapter focuses on presenting the
+results we have obtained as well as some observations regarding them.
 
 \section{Entropy}
 
@@ -29,71 +29,72 @@ jeopardize the study results.
 predictability characterizing a time series'' \cite{Barabasi10}. Multiple
 studies (\cite{Sinatra14},\cite{Lu13}, \cite{marin2012exploring},
 \cite{Barabasi10}) that aim at understanding the predictability of the human
-travel trajectory take into consideration different entropy measures which have
-different meaning and different levels of importance in correctly estimating the
-probability of choosing a location or another. The measures that are mentioned
-are the random entropy, the temporal uncorrelated entropy, the conditional
-entropy and the real entropy.
+travel trajectories take into consideration different entropy measures which
+have different meaning and different levels of importance in correctly
+estimating the probability of choosing a location or another. The measures that
+are mentioned are the random entropy, the temporal uncorrelated entropy, the
+conditional entropy and the real entropy.
 
 \subsection{The random entropy}
 \label{r_e}
 
-The formula for the random entropy of a random user i is given by
+The formula for the random entropy of a random user $i$ is given by
 
 \begin{equation}
 S_{i}^{rand} = log_{2}N_{i}
 \end{equation}
 
-Where $N_{i}$ represents the number of unique locations that
-have been associated to the given user throughout the time frame that we are
-taking into consideration. This measurement can be used to reflect the
-predictability of the travel patterns of the given user in case we consider that
-each of the locations can be visited with the exact same probability.
+Where $N_{i}$ represents the number of unique locations that have been
+associated to the given user throughout the time frame that we are taking into
+consideration. This measurement can be used to reflect the predictability of the
+travel patterns of the given user in case we consider that each of the locations
+can be visited with the exact same probability.
 
 We have calculated the random entropy by taking into consideration the locations
 visited by our selected users throughout a period of $30$ days.
-Fig.~\ref{dis_r_e} shows the density distribution of the results which have been
-rounded after the second decimal. As we can see, most of the users have a random
-entropy of around $3.65$ and the average random entropy is $3.87$. This means
-that, in average, is a user would choose randomly his or her next location, than
-they can be found in any of $2^{S^{rand}} = 2^{3.87}$ locations (which is
+Fig.~\ref{dis_r_e} shows a histogram of the results which have been rounded
+after the second decimal. As we can see, most of the users have a random entropy
+of around $3.65$ and the average random entropy is $3.87$. This means that, in
+average, if a user was to choose randomly his or her next location, than they
+can be found in any of $2^{S^{rand}} = 2^{3.87}$ locations (which is
 approximately $14.62$).
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width=\textwidth]{figures/entro_pred/rand_entro_distrib.png}
-\caption{Density distribution for $S^{rand}$}
+\caption{Histogram for $S^{rand}$ values}
 \label{dis_r_e}
 \end{figure}
 
 \subsection{The temporal uncorrelated entropy}
 \label{tu_e}
 
-The formula for the temporal uncorrelated entropy of a random user i is given by
+The formula for the temporal uncorrelated entropy of a random user $i$ is given
+by
 
 \begin{equation}
-S_{i}^{unc} = -\sum\limits_{j=1}^{N_{i}}p_{i}(j)log_{2}p_{i}(j)
+S_{i}^{unc} = -\sum\limits_{j=1}^{N_{i}}p_{i}(j)log_{2}[p_{i}(j)]
 \end{equation}
 
 Where $N_{i}$ represents the number of unique locations that have been
 associated to the given user throughout the time frame that we are taking into
 consideration and $p_{i}(j)$ represents the historical probability of the given
-user to visit location j. The present measurement incorporates the knowledge
+user to visit location $j$. The present measurement incorporates the knowledge
 about what locations occur more often in the user's traveling patterns.
 
 We have calculated the temporal uncorrelated entropy by taking into
 consideration the locations visited by our selected users throughout a period of
-$30$ days. Fig.~\ref{dis_tu_e} shows the density distribution of the results
-which have been rounded after the second decimal. The average temporal
-uncorrelated entropy is $1.3$. This means that, in average, if we are to base
-our supposition on the number of times each location has been visited in the
-past by a given user, then the user's next location can be found in any of
-$2^{S^{unc}} = 2^{1.3}$ locations (which is approximately $2.46$).
+$30$ days. Fig.~\ref{dis_tu_e} shows the results which have been rounded after
+the second decimal. The average temporal uncorrelated entropy is $1.3$.
+This means that, in average, if we are to base our supposition on the number of
+times each location has been visited in the past by a given user, then the
+user's next location can be found in any of $2^{S^{unc}} = 2^{1.3}$ locations
+(which is approximately $2.46$).
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width=\textwidth]{figures/entro_pred/tu_entro_distrib.png}
-\caption{Density distribution for $S^{unc}$}
+\caption{Histogram for $S^{unc}$ values}
 \label{dis_tu_e}
 \end{figure}
 
@@ -104,7 +105,7 @@ on the formula given in the paper \cite{Sinatra14}
 
 \begin{equation}
 S_{i}^{cond} = - \sum\limits_{x_{t}\in X_{i}} \sum\limits_{x_{t-1}\in X_{i}}
-p_{i}(x_{t-1},x_{t})log_{2}p_{i}(x_{t}|x_{t-1})
+p_{i}(x_{t-1},x_{t})log_{2}[p_{i}(x_{t}|x_{t-1})]
 \end{equation}
 
 In this formula, $x_{t}$ and $x_{t-1}$ are possible locations,
@@ -118,14 +119,14 @@ S^{rand}$ \cite{Cover:2006:EIT:1146355}.
 
 In \cite{Sinatra14} the authors introduce an extension for the conditional
 entropy in order to explore how the amount of previous knowledge affects the
-value of the conditional entropy. The new formula is 
+value of the conditional entropy. The extended formula is 
 
 \begin{equation}
 S_{i}^{cond,k} = - \sum\limits_{x_{t}\in X_{i}} .. \sum\limits_{x_{t-k}\in
-X_{i}} p_{i}(x_{t-k},..,x_{t})log_{2}p_{i}(x_{t}|x_{t-k},..,x_{t-1})
+X_{i}} p_{i}(x_{t-k},..,x_{t})log_{2}[p_{i}(x_{t}|x_{t-k},..,x_{t-1})]
 \end{equation}
 
-In this case, k represents the number of previous steps we know. With the
+In this case, $k$ represents the number of previous steps we know. With the
 present formula it can be observed that $S_{i}^{cond,0}$ is the same with
 $S_{i}^{unc}$ and that $S_{i}^{cond,1}$ is the same as $S_{i}^{cond}$.
 
@@ -146,11 +147,11 @@ The real entropy of a user needs to be calculated by taking into consideration
 the different locations that the user has been to, the frequency with which he
 or she visits these locations, the time spent at the locations and the order in
 which the locations seem to follow through time. The relation between the actual
-entropy and the random and time uncorrelated entropies is $S \leq S^{unc}
+entropy and the random and time uncorrelated ones is $S \leq S^{unc}
 \leq S^{rand}$. 
 
-If we consider that $X_{i}$ represents the locations of a user at time i,
-and $h_{n}$ represents a sequence of n locations, then for a process X =
+If we consider that $X_{i}$ represents the location of a user at time $i$,
+and $h_{n}$ represents a sequence of $n$ locations, then for a process $X$ =
 \{$X_{i}$\} the entropy can be written as
 \begin{equation}
 \label{eq_7_5}
@@ -168,13 +169,13 @@ S \equiv \lim_{n\to\infty} {1 \over n}S(X_{1},X_{2},..,X_{n})
 Equation \ref{eq_7_5} is the definition given to entropy in
 \cite{Cover:2006:EIT:1146355}, equation \ref{eq_7_6} reflects the application of
 the chain rule in the previous equation and $S(X_{i}|h_{i-1})$ represents the
-conditional entropy at step n in equation \ref{eq_7_7} \cite{song2010limits}.
+conditional entropy at step $n$ in equation \ref{eq_7_7} \cite{song2010limits}.
 
-The paper \cite{Barabasi10} present another way in which the entropy for a user
-i can be written. If we consider that $T_{i} = {X_{1}, X_{2},\ldots, X_{n}}$
-represents the sequence of locations which have been visited by user i and if we
-consider that $P(T'_{i})$ represents the probability of finding time ordered
-subsequence $T'_{i}$ in the trajectory $T_{i}$, then the entropy of user i can
+The paper \cite{Barabasi10} presents another way in which the entropy for a user
+$i$ can be written. If we consider that $T_{i} = {X_{1}, X_{2},\ldots, X_{n}}$
+represents the sequence of locations which have been visited by user $i$ and if
+we consider that $P(T'_{i})$ represents the probability of finding time ordered
+subsequence $T'_{i}$ in the trajectory $T_{i}$, then the entropy of user $i$ can
 be written as
 
 \begin{equation}
@@ -184,28 +185,28 @@ S_{i} = - \sum\limits_{T'_{i}\subset T_{i}}P(T'_{i})log_{2}[P(T'_{i})]
 We have calculated a measurement of the entropy for our selected users and the
 distribution for the results which have been rounded after the second decimal
 can be seen in Fig.~\ref{dis_full_e}. The fact that the average value of the
-real entropy for the selected user is around $0.17$ means that, in reality we
-the uncertainty about where a user will be traveling to next is $2^{0.17} =
-1.12$ locations. These findings show that, the users we have been observing do
-not randomly choose their future locations, but in fact, their locations are
-well established by restrictions such as hours or days at which they need to be
-at work, or school as well as other patterns that govern most of the times our
-decisions.
+real entropy for the selected user is around $0.17$ means that, in reality, the
+uncertainty about where a user will be traveling to next is $2^{0.17} = 1.12$
+locations. These findings show that, the users we have been observing do not
+randomly choose their future locations, but in fact, their locations are well
+established by restrictions such as hours or days at which they need to be at
+work, or school as well as other patterns that govern our decisions most of the
+times.
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width=\textwidth]{figures/entro_pred/full_entro_distrib.png}
-\caption{Density distribution for $S$}
+\caption{Histogram for $S$ values}
 \label{dis_full_e}
 \end{figure}
 
 In Fig.~\ref{dis_overlay} we have an overlay of the distribution for the random,
-temporal uncorrelated and real entropies.
+temporal uncorrelated and real entropy.
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width=\textwidth]{figures/entro_pred/overlay.png}
-\caption{Density distributions for $S$, $S^{rand}$ and $S^{unc}$}
+\caption{Histograms for $S$, $S^{rand}$ and $S^{unc}$ values}
 \label{dis_overlay}
 \end{figure}
 
@@ -215,8 +216,8 @@ A measure that needs to be taken into consideration when discussing
 predictability is the probability ($\Pi$) of a predictive algorithm to correctly
 estimate the future locations a user will visit. According to the inequality of
 Fano \cite{brabazon2008natural} \cite{1057678}, a user for which the entropy is
-S and it has been calculated taking into consideration the fact that the user
-spends his or her time in either of N given locations, then his or her
+$S$ and it has been calculated taking into consideration the fact that the user
+spends his or her time in either of $N$ given locations, then his or her
 predictability (as it is presented in \cite{Barabasi10} and in \cite{Sinatra14}
 as well) is given by
 
@@ -254,28 +255,28 @@ each of them has been traveling in between for the duration of $30$ days that we
 considered for our experiment, we only needed to calculate the entropy based on
 the mathematical formulae at \ref{pred} and \ref{h_func}. However, the equation
 at \ref{equation}, which would allow us to calculate the predictability for each
-user is a transcendent equation. This means that the equation can be solved
+user is a transcendental equation. This means that the equation can be solved
 either numerically or graphically.
 
 In order to solve the equation we use a numerical method that helped us
 approximate the result. The method we use is the bisection method \cite{faires}.
 This method is applicable for solving an equation $f(x) = 0$ over a given
 interval $[a,b]$ for which the values $f(a)$ and $f(b)$ have opposing sings. In
-our case the f function is represented by the left side in the equation
+our case the $f$ function is represented by the left side in the equation
 \ref{equation}. Since the solution of our equation $f(x) = 0$ needs to be a
-number between 0 and 1 (the maximum predictability can only have a value in this
-interval), than we start the algorithm by verifying if by replacing the maximum
-predictability with 0 or 1 we have a solution or if the two values obtained this
-way have opposing signs. If they have opposing signs, we consider that $a = 0$
+number between $0$ and $1$ (the maximum predictability can only have a value in
+this interval), than we start the algorithm by verifying if by replacing the maximum
+predictability with $0$ or $1$ we have a solution or if the two values obtained
+this way have opposing signs. If they have opposing signs, we consider that $a = 0$
 and $b = 1$. In case the function does not have opposing signs, we adjust the
 interval until we find either a solution or values for which the signs are
 opposing. The algorithm continues as following:
 \begin{itemize}
   \item As long as we do not exceed a previously set number of iterations we
-  look for the middle of the interval given by the selected a and b numbers
-  (let the middle be m)
-  \item In case $f(m)$ is 0 or sufficiently close to 0 (we accept an error of
-  order $10^{-3}$), than we have found our solution, otherwise if the value of
+  look for the middle of the interval given by the selected $a$ and $b$ numbers
+  (let the middle be $m$)
+  \item In case $f(m)$ is $0$ or sufficiently close to $0$ (we accept an error
+  of order $10^{-3}$), than we have found our solution, otherwise if the value of
   $f(m)$ has the same sign as $f(a)$ we move forward considering the interval
   $[m,b]$, if it has the same sign as $f(b)$ we continue by using the interval
   $[a,m]$
@@ -284,10 +285,40 @@ opposing. The algorithm continues as following:
 
 The average predictability value for the selected users and through the given
 $30$ days of observations is of approximately $98\%$ which supports the
-observations made in previous studies (a considerable number of which have
-already been mentioned in the present paper - e.g. \cite{song2010limits},
+observations made in previous studies (some of which have already been mentioned
+in the present paper, like, for example, \cite{song2010limits},
 \cite{Barabasi08} etc) regarding the fact that we seem to have a highly well
-established pattern of traveling that rises from our daily habits.
+established pattern of traveling that forms due to our daily habits.
 
-% 6 pages \begin{enumerate} \item Calculating entropy for users \item
-% Calculating predictability for users \item Observations end{enumerate}
+Fig.~\ref{pred_histo} shows a histogram for the calculated predictability values
+for the selected users. In this particular case, the users for whom the values
+have been determined have things in common (for example they are all students
+at the Technical University of Denmark and they probably have similar ages) and
+they can be viewed as a community, yet even considering these similarities
+between the users, the results based on their data are interesting and seem to
+attest that, in general are mobility actions are highly predictable.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{figures/entro_pred/pred_hist.png}
+\caption{Histogram for predictability values}
+\label{pred_histo}
+\end{figure}
+
+The difference of $5\%$ between the value of the maximum predictability average
+we have obtained ($98\%$) and the value obtained in the study presented in
+\cite{song2010limits} ($93\%$) can be caused by a multitude of factors. For
+example, the number of users which took part in the two studies is very
+different ($65$ users for the present study versus $45000$ for the one presented
+by Song et.al.). There is also the difference between the types of data that
+have been analyzed. Song et. al. analyze data that comes from telephone towers
+while during our research we analyze Wifi data. The location for the users in
+our study can be closely monitored due to the fact that we have access to highly
+granular data, while in the case of the users observed by Song et. al., the data
+is collected only when the phone is used by the owners which can lead to periods
+of time when the location of a user is not known exactly. These are just a few
+examples of factors that can justify the difference between the results,
+however, what is worth considering is that, even though the experiments are
+quite different, the results seem to point in the same direction: our mobility
+patterns are rooted in our daily habits rather than being the result of
+spontaneity.
