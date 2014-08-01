@@ -30,8 +30,8 @@ time which can be avoided by using another solution. The second solution is to
 extract locations for each day and concatenate the results for all the days
 afterwards. This however leads to a new situation. We need to find a way in
 which to identify that a location $L_{x}$ from day X might be the same as a
-location $L_{y}$ from day Y. This problem is referred to in the present paper as
-the ``matching of locations'' problem.
+location $L_{y}$ from day Y. This problem is referred to in the present paper
+as the ``matching of locations'' problem.
 
 We have taken into consideration three possible ways in which we can solve this
 new problem. In order to evaluate the proposed solutions we have evaluated the
@@ -46,8 +46,8 @@ the matching that was done.
 The algorithm which can be used for matching up locations over time based on a
 \textit{dictionary based on APs} is as follows:
 \begin{itemize}
-  \item For each location we reunite the time bins that has been associated with
-  it. We identify the APs present in either of the time bins and we consider
+  \item For each location we reunite the time bins that have been associated
+  with it. We identify the APs present in either of the time bins and we consider
   all these APs to be associated to the given location
   \item Before adding a new entry in the dictionary~\footnote{Adding an entry
   in such a dictionary is equivalent with defining a new location based on the
@@ -58,7 +58,7 @@ The algorithm which can be used for matching up locations over time based on a
   new location in the dictionary
   \item If we find locations which resemble the new one in a proportion bigger
   than a given threshold (they have a sufficient number of APs that coincide
-  with the ones associated to the new location), we can chose the one which
+  with the ones associated to the new location), we can choose the one which
   resembles the most and consider that the new location and this specific
   location are the same
   \item In the above case, the entry for the location in the dictionary is
@@ -68,7 +68,7 @@ The algorithm which can be used for matching up locations over time based on a
 
 This method seems to be a simple solution, however, at a close exploration of
 possible situations which can appear within our data we identified a case in
-which this solution fails. Let use explore the situation in
+which this solution fails. Let us explore the situation in
 Fig.~\ref{overlap_of_aps}. 
 
 \begin{figure}[!h]
@@ -133,7 +133,7 @@ Tab.~\ref{tab:table_fingerprints}~\footnote{We make the assumption that the
 algorithm for extracting locations associates the period between t1 and t0 to
 location L1.}.
 
-\begin{table}[h]
+\begin{table}[!h]
 \begin{tabular}{|c|c|c|c|}
 \hline
 \multicolumn{1}{|l|}{}       & \multicolumn{2}{c|}{\textbf{Location 1 (L1)}}   & \textbf{Location 2 (L2)} \\ \hline
@@ -174,7 +174,7 @@ possible interferences. In this case the algorithm will fail to identify the two
 location as being the same one and, as such, the present algorithm can present
 difficulties when solve the matching problem.
 
-\begin{table}[h]
+\begin{table}[!h]
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
              & \textbf{Location 1 (L1)}     & \multicolumn{6}{c|}{\textbf{Location 2 (L2)}}                                           \\ \hline
@@ -279,8 +279,8 @@ condition which goes as follows: if all the APs which have the value $1$ in the
 signature of a location appear in the signature of an already found previous
 location, than the two can be considered the same location even if the
 similarity value is not above the given threshold. This small improvement
-ensures that the algorithm performs very well even despite cases as this one.
+ensures that the algorithm performs well even despite cases as this one.
 
-This third possible solution performs very well for the test we have conducted
-over or data and as such it has been chosen for solving the matching problem for
+This third possible solution performs well for the test we have conducted over
+or data and as such it has been chosen for solving the matching problem for
 locations over different days.
