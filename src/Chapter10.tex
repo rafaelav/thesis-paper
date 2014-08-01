@@ -9,10 +9,10 @@ into consideration different approaches that can be used in order to extract
 locations. We considered determining locations based on access points' BSSIDs
 and RSS. This option has led to us trying to find a solution for a better noise
 elimination. We have experienced with different averages that aimed to smooth
-the spikes in the signal strength, however we have come to the conclusion that
-for the used data a better approach is to only take into consideration the
-BSSIDs of the access point and the knowledge if an access point is present or
-not in a given time bin. The information extracted by analyzing when the access
+the spikes in the signal strength, however we have come to the conclusion that,
+for the used data, a better approach is to only take into consideration the
+BSSIDs of the access point and the knowledge stating whether an access point is
+present or not in a given time bin. The information extracted by analyzing when the access
 points are visible has been used in order to determine stop locations.
 
 The extraction of the locations based on the identity and presence of various
@@ -20,17 +20,17 @@ access points throughout different time frames has proved to be a challenging
 and complex task. We have tested three different methods: an algorithm based on
 the usage of networks, an algorithm based on $k$-means clustering and an
 algorithm based on Hidden Markov Models. The first algorithm did not lead to
-satisfactory results in the present study. Between the second two approaches,
+satisfactory results in the present study. Between the other two approaches,
 the algorithm based on Hidden Markov Models has statistically had better results
 for our used data, however further research is needed in order to make a
 definitive assumption on which of the two algorithms can prove to be better to
 use in different circumstances. Also, in order to use either of $k$-means or
-Hidden Markov Models based algorithms we needed to first determine the number of
-locations we were expecting the algorithms to identify. This has been achieved
+Hidden Markov Models based algorithms, we needed to firstly determine the number
+of locations we were expecting the algorithms to identify. This has been achieved
 by using cross validation in order to rank the results based on different
 numbers of expected locations.
 
-In order to conduct the study over a large amount of data we needed to run the
+In order to conduct the study over a large amount of data, we needed to run the
 location identification algorithm on data collected during smaller time frames
 (e.g. one day). The resulting locations have been compared to each other. This
 was needed in order to determine if a location appeared in the results from a
@@ -46,17 +46,17 @@ pool of users. We have also been able to determine that the users which have
 been selected to be part of the present study present a high degree of
 predictability as far as human mobility is concerned. This observation supports
 previous results which have been made regarding this topic, yet further research
-on an even bigger data set and longer period of time might be needed in order to
-establish if this particular observation can be considered a fact.
+on an even bigger dataset and a longer period of time might be needed in order
+to establish if this particular observation can be considered a fact.
 
-We have finalized the paper by making a summary of the most important
+We finalized the paper by making a summary of the most important
 observations that have emerged throughout our work as well as a series of
 suggestions about possible future areas of interest for the present topic.
 
 To conclude, we would like to state that the work in the present field is far
 from being complete. There are many questions that still require answers and
-many opportunities for improvement and we feel that the findings presented in
-the current paper, as well as previous works can constitute a solid ground for
-further research projects. The topic in itself is of a high interest for the
+many opportunities for improvement. We consider that the findings presented in
+the current paper, as well as in previous work, can constitute a solid ground
+for further research projects. The topic in itself is of a high interest for the
 future as any results can be used to drastically improve the quality of life for
 generations to come.
