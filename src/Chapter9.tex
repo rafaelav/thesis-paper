@@ -1,9 +1,9 @@
 \chapter{Discussion and future work}
 
 During the work conducted for our study we have come across a number of
-interesting findings and observations. This chapter contains a summation of
-these surfacing results as well as a list of possible directions and subtopics
-that can be explored during future research on the subject.
+interesting findings and observations. This chapter contains a summary of these
+surfacing results as well as a list of possible directions and subtopics that
+can be explored during future research on the subject.
 
 In order to capture results that can reflect general facts about the way human
 mobility patterns emerge, it is important for the conducted studies to
@@ -40,40 +40,41 @@ with Wifi data. The present paper presented a few techniques which have been use
 order to eliminate possible noise, however, future improvements can be added for
 obtaining data which has an even higher qualitative value.
 
-In order to extract locations from Wifi data we have worked with three different
-algorithms: based on networks, $k$-means clustering and based on the use of
-Hidden Markov Models. The algorithm that uses the construction of a network based on
-the presence of the access points at given times did not lead to acceptable
-results for the duration of our study. However, the $k$-means clustering and the
-algorithm based on Hidden Markov Models combined with a $k$-fold cross
-validation algorithm in order to estimate the correct number of locations that were to be
-expected for a user lead to good approximations for stop locations. For the data
-we have used, the algorithm based on Hidden Markov Models, has statistically
-given better approximations, but further research is needed in order to
-determine if either of the two methods is better than the other or they just
-behave better in various circumstances. Another thing which is worth taking into
-consideration for further research is that, even though during our study, we did
-not reach acceptable results by the use of the network method, further research
-is needed in order to determine if the idea behind this approach can produce
-note worthy findings. The benefits are that, by identifying clear
-characteristics of the locations, this enables the construction of an algorithm
-that can have a lower execution time for extracting locations from large amounts
-of data. Also, an additional interesting focus point can be represented by
-researching the implementation of an improved method that can be used for
-estimating the expected number of locations for a given time frame. The present
-paper has presented the use of cross validation as a method of determining the
-best possible estimation, however, Hidden Markov Models constitute a highly
-effective model which, possibly, with further research can be able to eliminate
-the use of estimation and allow the exact determination of the number of
-locations which can be observed during a given sequence of data. Other options
-can be explored and tested, as well, for achieving the best results.
+In order to extract locations from Wifi data, we have worked with three
+different algorithms: based on networks, $k$-means clustering and based on the
+use of Hidden Markov Models. The algorithm that uses the construction of a
+network based on the presence of the access points at given times did not lead
+to acceptable results for the duration of our study. However, the $k$-means
+clustering and the algorithm based on Hidden Markov Models combined with a
+$k$-fold cross validation algorithm in order to estimate the correct number of
+locations that were to be expected for a user lead to good approximations for
+stop locations. For the data we have used, the algorithm based on Hidden Markov
+Models, has statistically given better approximations, but further research is
+needed in order to determine if either of the two methods is better than the
+other or they just behave better in various circumstances. Another thing which
+is worth taking into consideration for further research is that, even though
+during our study, we did not reach acceptable results by the use of the network
+method, further research is needed in order to determine if the idea behind this
+approach can produce note worthy findings. The benefits are that, by identifying
+clear characteristics of the locations, this enables the construction of an
+algorithm that can have a lower execution time for extracting locations from
+large amounts of data. Also, an additional interesting focus point can be
+represented by researching the implementation of an improved method that can be
+used for estimating the expected number of locations for a given time frame. The
+present paper has presented the use of cross validation as a method of
+determining the best possible estimation, however, Hidden Markov Models
+constitute a highly effective tool which, possibly, with further research can
+be able to eliminate the use of estimation and allow the exact determination of
+the number of locations which can be observed during a given sequence of data.
+Other options can be explored and tested, as well, for achieving the best
+results.
 
 Due to the using of cross validation in order to determine the approximate
 number of locations we are to expect for each user during a given time frame, as well
 as the complexity of the location determination algorithms, the execution time
 rises exponentially if the amount of input data is high. In order to avoid this
-problem we have determined locations over short one day intervals. The locations
-estimated for different days needed to be compared and analyzed in order to
+problem, we have determined locations over short one day intervals. The
+locations estimated for different days needed to be compared and analyzed in order to
 determine when they coincided. This offered us the opportunity to explore
 different methods in order to determine the location matching (Chapter
 \ref{ch_matching}). We have also compared our extracted locations with locations
@@ -89,7 +90,7 @@ to the development of a new method that can exceed the benefits of the one that
 has been used in this case.
 
 The locations extracted from a selection of $65$ of users from our original pool
-of $131$ users has allowed us to explore the predictability of human travel
+of $131$ users have allowed us to explore the predictability of human travel
 trajectories. The results we have reached support previous studies
 (\cite{Barabasi10}, \cite{Barabasi08}, \cite{Sinatra14}, \cite{Brockmann06}
 etc.) which indicate that the mobility patterns we display seem to have a high
@@ -109,22 +110,22 @@ solution by using visualization of the results. Future work can be done in order
 to employ the use of various tools that can be used to make exact calculations
 for the accuracy of the proposed solutions.
 
-During our work we have debated what is a good
-approximation for the time an user can be expected to stay at a given location in order to consider it a stop
+During our work we have debated what is a good approximation for the time a user
+can be expected to stay at a given location in order to consider it a stop
 location rather than a transit location. We have proposed the use of a $5$
 minute time frame, however further studies can be conducted in order to estimate
 what is the average time a person spends at a given location based on the
 location type. This can lead to further considerations and adaptations for
 algorithms that try to extract stop locations both from Wifi data, but also from
-other types of data, like ,for example, GPS data.
+other types of data (e.g. GPS data).
 
 Clearly the path of exploring the subject of human mobility and predictability
 of human travel trajectories is far from reaching an end. Numerous studies, the
 present one included, have been conducted on this topic, however there are
 still an enormous number of questions that need answers and further work is
-needed in order to be able to fully understand what determines our trajectories
-and how we can use the knowledge in order to increase our quality of life. The
-topic continues to remain of high interest as the possible results have an
+needed in order to be able to fully understand what determines our mobility
+patterns and how we can use the knowledge in order to increase our quality of
+life. The topic continues to remain of high interest as the possible results have an
 applicability potential that expands over a variety of fields and domains such
-as the prevention of the spreading of epidemics, the design of better urban and
-transportation infrastructures, and many other areas of interest.
+as the prevention of the spreading of epidemics or the design of better urban
+and transportation infrastructures.
