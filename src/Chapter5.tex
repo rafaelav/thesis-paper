@@ -198,7 +198,7 @@ user decided to switch off the Wifi.
 
 We can also notice fragments in which the density of signals is quite high, for
 example on Wednesday morning. This means that the user was located in a place
-which has a large number of APs near and since we can notice a regularity in
+which has a large number of APs nearby and since we can notice a regularity in
 this pattern we can assume that this place can be the University. This might
 seem unlikely based on the fact that the patterns sometimes is identified during
 the night, however this particular week is set in October when there are
@@ -208,30 +208,19 @@ As we can see, these visualization can offer us a good first glance at what the
 locations might be like, yet they also make us consider other things that we can
 learn about the data. For example:
 \begin{itemize}
-  \item How many samples from each access point are received during a given time
-  frame
-  \item What is the average signal for various time frames for a given access
-  point
-  \item What are the running averages for signals from various access point
+  \item How many samples from each AP are received during a given time frame
+  \item What is the average signal for various time frames for a given AP
+  \item What are the running averages for signals from various AP
 \end{itemize}
-%As we can see, these visualization can offer us a good first glance at what the
-%locations might be like, however, they also raise some interesting questions.
-%For example:
-%\begin{itemize}
-%  \item Can the spikes in the signals cause any problems in determining
-%  locations?
-%  \item Does the sample density give us additional useful information for
-%  extracting the locations?
-%\end{itemize}
 
 \subsection{Sample density}
 
 When trying to identify locations based on the Wifi data, it is important to
-only take into consideration the access points that actively contribute to the
-fingerprint of the mentioned location. Before cleaning our data (as it has been
-described in Section~\ref{data_cleaning}), isolated observable access points can
-appear and unnecessarily burden the algorithm used for extracting the locations.
-The best way to identify such access points is by analyzing the sample
+only take into consideration the APs that actively contribute to the fingerprint
+of the mentioned locations. Before cleaning our data (as it has been described
+in Section~\ref{data_cleaning}), isolated observable APs can appear and
+unnecessarily burden the algorithm used for extracting the locations.
+The best way to identify such APs is by analyzing the sample
 density~\footnote{We define the sample density for an access point as the number
 of times it appears in scans over a predefined time bin.} of the samples that
 are identified during scanning.
@@ -241,18 +230,17 @@ bin over which the sample density needs to be calculated. We have calculated the
 density considering a time bin of $5$ minutes as we can assume that this amount
 of time can be considered the minimum duration for which a user needs to be
 situated in approximately the same place in order for us to not consider that
-the location is a transition instead of a stop location.% TODO verify
-% supposition
+the location is a transition instead of a stop location.
 
-%TODO - userZ is 6 - 1 day , day 1
 In Fig.~\ref{rssi_6_2nd_day} we have the different APs and their RSSI values at
 the different moments when the mobile phone has identified them in the scans for
 userX during the second day of observations. In Fig.~\ref{samples_6_2nd_day} we
-can observe the sample density for one of the APs that are predominant during the visualized
-time frame. As we can see, the number of times the AP is present in the scans
-throughout the day is quite high and it is registered during numerous different
-periods during the day. We can easily assume that this AP is one of the key APs
-that define one of the locations the user has been associated with.
+can observe the sample density for one of the APs that are predominant during
+the visualized time frame. As we can see, the number of times the AP is present
+in the scans throughout the day is quite high and it is registered during
+numerous different periods during the day. We can easily assume that this AP is
+one of the key APs that define one of the locations the user has been associated
+with.
 
 \begin{figure}[h]
 \centering
@@ -292,27 +280,25 @@ throughout most of this time.
 \end{figure}
 
 Other examples of visualizations for APs based on their sample density can be
-found in Appendix~\ref{appendix_sample_density}% TODO - add stuff to appendix
-% TODO - modify and add fig with only one apparitions with 5 samples in 5
-% minutes -> to modify and say we take into consideration only those with more
-% than 5 samples in 5 minutes
+found in Appendix~\ref{appendix_sample_density}
 
 \subsection{Exploring the implications of the signal strength}
+
 Something that is often taken into consideration during studies regarding the
-determination of locations based on Wifi data is the value which indicates
-the signal strength received from the various APs. The level of the signal
-strength indicator can, in general, give us a good approximation of how close we
-are to a particular AP. However, Wifi networks are susceptible to interferences
-\cite{MahantiCWA10}, meaning that there numerous factors which can cause signals
-to spike even in case the device which scans the region for AP signals does not
-move. This can represent a factor of risk when including the signal strength
-value in the location extraction from Wifi data as the same location could be,
-at different times, be associated to an AP which has a signal strength that
-oscillates based on other external factors.
+determination of locations based on Wifi data is the value which indicates the
+signal strength received from the various APs. The level of the signal strength
+indicator can, in general, give us a good approximation of how close we are to a
+particular AP. However, Wifi networks are susceptible to interferences
+\cite{MahantiCWA10}, meaning that there are numerous factors which can cause
+signals to spike even in case the device that scans the region for AP signals
+does not move. This can represent a factor of risk when including the signal
+strength value in the location extraction from Wifi data as the same location
+could, at different times, be associated to an AP which has a signal strength
+that oscillates based on other external factors.
 
 In order to see if we can smooth down possible fluctuations we have employed two
 mathematical tools. We have calculated the average signal strength, as well as
-the running average, considering different length time bins.
+the running average for time windows of different length.
 
 \subsection{Average signal strength}
 \label{average_sig}
@@ -329,15 +315,12 @@ bin for our AP would be $avg = [(-60) + (-70) + (-60) + (-80) + (-90) +
 (-60)] / 6= -70$ dBm.
 
 We have calculated the average signal for various users and various days. We
-have also calculated it for different time bin length. For example, for the same
-data that we can see in Fig.~\ref{rssi_6_2nd_day} and for the same AP that has
+have also calculated it for different time bin lengths. For example, for the
+same data that we can see in Fig.~\ref{rssi_6_2nd_day} and for the same AP that has
 the sample density represented in Fig.~\ref{samples_6_2nd_day}, if we visualize
 the non-null averages calculated for time bins of $5$ minutes, we would have the
 representation in Fig.~\ref{user_6_avg_1d_5m}. The X axis records the time
 while on the Y axis records the values of the averages
-
-% TODO plot only with this AP in normal mode and maybe make some observations.
-%TODO add more to appendix.
 
 \begin{figure}[h]
 \centering
@@ -351,8 +334,8 @@ of the time bin for which the average is calculated. For example, if we have
 calculated an average for the interval $12:05 - 12:10$, the average is plotted
 on the visualization at $12:05$. 
 
-Additional examples of averages for different APs scanned during the same day by
-userZ's mobile phone can be found in Appendix~\ref{appendix_signal_strength}.
+Additional examples of averages for different APs scanned during a given day can
+be found in Appendix~\ref{appendix_signal_strength}.
 
 \subsection{Running average signal strength}
 \label{running_avg}
@@ -362,22 +345,23 @@ fluctuations is to calculate the running average\footnote{Also referred to as
 the moving average} \cite{Hyndman09movingaverages}.
 
 We have calculated the running average for different users and time frames, and
-we have taken into consideration different time bins when calculating it.
-The algorithm for calculating it is as follows:
+we have taken into consideration different time bins when calculating it. The
+algorithm for calculating it is as follows:
 \begin{itemize}
   \item For the selected user and the selected time frame, we have extracted for
-  each AP the time stamps at which it has been identified by the user's phone
-  \item We have divided for each AP the previously mentioned time stamps into
-  bins of $2$, $5$ or $10$ minutes recording also the signal
-  strength identified at each time stamp\footnote{By doing this we have the
-  signal strength for the given AP at any moments it has appeared inside the time bin}
+  each AP the timestamps at which it has been identified by the user's phone
+  \item We have divided for each AP the previously mentioned timestamps into
+  bins of $2$, $5$ or $10$ minutes recording also the signal strength identified
+  at each timestamp\footnote{By doing this we have the signal strength for the
+  given AP at any moments it has appeared inside the time bin}
   \item The above identified time bins are overlapping. For example, if a
-  sequence of signals $[-60, -80, -70, -70]$ that have each been identified at $1$ minute
-  apart is to be divided into bins of $2$ minutes, the resulting $2$
+  sequence of signals $[-60, -80, -70, -70]$ that have each been identified at
+  $1$ minute apart is to be divided into bins of $2$ minutes, the resulting $2$
   minute bins would be: $[-60, -80]$, $[-80, -70]$, $[-70, -70]$
-  \item The running average is calculated as the sum of the values present in a
-  time bin which is then divided to the number of values. For example, for the
-  above time bins, the running averages would be $-70$, $-75$ and $-70$
+  \item The running average is calculated as the sum of the values that can be
+  found in a time bin which is then divided to the number of values. For
+  example, for the above time bins, the running averages would be $-70$, $-75$
+  and $-70$
 \end{itemize}
 
 In Fig.~\ref{user_1_APs_1d} we can see the APs associated with another user
@@ -389,7 +373,7 @@ Fig.~\ref{user_1_AP85_rn2avg_1d}, Fig.~\ref{user_1_AP85_rn5avg_1d} and
 Fig.~\ref{user_1_AP85_rn10avg_1d} present the running averages calculated for
 the same AP for time bins of $2$, $5$ and $10$ minutes~\footnote{In this
 representation, only the non-null values for running averages are displayed}.
-The X axis of these figures track the succession of time moments while the Y
+The X axis of these figures tracks the succession of time moments while the Y
 axis keeps track of the value of the running average calculated over this time.
 
 \begin{figure}[!h]
@@ -469,9 +453,9 @@ based on both the identity of the APs present and their signal strength, we
 would only associate locations to visible APs.
 
 The idea is simple and elegant and has been used in previous studies with
-success \cite{Larsen:2009:MCT:1813042.1813063}. The concept behind is that, in
-general\footnote{New APs can be set up or old ones can be changed with new ones
-in time, which would mean a change in how the scans would look for the same
+success \cite{Larsen:2009:MCT:1813042.1813063}. The concept behind it is that,
+in general\footnote{New APs can be set up or old ones can be changed with new
+ones in time, which would mean a change in how the scans would look for the same
 location. However, this is an issue that is outside the scope of the present
 paper and work.}, at a given location the scans will always show the presence of
 the same APs. If, after a time, the scans change and other APs appear, it is
@@ -483,7 +467,7 @@ based on the presence of the APs. We consider that an AP is present at a
 specific moment of time if the Wifi scans at that moment register a signal
 strength from that AP. However, as it has been mentioned previously, due to
 interferences, the signal from the AP might be lost for short periods of time
-even when the user does not change their location.Considering this and the
+even when the user does not change their location. Considering this and the
 assumption that, in general, people tend to spend at least a few minutes in a
 stop location (otherwise meaning that they might be just transiting it), we have
 made the decision to adapt for our case the definition for the presence of an
@@ -492,10 +476,10 @@ AP.
 We divide our data into time bins of $5$ minutes~\footnote{We consider 5 minutes
 as the minimum amount of time that needs to be spent in a location for it be
 considered a stop location. This number can be easily adjusted in case further
-research shows that it is not the optimal assumption.}. We redefine the presence
-of an AP as follows: an AP is considered to be present for the duration of a $5$
-minute time bin if it appeared in the scans at any point inside this time
-interval.
+research shows that it is not the optimal value to be taken into
+consideration.}. We redefine the presence of an AP as follows: an AP is
+considered to be present for the duration of a $5$ minute time bin if it
+appeared in the scans at any point inside this time interval.
 
 We can use visualization in order to see how this transforms the way in which we
 can understand the data. In Fig.~\ref{user_6_APs_2d} we have the different APs
@@ -532,20 +516,20 @@ until almost Thursday $6:15$ in one location. This also coincides with what we
 can observe in the visualization for all the APs (with signal strength) scanned
 throughout this time.
 
-In Appendix~\ref{appendix_pres} can be found a visualization for the presence
-of APs for a period of $2$ days for another user. The presence for APs is determined for $5$
-minutes time bins over the $2$ days.
+In Appendix~\ref{appendix_pres} can be found a visualization for the presence of
+APs for a period of $2$ days for another user. The presence for APs is
+determined for $5$ minutes time bins over the $2$ days.
 
 \section{Extracting locations}
 \label{extracting_location}
 
 By visualizing the Wifi data in the way presented in Section \ref{sig_pres}, we
-can begin to see how locations seem to succeed each other throughout the days of
-a particular user. However, it is important to be able to implement a solution
+can begin to see how locations seem to succeed each other throughout the days
+for a particular user. However, it is important to be able to implement a solution
 that will extract these locations from a large amount of data so that we would
-not be needed to examine the data manually. We have used different methods in
+not be needing to examine the data manually. We have used different methods in
 order to get the best possible approximation for identifying the locations. The
-methods we have tried are: using \textit{networks}, using \textit{k-means
+methods we have tried are: using \textit{networks}, using \textit{$k$-means
 clustering} and using \textit{Hidden Markov Models}.
 
 Before describing each of these methods, we have to clarify what we consider a
@@ -556,18 +540,19 @@ calculated based on the AP presence inside $5$ minutes time bins
   \item We extract the data we want to analyze from the user (either for 1, 2
   or more days).
   \item We identify the APs from the data
-  \item We divide the data into 5 minute time bins
+  \item We divide the data into 5 minutes time bins
   \item For each time bin we identify the APs which have been spotted during the
   $5$ minutes and we attribute them the value of 1 (meaning that they are
   visible to the mobile device during that time bin); the remaining APs will
   have attributed the value 0 (not visible) for the given time bin.
-  \item Each fingerprint describes a time bin and shows what APs were visible
+  \item Each fingerprint describes a time bin and shows what APs are visible
   during it and which are not
 \end{itemize}
-for consecutive $5$ minutes time bins.
-The fingerprint contains the names for all the APs which are associated to the user throughout the time
-frame we are analyzing (e.g. 1 day, 5 days etc.) and each AP has associated to
-it a value which represents its presence throughout the $5$ minutes 
+
+The fingerprint contains the names for all the APs which are associated to the
+user throughout the time frame we are analyzing (for example 1 day, 5 days etc.)
+and each AP has associated to it a value which represents its presence
+throughout the $5$ minutes.
 
 \subsection{Network theory}
 
@@ -575,7 +560,7 @@ Networks have a high degree of importance when trying to understand human or
 animal behaviour. They have been used in combination with social platforms in
 order to extract a new definition of friendship \cite{cho2011friendship}, they
 have been used for monitoring animal behaviour \cite{4116628}, or to understand
-the economical situations cause by the way in which people interact
+the economical situations caused by the way in which people interact
 \cite{Copic05identifyingcommunity}, or just to understand underlying communities
 of people. During our research, we have considered the use of network theory in
 order to extract locations from Wifi data.
@@ -585,8 +570,9 @@ location will not appear in the scans the user's phone will have from another
 location. This assumption is sound as the APs will rarely be moved and as such
 they should always be associated to the same place. In this case, we should
 expect that the succession of locations can be similar to what we can see in
-Fig.~\ref{user_6_tn}., where AP1-AP6 are associated to location number 1, while
-the remaining APs are associated with location 2 and the APs never overlap.
+Fig.~\ref{user_6_tn}., where AP1-AP6 are associated to location number $1$,
+while the remaining APs are associated with location $2$ and the APs never
+overlap.
 
 \begin{figure}[!h]
 \centering
@@ -606,9 +592,8 @@ the locations can be identified as follows:
   presence matrix is associated to an AP and contains the signal presence
   (Section \ref{sig_pres}) calculated for the AP considering $5$ minute time bins
   throughout the time we are evaluating
-  \item For each time bin, we identify the APs that are present trough it and
-  we connect each two of them with an undirected edge (in case they have not
-  been connected at a previous time)
+  \item For each time bin, we identify the APs that are present throughout it
+  and we connect each two of them with an undirected edge
   \item Since signal from various APs can be lost due to interferences, for each
   two APs for which we have created a connecting edge, we keep and update a
   variable which represents the number of times the APs have been identified in
@@ -623,7 +608,7 @@ the locations can be identified as follows:
   locations
 \end{itemize}
 
-An example on how to construct such a graph if given four APs and their
+An example on how to construct such a graph if given $4$ APs and their
 presence matrix can be seen in Fig.~\ref{network_calc_example}
 
 \begin{figure}[!h]
@@ -648,7 +633,7 @@ user has been in f$2$ main locations during this day.
 \label{user_6_pres_1d}
 \end{figure}
 
-When running the algorithm that extract the locations based on the constructed
+When running the algorithm that extracts the locations based on the constructed
 network, we obtain $21$ connected components which have the potential of being
 locations. The image for the connected components can be seen in
 Fig.~\ref{user_6_networks_1d} 
@@ -662,10 +647,10 @@ Fig.~\ref{user_6_networks_1d}
 
 We have tried to adjust the threshold for eliminating weak links yet the results
 are in most cases unsatisfactory. Upon closer analysis we have observed that
-this can be cause by the fact that, sometimes, there are a high number of APs
+this can be caused by the fact that, sometimes, there are a high number of APs
 that even though they are in reality tied to a given location, their signal
 fluctuates often and as such, the algorithm identifies them as part of a
-different location and as such we have locations consisting in only a very small
+different location. As such we have locations consisting in only a very small
 number of APs that in reality could have been integrated in other locations.
 This observation is sustained by the size distribution of the generated networks
 (example for such a size distribution determined for the network in
@@ -683,23 +668,22 @@ them }
 \label{user_6_size_distribution_1d}
 \end{figure}
 
-%TODO cum ar arata efectiv locatiile fata de cum sunt
 For generating the networks and the size distributions, we have been using
-Gephi~\cite{Gephi}. For visualizing the visualization in
+Gephi~\cite{Gephi}. For obtaining the visualization in
 Fig.~\ref{user_6_networks_1d} we have used the Force Atlas $2$ layer which has
 been configured in order to avoid overlapping of components.
 
 \subsection{Cross validation}
 \label{cross_valid}
 
-For both the k-means and the Hidden Markove Models approaches on extracting
-locations out of the user data we have been faced with a problem. The problem we
-have been faced with is that both these algorithm need to know how many
-locations they are trying to identify. However, we cannot know for sure, from
-the beginning, how many locations a user has been visited during a given time.
-In order for us to have a good estimation for the number of locations we could
-be expecting to find inside a time frame, we have used the cross validation
-technique, more specifically we have used the 10-fold cross validation method.
+For both the $k$-means and the Hidden Markov Models approaches on extracting
+locations out of the user data we have been faced with a problem. The problem is
+that both these algorithms need to know how many locations they are trying to
+identify. However, we cannot know for sure, from the beginning, how many
+locations a user has been visited during a given time. In order for us to have a
+good estimation for the number of locations we could be expecting to find inside
+a time frame, we have used the cross validation technique, more specifically we
+have used the $10$-fold cross validation method.
 
 Cross validation \cite{Kohavi95astudy} is a technique for model validation that
 tries to asses how the results given by a statistical analysis of some given
@@ -708,20 +692,20 @@ validation is in problems that deal with prediction. Prediction problems usually
 deal with a set of training data and a set of testing data that the model needs
 to be able to react to as expected.
 
-The k-fold cross validation divides the data we have at our disposal in k equal
-sized subsamples in a random way~\footnote{Random in this case means that
-each of the subsamples contains elements from the original sample that are
-most likly not in their original order.}. K-1 of the resulting subsamples are
-used as training data, while the remaining subsample is used as testing data.
-The samples are then rotated so as each of them becomes, in turn, testing
-data while the others for the training data. The k results are then combined in
-order to retrieve an unique estimation for the original data and an evaluation
-of the accuracy of the prediction model can be done based on how close the
-result is to the original data. The k value can be any number as long as the
-data can be divided into k subsamples. A value that is oftenly used for k is 10
+The $k$-fold cross validation divides the data we have at our disposal in $k$
+equal sized subsamples in a random way~\footnote{Random in this case means that
+each of the subsamples contains elements from the original sample that are most
+likely not in their original order.}. $k$-1 of the resulting subsamples are used
+as training data, while the remaining subsample is used as testing data.
+The samples are then rotated so as each of them becomes, in turn, testing data
+while the others form the training data. The $k$ results are then combined in
+order to retrieve an unique estimation for the original data. An evaluation of
+the accuracy of the prediction model can be done based on how close the result
+is to the original data. The $k$ value can be any number as long as the data can
+be divided into $k$ subsamples. A value that is often used for $k$ is $10$
 \cite{mclachlan2005analyzing}.
 
-An example of how 2-fold cross validation works for four location fingerpints
+An example of how $2$-fold cross validation works for $4$ location fingerprints
 can be seen in Fig.~\ref{2foldvalid}.
 
 \begin{figure}[!h]
@@ -731,46 +715,47 @@ can be seen in Fig.~\ref{2foldvalid}.
 \label{2foldvalid}
 \end{figure}
 
-In Step$1$ we have the four fingerprints. Let us consider that the algorithm
-that we are using to extract the locations based on these fingerprints have
-identified the location 1 and 2 as they can be seen in Step$1$. In order to see
-if our algorithm behaved as expected, we can cross validate the result using in
-this case a 2-fold cross validation. We are randomly selecting the $2$
-subsamples as is seen in Step$2$. The blue color is associated with the training
-data, while the orange color is associated with the testing data. In Step$3$ the
-first subsample is treated as training data while in Step$4$ the second one
-represents the training data. After the test data are classified based on the
-training data we can combined the results into one single sample which is
-presented in Step$5$. In this the cross validation has returned a result which
-matches the original estimation made by our selected algorithm, which means that
-the algorithm we have used has worked fine.
+In Step $1$ we have the four fingerprints. Let us consider that the algorithm
+that we are using to extract the locations based on these fingerprints has
+identified locations $1$ and $2$ as they can be seen in Step $1$. In order to
+see if our algorithm behaved as expected, we can cross validate the result using
+in this case a $2$-fold cross validation. We are randomly selecting the $2$
+subsamples as is seen in Step $2$. The blue color is associated with the
+training data, while the orange color is associated with the testing data. In
+Step $3$ the first subsample is treated as training data while in Step $4$ the
+second one represents the training data. After the test data is classified based
+on the training data, we can combined the results into one single sample which
+is presented in Step $5$. In this example, the cross validation has returned a
+result which matches the original estimation made by our selected location
+extraction algorithm, which means that the algorithm we have used has worked
+properly.
 
 \subsection{K-means clustering}
 \label{k-means}
 
-The k-means algorithm is a popular method for analyzing clusters in data mining.
-The first time the ``k-means'' term was used was by MacQueen
-\cite{Macqueen67somemethods}, yet the standard algorithm for the k-means problem
-was proposed by Lloyd \cite{Lloyd:2006:LSQ:2263356.2269955}. The idea behind
-this algorithm is to start the clustering process by having k original groups of
-only one point each. After this initial setup, each new point can be added to
-the cluster that has the mean nearest to the new point. After a new point is
-added to a group, the mean of the group is updated, and at each stage the k
-means will represent the means of the k groups.
+The $k$-means algorithm is a popular method for analyzing clusters in data
+mining. The first time the ``$k$-means'' term was used was by MacQueen
+\cite{Macqueen67somemethods}, yet the standard algorithm for the $k$-means
+problem was proposed by Lloyd \cite{Lloyd:2006:LSQ:2263356.2269955}. The idea
+behind this algorithm is to start the clustering process by having $k$ original
+groups of only one point each. After this initial setup, each new point can be
+added to the cluster that has the mean nearest to it. After a new point is added
+to a group, the mean of the group is updated, and at each stage the $k$ means
+will represent the means of the $k$ groups.
 
-The Lloyd algorithm for k-means is the solution that is used for creating the
-k-means tool by scikit-learn \cite{SL}. We have used the tool provided by
+The Lloyd algorithm for $k$-means is the solution that is used for creating the
+$k$-means tool by scikit-learn \cite{SL}. We have used the tool provided by
 scikit-learn in order to try to extract the places where a user has been
 situated at during a time frame based on the fingerprints that we can determine
-for that time frame. Our goals was to use the k-means algorithm to cluster the
+for that time frame. Our goal was to use the $k$-means algorithm to cluster the
 fingerprints that are similar enough as to be associated to the same location.
 However, since we cannot know for sure the number of locations (clusters) we are
-to expect for a given time frame, we are running the k-means algorithm with
-different values for k and we perform 10-fold cross validation in order to see
-what value has generate the most likely estimation.
+to expect for a given time frame, we are running the $k$-means algorithm with
+different values for $k$ and we perform $10$-fold cross validation in order to
+see what value has generated the most likely estimation.
 
-The steps in extracting the locations with k-means and 10-fold cross validation
-are as follow:
+The steps in extracting the locations with $k$-means and $10$-fold cross
+validation are as follow:
 \begin{itemize}
   \item We select the time frame (number of days) for which we want to extract
   the locations
@@ -778,13 +763,17 @@ are as follow:
   \item Since previous research shows that in general people spend most of their
   time in a small amount of locations ($5$ to $50$) \cite{Barabasi08}, we choose
   the maximum number of locations we are expecting to find as the minimum value
-  between $50$ and the rezult for the number of days multiplied by
+  between $50$ and the result for the number of days multiplied by
   $10$\footnote{By observing the visualization for the presence of APs during
   different days in different users' life, we have observed that in general
-  they seem to spend their time during a day in a most 10 locations}
-  \item For each possible number for locations from between $2$ and our
-  previously selected maximum we run the k-means clustering algorithm on the
+  they seem to spend their time during a day in at most 10 locations}
+  \item For each possible number of locations from between $2$ and our
+  previously selected maximum we run the $k$-means clustering algorithm on the
   identified fingerprints
+  \item The algorithm returns the estimations for the locations. The locations
+  are the $k$ clusters formed based on the differences appearing in the presence
+  values associated to the APs in the given fingerprints. These differences
+  determine the distance between the fingerprints
   \item The estimations are cross validated in order to see which number of
   locations has generated the optimal approximation for the given fingerprints
   \item In case more locations have generated equally good results we selected
@@ -794,9 +783,9 @@ are as follow:
   out of the $10$ results is considered correct.
 \end{itemize}
 
-We ran the algorithm for $10$ times in order to ensure that we the final result
+We run the algorithm for $10$ times in order to ensure that the final result
 is as less influenced by the random fact involved in the determination of the
-subsamples for the cross validation as possible. At the end of the algorith we
+subsamples for the cross validation as possible. At the end of the algorithm we
 have the estimation for the locations throughout the selected time frame. An
 example for such an estimation can be seen in Fig.~\ref{user_3_days1_2_kmeans},
 while in Fig.~\ref{user_3_days1_2_APs_presence} we have the presence of the APs
@@ -817,8 +806,19 @@ visualization calculated for 5 minutes time bins)}
 \label{user_3_days1_2_kmeans}
 \end{figure}
 
-An additional example of locations estimated using k-means can be seen in
-Appendix~\ref{appendix_kmeans}.
+We have evaluated the results of the algorithm in a graphical manner. We have
+generated visualizations for the presence of the various APs (like in
+Fig.~\ref{user_3_days1_2_APs_presence}) and made a graphical analysis of how
+similar the patterns are to the results given by the $k$-means algorithm. The
+algorithm identifies a big part of the locations, however differences do appear.
+For example, in Fig.~\ref{user_3_days1_2_kmeans} we can see that on Friday at
+$10:36$, according to the $k$-means algorithm the user has been in a location
+that changed at some point before $12:36$. This observation is inconsistent to
+the image we have based on the APs presence in
+Fig.~\ref{user_3_days1_2_APs_presence}.
+
+An additional example of locations estimated using
+k-means can be seen in Appendix~\ref{appendix_kmeans}.
 
 \subsection{Hidden Markov Models}
 \label{hmm_section}
@@ -831,77 +831,78 @@ searches, multiple sequence alignment and regulatory site identification. HMMs
 are the Legos of computational sequence analysis.''\cite{JOUR} 
 
 HMMs are, in principle, Markov Models (MMs) \cite{opac-b1082850} for which the
-modeled systems are considered to be processes with hidden states. If the the
-MMs the states are visible to possible observers, the difference for the HMMs is
-that the states are not visible, yet the results which can be observed do depend
+modeled systems are considered to be processes with hidden states. If in the
+MMs the states are visible to possible observers, the difference with the HMMs
+is that the states are not visible, yet the results which can be observed do depend
 on the hidden states \cite{18626}.
 
-There area few elements that characterize the HMMs according to \cite{18626}.
+There area a few elements that characterize the HMMs according to \cite{18626}.
 They are as follows:
 \begin{itemize}
-  \item N which represents the number of hidden states in the model. In general,
-  these states can be interconnected in a way so that from some states others
+  \item \textit{N} which represents the number of hidden states in the model. In
+  general, these states can be interconnected in a way so that from some states others
   can be reached
-  \item M which represents the number of different observation symbols which
-  care generated by the hidden states
-  \item A which represents the state transition probability distribution. A is a
+  \item \textit{M} which represents the number of different observation symbols
+  that are generated by the hidden states
+  \item \textit{A} which represents the state transition probability distribution. A is a
   matrix for which each element a$_{i,j}$ represents the probability of moving
   from the state i to the state j in the system represented by the HMM
-  \item $B = {b_{j}(k)}$ which represents the observation system probability
-  distribution in state j. This basically means that each element in B shows the
-  probability of seeing a particular element of M in a given state j
+  \item \textit{B}$ = {b_{j}(k)}$ which represents the observation system probability
+  distribution in state j. This basically means that each element in $B$ shows
+  the probability of seeing a particular element of $M$ in a given state j
   \item $\pi$ which represents the initial state distribution, meaning what is
   the probability of the system to start producing output from any of the states in
-  N
+  $N$
 \end{itemize}
 
 The three problems also mentioned in \cite{18626} that the HMMs can be used for
-to solve are as follows:
+solving are as follows:
 \begin{itemize}
   \item Given an observation sequence, how can the probability of the
-  observation sequence be computed efficiently considering the given model
+  observation sequence be computed efficiently considering the given model?
   \item Given the observation sequence how can a state sequence be chosen so
-  that it explains in the most appropriate manner the existing observations
+  that it explains in the most appropriate manner the existing observations?
   \item How can the parameters of the model be adjusted in order to maximize the
-  probability of a given observation sequence
+  probability of a given observation sequence?
 \end{itemize}
 
 The second of the three problems above addresses the uncovering of the hidden
-states of a given model. Which is exactly what we are trying to identify when
-attempting to extract what are the locations an user has been at based on
-observing the APs that have been scanned throughout a given time frame for the
-given user. In our case, N represents the number of unknown locations a user has
-been at, M is the set of observable fingerprints which we can calculate based
-on the presence of various APs in $5$ minutes time bins, and A, B and $\pi$ are
-the various probability distributions that can be associated with the way in
-which the user travels from location to location.
+states of a given model. This can be used in our case because we need to
+identify the locations an user has been at based on observing transitions
+between different fingerprints of the locations at given times and without
+knowing what those locations actually are. In our case, N represents the number
+of unknown locations a user has been at, M is the set of observable fingerprints
+which we can calculate based on the presence of various APs in $5$ minutes time
+bins, and A, B and $\pi$ are the various probability distributions that can be
+associated with the way in which the user travels from location to location.
 
 The idea of using HMMs in order to track localization is not new. It has been
 explored in papers like \cite{el2013indoor}, \cite{inatomi2013hidden} or
 \cite{morelli2007hidden} which sustain the potential of using an algorithm based
-on this method of studying the travel behaviour of people.
+on this method for studying the travel behaviour of people.
 
 Scikit-learn \cite{SL} offers an implementation for HMMs that ensures the
 training for the models and the inferring of the hidden states and we have been
 using the tools they provide for working with our data.
 
-As with the k-means method (Section~\ref{k-means}), the problem we have been
-facing was that we could not approximate from the beginning the number of hidden
+As with the $k$-means method (Section~\ref{k-means}), the problem we have been
+facing is that we can not approximate from the beginning the number of hidden
 states (which stand for locations in our case) that we are expecting the model
-to find based on the input observations. However, by using the k-fold cross
+to find based on the input observations. However, by using the $k$-fold cross
 validation (Section~\ref{cross_valid}) we can, once again (similar to the way in
-which we have solved the problem for k-means), test the estimation being
+which we have solved the problem for $k$-means), test the estimation being
 computed based on different numbers of possible locations.
 
 The steps in extracting the locations with the help of the HMM based algorithm
-that has been combined with a 10-fold cross validation are as follow:
+that has been combined with a $10$-fold cross validation are as follow:
 \begin{itemize}
   \item We select the time frame (number of days) for which we want to extract
   the locations
   \item We retrieve the data and extract the fingerprints
   \item We choose the maximum number of locations we are expecting to find in a
-  similar manner we have done for the k-means algorithm, meaning as the minimum
-  value between $50$ and the result for the number of days multiplied by $10$
+  similar manner we have done for the $k$-means algorithm, meaning as the
+  minimum value between $50$ and the result for the number of days multiplied
+  by $10$
   \item For each possible number of locations in the range of $2$ and our
   previously selected maximum we run the HMM algorithm on the existing
   fingerprints
@@ -915,8 +916,8 @@ that has been combined with a 10-fold cross validation are as follow:
 \end{itemize}
 
 The reason behind running the algorithm $10$ times is the same as the one
-present for k-means algorithm. We want to ensure that the random factor which is
-involved in the cross validation process has a very little effect on the
+presented for the $k$-means algorithm. We want to ensure that the random factor
+which is involved in the cross validation process has a very little effect on the
 correctness of the estimation. At the end of the algorithm we have the hidden
 states (in our case, locations) that can be extracted based on the observations
 we have based on the presence of the various APs the user is associated to
@@ -925,7 +926,7 @@ for userT throughout $1$ day can be seen in Fig.~\ref{user_6_days1_2_3_hmm}.
 They can be easily mapped to the locations we can observe by looking at
 Fig.~\ref{user_6_days1_2_3_APs_presence} where we have the presence of the
 APs which have been scanned throughout the same amount of time for the same user.
-%explain figures
+
 \begin{figure}[!h]
 \centering
 \includegraphics[width=\textwidth]{figures/hmm/user_1_sorted_1days_no_rssi_plot.png}
@@ -940,6 +941,13 @@ visualization calculated for 5 minutes time bins)}
 \caption{Locations estimated with HMM for userT for 1 day}
 \label{user_6_days1_2_3_hmm}
 \end{figure}
+
+We have done a graphical analysis of the results provided by the HMM algorithm
+considering the results obtained for different users and we have observed that
+the results tend to be more accurate that the ones obtained when using the
+$k$-means algorithm. Fig.~\ref{user_6_days1_2_3_hmm} and
+Fig.~\ref{user_6_days1_2_3_APs_presence} illustrate a very good identification
+of locations done by using HMM.
 
 An additional example of locations estimated using the HMM based algorithm can
 be seen in Appendix~\ref{appendix_hmm}.

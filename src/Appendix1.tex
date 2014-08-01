@@ -87,29 +87,29 @@ visualizations for the top various APs that were scanned throughout this time
 \subsection{Average signal strength for APs identified for a user}
 \label{appendix_avg_signal}
 
-This section contains the visualization for the signal strength of APs 15188
-(Fig.~\ref{avg_6_2nd_day_1_A}), 15190 (Fig.~\ref{avg_6_2nd_day_2_A}) and 3144
-(Fig.~\ref{avg_6_2nd_day_3_A}) calculated for $5$ minutes time bins over the
-course of one day from the data gathered for userZ.
+This section contains the visualization for the average signal strength of APs
+15188 (Fig.~\ref{avg_6_2nd_day_1_A}), 15190 (Fig.~\ref{avg_6_2nd_day_2_A}) and
+3144 (Fig.~\ref{avg_6_2nd_day_3_A}) calculated for $5$ minutes time bins over
+the course of one day from the data gathered for a given user.
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width =\textwidth]{figures/combinations/user_6_sorted_1days_plot_15188_avg_sig.png}
-\caption{Sample density of AP 15188 for userZ}
+\caption{Average signal strength of AP 15188 for an user}
 \label{avg_6_2nd_day_1_A}
 \end{figure}
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width =\textwidth]{figures/combinations/user_6_sorted_1days_plot_15190_avg_sig.png}
-\caption{Sample density of AP 15190 for userZ}
+\caption{Average signal strength of AP 15190 for an user}
 \label{avg_6_2nd_day_2_A}
 \end{figure}
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width =\textwidth]{figures/combinations/user_6_sorted_1days_plot_3144_avg_sig.png}
-\caption{Sample density of AP 3144}
+\caption{Average signal strength of AP 3144}
 \label{avg_6_2nd_day_3_A}
 \end{figure}
 
@@ -118,9 +118,9 @@ course of one day from the data gathered for userZ.
 
 This section contains the visualization for the running averages calculated for
 $2$ (Fig.~\ref{user_1_AP1613_rn2avg_1d_A}), $5$
-(Fig.~\ref{user_1_AP1613_rn2avg_1d_A}) and $10$
-(Fig.~\ref{user_1_AP1613_rn2avg_1d_A}) minutes time bins for AP $1613$
-identified in a time frame of one day (Fig.\ref{user_1_APs_1d_ap}).
+(Fig.~\ref{user_1_AP1613_rn5avg_1d_A}) and $10$
+(Fig.~\ref{user_1_AP1613_rn10avg_1d_A}) minutes time bins for AP $1613$
+identified in a time frame of one day (Fig.\ref{user_1_APs_1d_ap_A}).
 
 \begin{figure}[!h]
 \centering
@@ -161,10 +161,9 @@ bins)}
 \label{appendix_pres}
 This section contains the visualization for the presence of APs for a period of
 $2$ days for an user from the SensibleDTU database
-(Fig.~\ref{user_3_pres_2d_A}).The presence for APs is determined for $5$ minutes
-time bins over the $2$ days.
-Fig.~\ref{user_3_APs_2d_A} presents all the APs (and their signals) visualized
-for the same $2$ days.
+(Fig.~\ref{user_3_pres_2d_A}). The presence for APs is determined for $5$
+minutes time bins over the $2$ days. Fig.~\ref{user_3_APs_2d_A} presents all the
+APs (and their signals) visualized for the same $2$ days.
 
 \begin{figure}[!h]
 \centering
@@ -184,6 +183,26 @@ visualization calculated for 5 minutes time bins)}
 
 \subsection{Locations extracted using k-means}
 \label{appendix_kmeans}
+An example of locations that have been identified by using the $k$-means
+algorithm over a period of $3$ days for a given user can be seen in
+Fig.~\ref{user_93_days1_to_3_kmeans_A}.
+Fig.~\ref{user_93_days1_to_3_APs_presence_A} represents the presence of the most
+common $50$ APs which have been scanned throughout the same time for the same
+user.
+
+\begin{figure}[!h] \centering
+\includegraphics[width=\textwidth]{figures/kmeans/user_93_sorted_3days_no_rssi_plot.png}
+\caption{The most common 50 APs for an user during 3 days (presence
+visualization calculated for 5 minutes time bins)}
+\label{user_93_days1_to_3_APs_presence_A}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/kmeans/user_93_kmeans_locations_(5)_3days_plot.png}
+\caption{Locations estimated with $k$-means for an user for 3 day}
+\label{user_93_days1_to_3_kmeans_A}
+\end{figure}
 
 \subsection{Locations extracted using HMM}
 \label{appendix_hmm}
