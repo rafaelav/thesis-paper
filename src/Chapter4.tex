@@ -165,7 +165,8 @@ study. The assumptions are as follows:
   common portion of a route, yet the access points identified by the phone would
   be completely different and thus the locations would be impossible to be
   matched based only on this information. Also, not to mention that the bus or
-  train would be moving.
+  train can be moving while the access points inside the vehicle would remain
+  the same.
   \item Data received from hot spots created from Android or iPhone devices
   (entries that have the context number set to 1 or 6) can also be ignored.
   These access points are most probably mobile and will not be present in the
@@ -226,8 +227,8 @@ however, it will be taken into account when computing the locations that can be
 identified for this scenario. An algorithm will identify location L1 and
 location L2 as being the same location, yet it would do the same thing in case
 we ignore AP1 and it would require less time to do so. A bad algorithm might not
-even consider location L1 and L2 as being the same. This can happen is the
-algorithm attribute a high weight to the difference between the access points
+even consider location L1 and L2 as being the same. This can happen if the
+algorithm attributes a high weight to the difference between the access points
 that have been attributed to different locations.
 
 \begin{figure}[ht]
@@ -239,7 +240,7 @@ that have been attributed to different locations.
 
 The above scenario considers a very small number of access points and a very
 short period of time. The time gains in eliminating the access point that does
-not provide so much information in this case would be very small. However, If we
+not provide so much information in this case would be very small. However, if we
 are, for example, looking at a month of collected data for a user, we will have
 entries for thousands of different access points that were observable at any
 moment during this time. Out of these entries there can be hundreds of access
@@ -248,7 +249,7 @@ their importance when determining the fingerprints for the different locations
 is very limited, yet they do have a huge impact on the execution time needed to
 actually extract the locations.
 
-In order to solve this issue, we eliminate from the access points those ones who
+In order to solve this issue, we eliminate from the access points the ones which
 are not respecting the following condition:
 \begin{itemize}
   \item There is no time window of at least 5 minutes throughout the time
@@ -258,5 +259,5 @@ are not respecting the following condition:
 
 We have chosen to use time windows of 5 minutes as we make the assumption that
 any user will choose to spend minimum 5 minutes at each stop location. In case
-the user spend less time, we can consider that they are just transitioning until
-the next stop location.
+the user spends less time, we can consider that they are just transitioning
+until the next stop location.
