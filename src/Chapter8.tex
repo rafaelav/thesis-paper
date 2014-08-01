@@ -128,6 +128,35 @@ between the timestamps of the first sample that is associated with the position
 and the last sample that is still considered a part of the stop location. If the
 difference is equal or above $5$ minutes, the stop location is kept.
 
+Fig.~\ref{loc_wifi_data} represents a quantitative measurement for the number of
+locations that a group of $65$ users change during a period of $30$ days
+according to the Wifi data, while Fig.~\ref{loc_gps_data} represent a
+quantitative measurement for the number of locations the same group of users
+changes during the same period of time according to the GPS data. As we can see,
+by using the GPS data we can identify a biger number of locations for a given
+time frame than by using the Wifi data. The average number of locations changed
+during a month per user according to the GPS data is approximately $153$, while
+the average number identified for Wifi data is approximately $80$. Considering
+these results we wanted to take a look at a time frame from the perspective of
+the locations identified with both Wifi and GPS data in order to understand the
+differences between the estimations.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{figures/gps/distribution_loc_wifi.png}
+\caption{Count of location changes done during $30$ days by $65$ users
+according to Wifi data}
+\label{loc_wifi_data}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\textwidth]{figures/gps/distribution_loc_gps.png}
+\caption{Count of location changes done during $30$ days by $65$ users
+according to GPS data}
+\label{loc_gps_data}
+\end{figure}
+
 In Fig.~\ref{user6_aps_2days} we can see the predominant APs that have been
 scanned during a $2$ days time frame for an user. Fig.~\ref{user6_hmm_2days}
 displays the locations identified considering the Wifi data (first line of
@@ -160,6 +189,10 @@ identified as being different based on GPS can be considered the same based on
 Wifi data.
 
 Despite some differences, the two figures do present similarities and are
-clearly associated to the same time frame and the same user. For example, the
+clearly associated to the same time frame and the same user (for example, the
 time between Thursday at around $12.15$ until Friday at around $4.00$ is
-identified in both data as one stop location.
+identified in both data as one stop location). However, the need for further
+work in order to improve the way in which we estimate locations based on Wifi
+data is needed. In this sense, an analysis of stop durations for both Wifi
+and GPS data and an analysis of the fraction of stops that approximately overlap
+can be a good starting point for further research.
