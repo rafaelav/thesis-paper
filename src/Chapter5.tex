@@ -8,7 +8,7 @@ the spreading of diseases and many others \cite{AsgariGB13} \cite{Brockmann08}.
 The studies that have been conducted on this subject have been using various
 ways to identify the travel behaviour of people. Some of them have focused on
 studying the information gathered from observing the way in which money is
-dispersed through time \cite{Brockmann06}, or they have been focusing in
+dispersed through time \cite{Brockmann06}, or they have been focusing on
 studying the behaviour of mobile phone users by analyzing the way they move
 based on the telephone towers their phones are connecting to when they are
 engaging in voice communication \cite{Barabasi08}. There are studies that try to
@@ -97,7 +97,7 @@ users have been moving throughout the experiment, we need to have an image of
 the way a given period of time would look based on their Wifi records from
 SensibleDTU. As it has been presented in Section~\ref{data_structures}, the Wifi
 data we are using for the present project consists in the following fields:
-user id, timestamp, SSID, BSSID, RSSI and the context. However, considering the
+user ID, timestamp, SSID, BSSID, RSSI and the context. However, considering the
 amount of data involved, just by looking through the log files it is almost
 impossible for us to understand at what moment the user might have reached a
 location and when they left from it. In order to be able to do this, we have
@@ -108,8 +108,8 @@ further to defining what can help identify a location.
 
 \subsection{Signal strength over time}
 
-The first thing that we have tried to visualize was the APs that were scanned by
-users' mobile phones throughout different periods of time. We have plotted the
+The first thing that we have tried to visualize were the APs that were scanned
+by users' mobile phones throughout different periods of time. We have plotted the
 APs and their registered signal strength for a variety of users in order to see
 if we notice any patterns in their movements.
 
@@ -147,7 +147,7 @@ The steps for creating this type of visualization are as follows:
 Although we have tried to visualize this type of information in various ways
 (using different types of markers), we found that this way is the easiest to
 interpret by people~\footnote{We have required a group of 12 different people to
-rate different visualizations and one used in Fig.~\ref{user_6_1d_lines} has
+rate different visualizations and the one used in Fig.~\ref{user_6_1d_lines} has
 been preferred by a majority of 8}. If we leave out the lines, for example, as
 it can be seen in Fig.~\ref{user_6_1d_point}, it is quite hard to interpret
 where location might start or stop.
@@ -200,13 +200,13 @@ We can also notice fragments in which the density of signals is quite high, for
 example on Wednesday morning. This means that the user was located in a place
 which has a large number of APs nearby and since we can notice a regularity in
 this pattern we can assume that this place can be the University. This might
-seem unlikely based on the fact that the patterns sometimes is identified during
-the night, however this particular week is set in October when there are
-deadlines for school projects that need to be handed in.
+seem unlikely based on the fact that the patterns are sometimes identified
+during the night, however this particular week is set in October when deadlines
+for school projects that need to be handed in are possible to exist.
 
 As we can see, these visualization can offer us a good first glance at what the
 locations might be like, yet they also make us consider other things that we can
-learn about the data. For example:
+learn about from the data. For example:
 \begin{itemize}
   \item How many samples from each AP are received during a given time frame
   \item What is the average signal for various time frames for a given AP
@@ -287,8 +287,8 @@ found in Appendix~\ref{appendix_sample_density}
 Something that is often taken into consideration during studies regarding the
 determination of locations based on Wifi data is the value which indicates the
 signal strength received from the various APs. The level of the signal strength
-indicator can, in general, give us a good approximation of how close we are to a
-particular AP. However, Wifi networks are susceptible to interferences
+indicator can be expected to give us a good approximation of how close we are to
+a particular AP. However, Wifi networks are susceptible to interferences
 \cite{MahantiCWA10}, meaning that there are numerous factors which can cause
 signals to spike even in case the device that scans the region for AP signals
 does not move. This can represent a factor of risk when including the signal
@@ -308,9 +308,9 @@ bin, we needed to identify all the moments of time inside the given time bin in 
 the AP has been spotted during the scans. The average signal of the AP is
 calculated as the sum of all the strength values that have been recorded for the
 AP inside the time bin and the sum is then divided to the number of recorded
-apparitions of the AP. For example, if we were to have an AP which appears 6
-times inside a $5$ minutes time bin with the following RSSI values [-60, -70,
--60, -80, -90, -60], then the average signal strength for this particular time
+apparitions of the AP. For example, if we were to have an AP which appears $6$
+times inside a $5$ minutes time bin with the following RSSI values $[-60, -70,
+-60, -80, -90, -60]$, then the average signal strength for this particular time
 bin for our AP would be $avg = [(-60) + (-70) + (-60) + (-80) + (-90) +
 (-60)] / 6= -70$ dBm.
 
@@ -320,7 +320,7 @@ same data that we can see in Fig.~\ref{rssi_6_2nd_day} and for the same AP that 
 the sample density represented in Fig.~\ref{samples_6_2nd_day}, if we visualize
 the non-null averages calculated for time bins of $5$ minutes, we would have the
 representation in Fig.~\ref{user_6_avg_1d_5m}. The X axis records the time
-while on the Y axis records the values of the averages
+while the Y axis records the values of the averages
 
 \begin{figure}[h]
 \centering
@@ -335,7 +335,7 @@ calculated an average for the interval $12:05 - 12:10$, the average is plotted
 on the visualization at $12:05$. 
 
 Additional examples of averages for different APs scanned during a given day can
-be found in Appendix~\ref{appendix_signal_strength}.
+be found in Appendix~\ref{appendix_avg_signal}.
 
 \subsection{Running average signal strength}
 \label{running_avg}
@@ -527,7 +527,7 @@ By visualizing the Wifi data in the way presented in Section \ref{sig_pres}, we
 can begin to see how locations seem to succeed each other throughout the days
 for a particular user. However, it is important to be able to implement a solution
 that will extract these locations from a large amount of data so that we would
-not be needing to examine the data manually. We have used different methods in
+not need to examine the data manually. We have used different methods in
 order to get the best possible approximation for identifying the locations. The
 methods we have tried are: using \textit{networks}, using \textit{$k$-means
 clustering} and using \textit{Hidden Markov Models}.
@@ -537,21 +537,21 @@ fingerprint of a location at a given time. A fingerprint of a location is
 calculated based on the AP presence inside $5$ minutes time bins
 (Section~\ref{sig_pres}) as follows:
 \begin{itemize}
-  \item We extract the data we want to analyze from the user (either for 1, 2
-  or more days).
+  \item We extract the data we want to analyze from the user (either for $1$,
+  $2$ or more days).
   \item We identify the APs from the data
-  \item We divide the data into 5 minutes time bins
+  \item We divide the data into $5$ minutes time bins
   \item For each time bin we identify the APs which have been spotted during the
-  $5$ minutes and we attribute them the value of 1 (meaning that they are
+  $5$ minutes and we attribute them the value of $1$ (meaning that they are
   visible to the mobile device during that time bin); the remaining APs will
-  have attributed the value 0 (not visible) for the given time bin.
+  have attributed the value $0$ (not visible) for the given time bin.
   \item Each fingerprint describes a time bin and shows what APs are visible
   during it and which are not
 \end{itemize}
 
 The fingerprint contains the names for all the APs which are associated to the
-user throughout the time frame we are analyzing (for example 1 day, 5 days etc.)
-and each AP has associated to it a value which represents its presence
+user throughout the time frame we are analyzing (for example $1$ day, $5$ days
+etc.) and each AP has associated to it a value which represents its presence
 throughout the $5$ minutes.
 
 \subsection{Network theory}
@@ -624,7 +624,7 @@ the results have not been satisfactory.
 For example, we can take data for one day for userX. The visualization for the
 identified APs and their presence throughout this time can be observed in
 Fig.~\ref{user_6_pres_1d}. By looking at this image, we can observe that the
-user has been in f$2$ main locations during this day.
+user has been in $2$ main locations during this day.
 
 \begin{figure}[!h]
 \centering
@@ -695,7 +695,7 @@ to be able to react to as expected.
 The $k$-fold cross validation divides the data we have at our disposal in $k$
 equal sized subsamples in a random way~\footnote{Random in this case means that
 each of the subsamples contains elements from the original sample that are most
-likely not in their original order.}. $k$-1 of the resulting subsamples are used
+likely not in their original order.}. $k-1$ of the resulting subsamples are used
 as training data, while the remaining subsample is used as testing data.
 The samples are then rotated so as each of them becomes, in turn, testing data
 while the others form the training data. The $k$ results are then combined in
@@ -784,7 +784,7 @@ validation are as follow:
 \end{itemize}
 
 We run the algorithm for $10$ times in order to ensure that the final result
-is as less influenced by the random fact involved in the determination of the
+is as less influenced by the random factor involved in the determination of the
 subsamples for the cross validation as possible. At the end of the algorithm we
 have the estimation for the locations throughout the selected time frame. An
 example for such an estimation can be seen in Fig.~\ref{user_3_days1_2_kmeans},
@@ -844,12 +844,13 @@ They are as follows:
   can be reached
   \item \textit{M} which represents the number of different observation symbols
   that are generated by the hidden states
-  \item \textit{A} which represents the state transition probability distribution. A is a
-  matrix for which each element a$_{i,j}$ represents the probability of moving
-  from the state i to the state j in the system represented by the HMM
+  \item \textit{A} which represents the state transition probability
+  distribution. $A$ is a matrix for which each element a$_{i,j}$ represents the
+  probability of moving from the state $i$ to the state $j$ in the system
+  represented by the HMM
   \item \textit{B}$ = {b_{j}(k)}$ which represents the observation system probability
-  distribution in state j. This basically means that each element in $B$ shows
-  the probability of seeing a particular element of $M$ in a given state j
+  distribution in state $j$. This basically means that each element in $B$ shows
+  the probability of seeing a particular element of $M$ in a given state $j$
   \item $\pi$ which represents the initial state distribution, meaning what is
   the probability of the system to start producing output from any of the states in
   $N$
@@ -870,11 +871,12 @@ The second of the three problems above addresses the uncovering of the hidden
 states of a given model. This can be used in our case because we need to
 identify the locations an user has been at based on observing transitions
 between different fingerprints of the locations at given times and without
-knowing what those locations actually are. In our case, N represents the number
-of unknown locations a user has been at, M is the set of observable fingerprints
-which we can calculate based on the presence of various APs in $5$ minutes time
-bins, and A, B and $\pi$ are the various probability distributions that can be
-associated with the way in which the user travels from location to location.
+knowing what those locations actually are. In our case, $N$ represents the
+number of unknown locations a user has been at, $M$ is the set of observable
+fingerprints which we can calculate based on the presence of various APs in $5$
+minutes time bins, and $A$, $B$ and $\pi$ are the various probability
+distributions that can be associated with the way in which the user travels from
+location to location.
 
 The idea of using HMMs in order to track localization is not new. It has been
 explored in papers like \cite{el2013indoor}, \cite{inatomi2013hidden} or
@@ -944,7 +946,7 @@ visualization calculated for 5 minutes time bins)}
 
 We have done a graphical analysis of the results provided by the HMM algorithm
 considering the results obtained for different users and we have observed that
-the results tend to be more accurate that the ones obtained when using the
+the results tend to be more accurate than the ones obtained when using the
 $k$-means algorithm. Fig.~\ref{user_6_days1_2_3_hmm} and
 Fig.~\ref{user_6_days1_2_3_APs_presence} illustrate a very good identification
 of locations done by using HMM.
