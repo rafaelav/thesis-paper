@@ -27,7 +27,7 @@ results we have obtained as well as some observations regarding them.
 
 ``Entropy is probably the most fundamental quantity capturing the degree of
 predictability characterizing a time series'' \cite{Barabasi10}. Multiple
-studies (\cite{Sinatra14},\cite{Lu13}, \cite{marin2012exploring},
+studies (\cite{Sinatra14}, \cite{Lu13}, \cite{marin2012exploring},
 \cite{Barabasi10}) that aim at understanding the predictability of the human
 travel trajectories take into consideration different entropy measures which
 have different meaning and different levels of importance in correctly
@@ -172,7 +172,7 @@ the chain rule in the previous equation and $S(X_{i}|h_{i-1})$ represents the
 conditional entropy at step $n$ in equation \ref{eq_7_7} \cite{song2010limits}.
 
 The paper \cite{Barabasi10} presents another way in which the entropy for a user
-$i$ can be written. If we consider that $T_{i} = {X_{1}, X_{2},\ldots, X_{n}}$
+$i$ can be written. If we consider that $T_{i} = \{X_{1}, X_{2},\ldots, X_{n}\}$
 represents the sequence of locations which have been visited by user $i$ and if
 we consider that $P(T'_{i})$ represents the probability of finding time ordered
 subsequence $T'_{i}$ in the trajectory $T_{i}$, then the entropy of user $i$ can
@@ -296,7 +296,7 @@ have been determined have things in common (for example they are all students
 at the Technical University of Denmark and they probably have similar ages) and
 they can be viewed as a community, yet even considering these similarities
 between the users, the results based on their data are interesting and seem to
-attest that, in general are mobility actions are highly predictable.
+attest that, in general our mobility related actions are highly predictable.
 
 \begin{figure}[!h]
 \centering
@@ -309,16 +309,16 @@ The difference of $5\%$ between the value of the maximum predictability average
 we have obtained ($98\%$) and the value obtained in the study presented in
 \cite{song2010limits} ($93\%$) can be caused by a multitude of factors. For
 example, the number of users which took part in the two studies is very
-different ($65$ users for the present study versus $45000$ for the one presented
-by Song et.al.). There is also the difference between the types of data that
-have been analyzed. Song et. al. analyze data that comes from telephone towers
-while during our research we analyze Wifi data. The location for the users in
-our study can be closely monitored due to the fact that we have access to highly
-granular data, while in the case of the users observed by Song et. al., the data
-is collected only when the phone is used by the owners which can lead to periods
-of time when the location of a user is not known exactly. These are just a few
-examples of factors that can justify the difference between the results,
-however, what is worth considering is that, even though the experiments are
-quite different, the results seem to point in the same direction: our mobility
-patterns are rooted in our daily habits rather than being the result of
-spontaneity.
+different ($65$ users for the present study compared to $45000$ for the one
+presented by Song et.al.). There is also the difference between the types of
+data that have been analyzed. Song et. al. analyze data that comes from
+telephone towers while during our research we analyze Wifi data. The location
+for the users in our study can be closely monitored due to the fact that we have
+access to highly granular data, while in the case of the users observed by Song
+et. al., the data is collected only when the phone is used by the owners which
+can lead to periods of time when the location of a user is not known exactly.
+These are just a few examples of factors that can justify the difference between
+the results, however, what is worth considering is that, even though the
+experiments are quite different, the results seem to point in the same
+direction: our mobility patterns are rooted in our daily habits rather than
+being the result of spontaneity.
